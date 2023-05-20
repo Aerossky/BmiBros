@@ -15,7 +15,7 @@ struct homeView: View {
         VStack {
             HStack {
                 VStack(alignment: .leading){
-                    Text("Hello, Nama 👋")
+                    Text("Hello, Jovan 👋")
                         .font(.custom("Poppins-SemiBold", size: 36))
                     Text("How Are You Today?")
                         .font(.custom("Poppins-Light", size: 16))
@@ -76,7 +76,7 @@ struct homeView: View {
                 
                 
                 ZStack{
-                    var cal: Double = 1000
+                    var cal: Double = 1000 // ini butuh diganti kalo sdh backend
                     Rectangle()
                         .frame(width: 220, height: 125)
                         .foregroundColor(.blue)
