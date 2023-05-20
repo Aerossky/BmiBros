@@ -12,19 +12,20 @@ struct homeView: View {
         VStack {
                     HStack {
                         Text("Hello, Nama")
-                            .font(.custom("Poppins-Bold", size: 36))
-                            .padding(.leading)
+                            .font(.custom("Poppins-SemiBold", size: 36))
+                            
                         Spacer()
+                        
+                        Image(systemName: "person")
+                            .resizable()
+                            .frame(width: 50, height: 50)
+                            .clipShape(Circle())
                     }
                     Spacer()
-                    Image("nama-foto-profil")
-                        .resizable()
-                        .frame(width: 100, height: 100)
-                        .clipShape(Circle())
-                        .padding(.trailing)
-                        .padding(.top, 20)
+                    
                 }
-        .padding(25)
+        .padding(15)
+        
     }
 }
 
