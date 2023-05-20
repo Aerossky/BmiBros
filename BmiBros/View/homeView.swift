@@ -12,7 +12,7 @@ struct homeView: View {
         VStack {
                     HStack {
                         Text("Hello, Nama")
-                            .font(.custom("Poppins", size: 36))
+                            .font(.custom("Poppins-Bold", size: 36))
                             .padding(.leading)
                         Spacer()
                     }
