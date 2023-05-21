@@ -50,6 +50,22 @@ struct LoginView: View {
             Text("Forgot Password?")
             .frame(width: 300,alignment: .trailing)
             
+           Spacer()
+
+            //Button login
+            Button(action: {
+           
+
+            }) {
+                Text("Sign In")
+                    .font(.custom("Poppins-SemiBold", size: 16))
+                    .foregroundColor(.white)
+                    .padding()
+                    .frame(width: 300)
+                    .background(Color(UIColor(hex: "#98A8F8")))
+                    .cornerRadius(10)
+                
+            }
             //sign in with apple
             Button(action: {
                 
@@ -58,33 +74,20 @@ struct LoginView: View {
                 HStack {
                     Image(systemName: "apple.logo")
                         .resizable()
-                        .frame(width: 20, height: 25)
+                        .frame(width: 18, height: 22)
+                      
                     Text("Sign in with Apple")
                         .foregroundColor(.white)
                         .font(.system(size: 16))
                         .fontWeight(.bold)
+                        .frame(height: 22)
+                        .padding(.top, 5)
                 }
-                    .font(.custom("Poppins-SemiBold", size: 15))
                     .foregroundColor(Color(UIColor(hex: "#ffffff")))
                     .padding()
                     .frame(width: 300)
                     .background(Color.black)
                     .cornerRadius(10)
-            }
-            Spacer()
-            //Button login
-            Button(action: {
-           
-
-            }) {
-                Text("Login")
-                    .font(.custom("Poppins-SemiBold", size: 16))
-                    .foregroundColor(.white)
-                    .padding()
-                    .frame(width: 300)
-                    .background(Color(UIColor(hex: "#98A8F8")))
-                    .cornerRadius(10)
-                
             }
             //text around here
             HStack{
