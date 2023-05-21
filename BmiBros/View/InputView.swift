@@ -23,7 +23,7 @@ struct InputView: View {
     let maxHeight = 300
     let minWeight = 20
     let maxWeight = 300
-    let minAge = 20
+    let minAge = 1
     let maxAge = 200
     
     @State private var activeAlert: ActiveAlert?
