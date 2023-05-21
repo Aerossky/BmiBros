@@ -15,7 +15,7 @@ struct homeView: View {
         VStack {
             HStack {
                 VStack(alignment: .leading){
-                    Text("Hello, Jovan 👋")
+                    Text("Hello, Rey 👋")
                         .font(.custom("Poppins-Bold", size: 36))
                         .foregroundColor(Color(UIColor(hex: "#609FFF")))
                     Text("How Are You Today?")
