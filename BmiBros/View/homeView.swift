@@ -16,9 +16,11 @@ struct homeView: View {
             HStack {
                 VStack(alignment: .leading){
                     Text("Hello, Jovan 👋")
-                        .font(.custom("Poppins-SemiBold", size: 36))
+                        .font(.custom("Poppins-Bold", size: 36))
+                        .foregroundColor(Color(UIColor(hex: "#609FFF")))
                     Text("How Are You Today?")
-                        .font(.custom("Poppins-Light", size: 16))
+                        .font(.custom("Poppins-Regular", size: 16))
+                        .foregroundColor(Color(UIColor(hex: "#76AAFA")))
                 }
                 Spacer()
                 Image(systemName: "person")
@@ -34,7 +36,7 @@ struct homeView: View {
                 ZStack{
                     Rectangle()
                         .frame(width: 150, height: 125)
-                        .foregroundColor(.blue)
+                        .foregroundColor(Color(UIColor(hex: "#98A8F8")))
                         .cornerRadius(25)
                     
                     VStack(alignment: .center){
@@ -78,14 +80,16 @@ struct homeView: View {
                 ZStack{
                     var cal: Double = 1000 // ini butuh diganti kalo sdh backend
                     Rectangle()
+                        .fill(ImagePaint(image: Image("CalorieShowBG")))
                         .frame(width: 220, height: 125)
-                        .foregroundColor(.blue)
                         .cornerRadius(25)
-                    
+                        
+                        
                     VStack(alignment: .center){
                         Text("Calorie Information")
                             .font(.custom("Poppins-Bold", size: 20))
                             .foregroundColor(.white)
+                        
                         Text("\(String(format: "%.0f" ,cal))/Day")
                             .font(.custom("Poppins-SemiBold", size: 15))
                             .foregroundColor(.white)
@@ -102,9 +106,11 @@ struct homeView: View {
                 }){
                     ZStack{
                         Rectangle()
+                            .fill(ImagePaint(image: Image("MealRSHBG")))
                             .frame(width: 370, height: 125)
-                            .foregroundColor(.blue)
                             .cornerRadius(25)
+                            
+                            
                         
                         VStack(alignment: .center) {
                             Text("Meal")
@@ -116,6 +122,7 @@ struct homeView: View {
                                 .font(.custom("Poppins-Bold", size: 24))
                         }
                     }
+                    
                 }
                 .sheet(isPresented: $isShowingDetail1) {
                     Text("MEAL RECOM VIEW")
@@ -128,8 +135,8 @@ struct homeView: View {
                 }){
                     ZStack{
                         Rectangle()
+                            .fill(ImagePaint(image: Image("FoodInfoBG")))
                             .frame(width: 370, height: 125)
-                            .foregroundColor(.blue)
                             .cornerRadius(25)
                         
                         Text("Food Information")
@@ -148,8 +155,8 @@ struct homeView: View {
                 }){
                     ZStack{
                         Rectangle()
+                            .fill(ImagePaint(image: Image("GraphBG")))
                             .frame(width: 370, height: 125)
-                            .foregroundColor(.blue)
                             .cornerRadius(25)
                         
                         Text("GRAPH")
