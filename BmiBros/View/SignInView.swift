@@ -18,7 +18,7 @@ struct SignInView: View {
                 .resizable()
                 .frame(width: 262, height: 263)
             Spacer()
-            Text("Login")
+            Text("Sign In")
                 .font(.custom("Poppins-Bold", size: 24))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal)
@@ -103,8 +103,9 @@ struct SignInView: View {
                     .font(.custom("Poppins-Light", size: 15))
                 
                 Text("Sign Up")
-                    .foregroundColor(Color(UIColor(hex: "#98A8F8")))
-                    .font(.custom("Poppins-Light", size: 15))
+                    .foregroundColor(Color(UIColor(hex: "#6D85FD")))
+                    .padding(.horizontal,-5)
+                    .font(.custom("Poppins-Bold", size: 15))
             }
             .padding(.vertical, 10)
         }

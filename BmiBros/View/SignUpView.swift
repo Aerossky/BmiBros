@@ -118,7 +118,9 @@ struct SignUpView: View {
                 HStack {
                     Text("Already have an account?")
                     Text("Sign In")
-                        .foregroundColor(Color(UIColor(hex: "#98A8F8")))
+                        .font(.custom("Poppins-Bold", size: 15))
+                        .foregroundColor(Color(UIColor(hex: "#6D85FD")))
+                        
                 }
                 .font(.custom("Poppins-Light", size: 15))
                 .padding(.top)
