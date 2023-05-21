@@ -19,7 +19,7 @@ struct ContentView: View {
                 .tag(0)
             
             // Tampilan kedua
-            Text("Second View")
+            InputView()
                 .tabItem {
                     Image(systemName: "ruler")
                     Text("Calculate")
