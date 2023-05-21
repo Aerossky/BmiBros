@@ -10,5 +10,12 @@
 		<string>Poppins-SemiBold.ttf</string>
 		<string>Poppins-Regular.ttf</string>
 	</array>
+	<key>UILaunchScreen</key>
+	<dict>
+		<key>UIImageName</key>
+		<string>SplashScreen</string>
+		<key>UILaunchScreen</key>
+		<string></string>
+	</dict>
 </dict>
 </plist>
