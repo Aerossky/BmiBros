@@ -8,22 +8,44 @@
 import SwiftUI
 
 struct InputView: View {
+    @Environment(\.presentationMode) var presentationMode
+    
     var body: some View {
-            VStack(alignment: .leading) {
+        NavigationView {
+            VStack {
                 HStack {
-                    Image(systemName: "chevron.backward")
-                        .resizable()
-                        .frame(width: 40, height: 50)
-                        .foregroundColor(Color(UIColor(hex: "#76AAFA")))
-                        .alignmentGuide(.top) { d in d[.bottom] }
-                    Text("Calculation Result")
-                        .font(.custom("Poppins-SemiBold", size: 24))
-                        .foregroundColor(Color(UIColor(hex: "#76AAFA")))
-                        .alignmentGuide(.top) { d in d[.top] }
+                    VStack {
+                        Text("Calculation Result")
+                            .font(.custom("Poppins-SemiBold", size: 24))
+                            .foregroundColor(Color(UIColor(hex: "#76AAFA")))
+                    }
                 }
-                Spacer()
+                .padding(.top, 20)
+                .padding(.bottom,20)
             }
+            .padding(.leading, 20)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        presentationMode.wrappedValue.dismiss()
+                    }) {
+                        Text("")
+                    }
+                }
+            }
+            .navigationBarBackButtonHidden(true)
+            .navigationBarItems(leading: backButton)
         }
+    }
+    
+    var backButton: some View {
+        Button(action: {
+            presentationMode.wrappedValue.dismiss()
+        }) {
+            Image(systemName: "chevron.left")
+                .imageScale(.large)
+        }
+    }
 }
 
 struct InputView_Previews: PreviewProvider {
@@ -31,3 +53,5 @@ struct InputView_Previews: PreviewProvider {
         InputView()
     }
 }
+
+
