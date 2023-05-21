@@ -12,32 +12,37 @@ struct InputView: View {
     @State private var Gender = ""
     @State private var Height = ""
     @State private var Weight = ""
+    @State private var Age = ""
     @State private var selectedGender = 0
-
     @State private var selectedHeight = "40"
     @State private var selectedWeight = "20"
+    @State private var selectedAge = "20"
     
     let genderOptions = ["Man", "Woman"]
     let minHeight = 40
     let maxHeight = 300
     let minWeight = 20
     let maxWeight = 300
+    let minAge = 20
+    let maxAge = 200
     
     @State private var activeAlert: ActiveAlert?
     
     enum ActiveAlert: Identifiable {
-            case Weight, Height
-            
-            var id: Int {
-                // Return a unique identifier for each case
-                switch self {
-                case .Weight:
-                    return 0
-                case .Height:
-                    return 1
-                }
+        case Weight, Height, Age
+        
+        var id: Int {
+            // Return a unique identifier for each case
+            switch self {
+            case .Weight:
+                return 0
+            case .Height:
+                return 1
+            case .Age:
+                return 2
             }
         }
+    }
     
     var isInputHeightValid: Bool {
         guard let value = Int(selectedHeight) else {
@@ -51,6 +56,13 @@ struct InputView: View {
             return false
         }
         return value >= minWeight && value <= maxWeight
+    }
+    
+    var isInputAgeValid: Bool {
+        guard let value = Int(selectedAge) else {
+            return false
+        }
+        return value >= minAge && value <= maxAge
     }
     
     var body: some View {
@@ -79,10 +91,11 @@ struct InputView: View {
                                         .tag(index)
                                 }
                             }
+                            .padding(.trailing, 20)
                             .pickerStyle(SegmentedPickerStyle())
                             .padding(.leading, 20)
-                            .padding(.trailing, 20)
                         }
+                        .padding(.leading, 20)
                         
                         HStack {
                             Text("Height")
@@ -97,6 +110,7 @@ struct InputView: View {
                                 .padding(.trailing, 20)
                             
                         }
+                        .padding(.leading, 20)
                         
                         HStack {
                             Text("Weight")
@@ -111,6 +125,22 @@ struct InputView: View {
                             }
                             
                         }
+                        .padding(.leading, 20)
+                        
+                        HStack {
+                            Text("Age")
+                                .font(.custom("Poppins-Bold", size: 20))
+                                .foregroundColor(Color(UIColor(hex: "#76AAFA")))
+                            VStack{
+                                TextField("Enter a number", text: $selectedAge)
+                                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                                    .keyboardType(.numberPad)
+                                    .padding(.leading, 54)
+                                    .padding(.trailing, 20)
+                            }
+                            
+                        }
+                        .padding(.leading, 20)
                         Spacer()
                         
                         Button(action: {
@@ -120,7 +150,10 @@ struct InputView: View {
                             else if(!isInputWeightValid){
                                 activeAlert = .Weight
                             }
-                            else if isInputHeightValid && isInputWeightValid {
+                            else if(!isInputAgeValid){
+                                activeAlert = .Age
+                            }
+                            else if isInputHeightValid && isInputWeightValid && isInputAgeValid {
                                 Text("SUCCESS") // ini ganti buat lempar data
                             }
                         }) {
@@ -129,7 +162,7 @@ struct InputView: View {
                                 .foregroundColor(.white)
                                 .padding()
                                 .frame(maxWidth: .infinity)
-                                .background((isInputHeightValid  && isInputWeightValid) ? Color.blue : Color.gray)
+                                .background((isInputHeightValid  && isInputWeightValid && isInputAgeValid) ? Color.blue : Color.gray)
                             //                                .background(isInputWeightValid ? Color.blue : Color.gray)
                                 .cornerRadius(8)
                         }
@@ -140,6 +173,8 @@ struct InputView: View {
                                 return Alert(title: Text("Invalid Input"), message: Text("Weight Must Between \(minWeight) and \(maxWeight) ."), dismissButton: .default(Text("OK")))
                             case .Height:
                                 return Alert(title: Text("Invalid Input"), message: Text("Height Must Between \(minHeight) and \(maxHeight) ."), dismissButton: .default(Text("OK")))
+                            case .Age:
+                                return Alert(title: Text("Invalid Input"), message: Text("Age Must Between \(minAge) and \(maxAge) ."), dismissButton: .default(Text("OK")))
                             }
                         }
                     }
@@ -149,7 +184,6 @@ struct InputView: View {
             }
             .multilineTextAlignment(.center)
         }
-        .padding(.leading, 20)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {

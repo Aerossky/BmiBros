@@ -11,7 +11,7 @@ import SwiftUI
 struct BmiBrosApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            InputView()
         }
     }
 }
