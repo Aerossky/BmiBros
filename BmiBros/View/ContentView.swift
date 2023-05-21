@@ -11,7 +11,7 @@ struct ContentView: View {
     var body: some View {
         TabView {
             // Tampilan pertama
-            homeView()
+            HomeView()
                 .tabItem {
                     Image(systemName: "square.grid.2x2")
                     Text("Home")
