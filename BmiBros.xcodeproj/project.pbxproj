@@ -91,27 +91,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		04100DEB2A1B540700160C69 /* Model */ = {
+		04100DEB2A1B540700160C69 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				04100DEC2A1B543000160C69 /* Food.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
-		04DBD8662A18C2F70037792E /* View */ = {
+		04DBD8662A18C2F70037792E /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				04FBE79A2A11C61200059DBF /* ContentView.swift */,
-				04DBD8692A18C6BA0037792E /* HomeView.swift */,
-				04100DE92A1B538600160C69 /* FoodInformationView.swift */,
-				04DBD89B2A18F27A0037792E /* FoodDetailView.swift */,
-				04DBD8A02A18F57F0037792E /* InputView.swift */,
 				04BB453D2A18F81100539210 /* IntroductionView.swift */,
-				04703BB82A1A19C1008723A7 /* SignInView.swift */,
-				04703BBC2A1A2894008723A7 /* SignUpView.swift */,
+				04DBD8692A18C6BA0037792E /* HomeView.swift */,
+				04FBE79A2A11C61200059DBF /* ContentView.swift */,
+				04DBD8A02A18F57F0037792E /* InputView.swift */,
+				04E2037A2A1BA3F900F61375 /* Authentication */,
+				04E2037B2A1BA63400F61375 /* Food */,
 			);
-			path = View;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		04DBD86C2A18CE340037792E /* Poppins */ = {
@@ -156,6 +154,24 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		04E2037A2A1BA3F900F61375 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				04703BB82A1A19C1008723A7 /* SignInView.swift */,
+				04703BBC2A1A2894008723A7 /* SignUpView.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		04E2037B2A1BA63400F61375 /* Food */ = {
+			isa = PBXGroup;
+			children = (
+				04100DE92A1B538600160C69 /* FoodInformationView.swift */,
+				04DBD89B2A18F27A0037792E /* FoodDetailView.swift */,
+			);
+			path = Food;
+			sourceTree = "<group>";
+		};
 		04FBE78C2A11C61200059DBF = {
 			isa = PBXGroup;
 			children = (
@@ -178,9 +194,9 @@
 			children = (
 				04100DF02A1B957D00160C69 /* BmiBros.entitlements */,
 				04FBE7982A11C61200059DBF /* BmiBrosApp.swift */,
-				04100DEB2A1B540700160C69 /* Model */,
+				04100DEB2A1B540700160C69 /* Models */,
 				04E203772A1BA0D400F61375 /* ViewModels */,
-				04DBD8662A18C2F70037792E /* View */,
+				04DBD8662A18C2F70037792E /* Views */,
 				04DBD89D2A18F5110037792E /* Resources */,
 				04FBE79C2A11C61400059DBF /* Assets.xcassets */,
 				04FBE79E2A11C61400059DBF /* Preview Content */,
