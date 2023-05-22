@@ -9,31 +9,34 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        TabView {
-            // Tampilan pertama
-            HomeView()
-                .tabItem {
-                    Image(systemName: "square.grid.2x2")
-                    Text("Home")
-                }
-                .tag(0)
-            
-            // Tampilan kedua
-            InputView()
-                .tabItem {
-                    Image(systemName: "ruler")
-                    Text("Calculate")
-                }
-                .tag(1)
-            
-            // Tampilan ketiga
-            Text("Third View")
-                .tabItem {
-                    Image(systemName: "person.fill")
-                    Text("Account")
-                }
-                .tag(2)
+        NavigationStack {
+            TabView {
+                // Tampilan pertama
+                HomeView()
+                    .tabItem {
+                        Image(systemName: "square.grid.2x2")
+                        Text("Home")
+                    }
+                    .tag(0)
+                
+                // Tampilan kedua
+                InputView()
+                    .tabItem {
+                        Image(systemName: "ruler")
+                        Text("Calculate")
+                    }
+                    .tag(1)
+                
+                // Tampilan ketiga
+                Text("Third View")
+                    .tabItem {
+                        Image(systemName: "person.fill")
+                        Text("Account")
+                    }
+                    .tag(2)
+            }
         }
+        .toolbar(.hidden, for: .navigationBar)
     }
 }
 

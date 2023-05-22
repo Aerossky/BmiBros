@@ -24,14 +24,12 @@ struct IntroductionView: View {
                     .multilineTextAlignment(.center)
                     .padding([.horizontal, .bottom], 20)
                 
-                
-                
                 Spacer()
                 //Button GetStarted
                 Button(action: {
                     // Aksi tombol login
                 }) {
-                    NavigationLink(destination: SignInView().navigationBarHidden(true)) {
+                    NavigationLink(destination: SignInView()) {
                         Text("Get Started")
                             .font(.custom("Poppins-SemiBold", size: 16))
                             .foregroundColor(.white)
@@ -46,7 +44,7 @@ struct IntroductionView: View {
                 Button(action: {
                     // Kode yang akan dijalankan ketika tombol ditekan
                 }) {
-                    NavigationLink(destination: SignUpView().navigationBarHidden(true)) {
+                    NavigationLink(destination: SignUpView()) {
                         Text("Sign Up")
                             .foregroundColor(Color(UIColor(hex: "#98A8F8")))
                             .padding()
@@ -60,12 +58,8 @@ struct IntroductionView: View {
                 }
             }
             .padding(.bottom, 10)
-            
-            
-            
-            
-            
         }
+        .toolbar(.hidden, for: .navigationBar)
     }
 }
 

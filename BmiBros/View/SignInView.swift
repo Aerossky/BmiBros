@@ -5,11 +5,13 @@
 //  Created by MacBook Pro on 21/05/23.
 //
 import SwiftUI
+import AuthenticationServices
 
 struct SignInView: View {
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var isPasswordVisible: Bool = false
+    @State private var isSignInSuccessful = false
     
     var body: some View {
         NavigationStack {
@@ -68,7 +70,7 @@ struct SignInView: View {
                     // Aksi tombol login
                     
                 }) {
-                    NavigationLink(destination: ContentView().navigationBarHidden(true)) {
+                    NavigationLink(destination: ContentView()) {
                         Text("Sign In")
                             .font(.custom("Poppins-SemiBold", size: 16))
                             .foregroundColor(.white)
@@ -80,26 +82,50 @@ struct SignInView: View {
                 }
                 .padding(.horizontal)
                 
-                Button(action: {
-                    // Aksi tombol sign in with apple
-                }) {
-                    HStack {
-                        Image(systemName: "applelogo")
-                            .resizable()
-                            .frame(width: 18, height: 22)
-                        Text("Sign in with Apple")
-                            .foregroundColor(.white)
-                            .font(.system(size: 16, weight: .bold))
-                            .frame(height: 22)
-                            .padding(.top, 5)
-                    }
-                    .foregroundColor(.white)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(Color.black)
-                    .cornerRadius(10)
-                }
-                .padding(.horizontal)
+                VStack {
+                           if isSignInSuccessful {
+                               NavigationLink(destination: ContentView()) {
+                                   Text("Continue")
+                               }
+                           } else {
+                               SignInWithAppleButton(.continue) { request in
+                                   request.requestedScopes = [.email]
+                               } onCompletion: { result in
+                                   switch result {
+                                   case .success(let authResults):
+                                       print("Authorization successful")
+                                       isSignInSuccessful = true  // Set the flag to true
+                                   case .failure(let error):
+                                       print("Authorization failed: \(error.localizedDescription)")
+                                   }
+                               }
+                               .padding(.horizontal)
+                               .cornerRadius(10)
+                               .signInWithAppleButtonStyle(.black)
+                               .frame(height: 50)
+                           }
+                       }
+                
+//                Button(action: {
+//                    // Aksi tombol sign in with apple
+//                }) {
+//                    HStack {
+//                        Image(systemName: "applelogo")
+//                            .resizable()
+//                            .frame(width: 18, height: 22)
+//                        Text("Sign in with Apple")
+//                            .foregroundColor(.white)
+//                            .font(.system(size: 16, weight: .bold))
+//                            .frame(height: 22)
+//                            .padding(.top, 5)
+//                    }
+//                    .foregroundColor(.white)
+//                    .padding()
+//                    .frame(maxWidth: .infinity)
+//                    .background(Color.black)
+//                    .cornerRadius(10)
+//                }
+//                .padding(.horizontal)
                 
                 HStack {
                     Text("New around here? ")
@@ -115,7 +141,7 @@ struct SignInView: View {
             }
             .padding(.vertical)
         }
-        .navigationBarHidden(true)
+        .toolbar(.hidden, for: .navigationBar)
     }
 }
 

@@ -44,6 +44,7 @@
 /* Begin PBXFileReference section */
 		04100DE92A1B538600160C69 /* FoodInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodInformationView.swift; sourceTree = "<group>"; };
 		04100DEC2A1B543000160C69 /* Food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
+		04100DF02A1B957D00160C69 /* BmiBros.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BmiBros.entitlements; sourceTree = "<group>"; };
 		04703BB82A1A19C1008723A7 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		04703BBC2A1A2894008723A7 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		04BB453D2A18F81100539210 /* IntroductionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionView.swift; sourceTree = "<group>"; };
@@ -165,10 +166,11 @@
 		04FBE7972A11C61200059DBF /* BmiBros */ = {
 			isa = PBXGroup;
 			children = (
+				04100DF02A1B957D00160C69 /* BmiBros.entitlements */,
+				04FBE7982A11C61200059DBF /* BmiBrosApp.swift */,
+				04DBD8662A18C2F70037792E /* View */,
 				04100DEB2A1B540700160C69 /* Model */,
 				04DBD89D2A18F5110037792E /* Resources */,
-				04DBD8662A18C2F70037792E /* View */,
-				04FBE7982A11C61200059DBF /* BmiBrosApp.swift */,
 				04FBE79C2A11C61400059DBF /* Assets.xcassets */,
 				04FBE79E2A11C61400059DBF /* Preview Content */,
 			);
@@ -408,6 +410,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = BmiBros/BmiBros.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BmiBros/Preview Content\"";
@@ -438,6 +441,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = BmiBros/BmiBros.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BmiBros/Preview Content\"";
