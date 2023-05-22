@@ -8,61 +8,55 @@
 import SwiftUI
 
 struct FoodDetailView: View {
-
+    let food: Food
+    
     var body: some View {
         VStack {
             HStack {
-                Image("food Image")
-            }.imageScale(.medium).padding(.top, 12).clipShape(Circle()).shadow(radius: 15)
-//            text about food
-            VStack{
-                Text("Nasi Campur Bu Dewi").padding(.top, 12).padding(.bottom, 20)
-                Text("Nasi campur Bu Dewi dengan isian ayam udang dan juga lobster khas atlantis").frame(width: 300)
+                Image(food.image)
             }
+            Text(food.name)
+                .font(.title)
+            Text(food.description)
+                .frame(width: 300)
             Spacer()
-//            info show
             VStack {
-                HStack{
-                    ZStack{
-                        Circle().frame(width: 75)
-
-                        VStack {
-                            Text("Cal")
-                            Text("457")
-                        }.foregroundColor(.white)
-                    }
-                    ZStack{
-                        Circle().frame(width: 75)
-
-                        VStack {
-                            Text("Prot")
-                            Text("40g")
-                        }.foregroundColor(.white)
-                    }
-                    ZStack{
-                        Circle().frame(width: 75)
-
-                        VStack {
-                            Text("Carbs")
-                            Text("30g")
-                        }.foregroundColor(.white)
-                    }
-                    ZStack{
-                        Circle().frame(width: 75)
-
-                        VStack {
-                            Text("fat")
-                            Text("2g")
-                        }.foregroundColor(.white)
-                    }
-                }.foregroundColor(.purple).shadow(radius: 7)
+                HStack {
+                    InfoCircleView(title: "Cal", value: food.cal)
+                    InfoCircleView(title: "Prot", value: food.prot)
+                    InfoCircleView(title: "Carbs", value: food.carbs)
+                    InfoCircleView(title: "Fat", value: food.fat)
+                }
             }
         }
+        .padding()
     }
 }
 
+struct InfoCircleView: View {
+    let title: String
+    let value: Int
+    
+    var body: some View {
+        ZStack {
+            Circle()
+                .frame(width: 75)
+                .foregroundColor(.purple)
+            
+            VStack {
+                Text(title)
+                Text("\(value)")
+            }
+            .foregroundColor(.white)
+        }
+        .shadow(radius: 7)
+    }
+}
+
+
 struct FoodDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        FoodDetailView()
+        let food = Food(id: UUID(), image: "food Image", name: "Salad Babi", description: "Salad isi babi ala Joseph yang enaknya wauwwwww makjos slebew (aku diajarin Rey)", cal: 478, prot: 30, carbs: 25, fat: 12)
+        FoodDetailView(food: food)
     }
 }
