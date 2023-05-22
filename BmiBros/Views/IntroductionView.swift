@@ -9,6 +9,7 @@ import SwiftUI
 
 struct IntroductionView: View {
     var body: some View {
+         
         NavigationStack {
             VStack(alignment: .center) {
                 Image("introduction")
