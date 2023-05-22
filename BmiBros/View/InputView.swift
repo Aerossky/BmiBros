@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct InputView: View {
-    @Environment(\.presentationMode) var presentationMode
     @State private var Gender = ""
     @State private var Height = ""
     @State private var Weight = ""
@@ -29,7 +28,7 @@ struct InputView: View {
     @State private var activeAlert: ActiveAlert?
     
     enum ActiveAlert: Identifiable {
-        case Weight, Height, Age
+        case Weight, Height, Age, SuccessInput
         
         var id: Int {
             // Return a unique identifier for each case
@@ -40,6 +39,8 @@ struct InputView: View {
                 return 1
             case .Age:
                 return 2
+            case .SuccessInput:
+                return 3
             }
         }
     }
@@ -155,6 +156,7 @@ struct InputView: View {
                             }
                             else if isInputHeightValid && isInputWeightValid && isInputAgeValid {
                                 Text("SUCCESS") // ini ganti buat lempar data
+                                activeAlert = .SuccessInput
                             }
                         }) {
                             Text("Submit")
@@ -175,6 +177,9 @@ struct InputView: View {
                                 return Alert(title: Text("Invalid Input"), message: Text("Height Must Between \(minHeight) and \(maxHeight) ."), dismissButton: .default(Text("OK")))
                             case .Age:
                                 return Alert(title: Text("Invalid Input"), message: Text("Age Must Between \(minAge) and \(maxAge) ."), dismissButton: .default(Text("OK")))
+                                
+                            case .SuccessInput:
+                                return Alert(title: Text("Success"), message: Text("Data updated successfully!"), dismissButton: .default(Text("OK")))
                             }
                         }
                     }
@@ -183,29 +188,6 @@ struct InputView: View {
                 .padding(.top, 50)
             }
             .multilineTextAlignment(.center)
-        }
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: {
-                    presentationMode.wrappedValue.dismiss()
-                }) {
-                    Text("Calculate Your BMI")
-                        .font(.custom("Poppins-SemiBold", size: 24))
-                        .foregroundColor(Color(UIColor(hex: "#76AAFA")))
-                }
-            }
-        }
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: backButton)
-    }
-    
-    
-    var backButton: some View {
-        Button(action: {
-            presentationMode.wrappedValue.dismiss()
-        }) {
-            Image(systemName: "chevron.left")
-                .imageScale(.large)
         }
     }
 }
