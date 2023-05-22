@@ -8,6 +8,11 @@ import SwiftUI
 import AuthenticationServices
 
 struct SignInView: View {
+    @StateObject private var viewModel = UserViewModel()
+    //    @State private var username = ""
+    //    @State private var password = ""
+    @State private var isLoggedIn = false
+    @State private var showLoginSuccessAlert = false
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var isPasswordVisible: Bool = false
@@ -68,64 +73,83 @@ struct SignInView: View {
                 
                 Button(action: {
                     // Aksi tombol login
-                    
-                }) {
-                    NavigationLink(destination: ContentView()) {
-                        Text("Sign In")
-                            .font(.custom("Poppins-SemiBold", size: 16))
-                            .foregroundColor(.white)
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .background(Color(UIColor(hex: "#98A8F8")))
-                            .cornerRadius(10)
+                    isLoggedIn = viewModel.loginUser(email: email, password: password)
+                    if isLoggedIn {
+                        showLoginSuccessAlert = true
+                    } else {
+                        showLoginSuccessAlert = false
                     }
+                }) {
+                    Text("Sign In")
+                        .font(.custom("Poppins-SemiBold", size: 16))
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color(UIColor(hex: "#98A8F8")))
+                        .cornerRadius(10)
                 }
                 .padding(.horizontal)
+                .alert(isPresented: $showLoginSuccessAlert) {
+                            Alert(
+                                title: Text("Login Successful"),
+                                message: Text("You have successfully logged in!"),
+                                dismissButton: .default(Text("OK"))
+                            )
+                        }
+                .background(
+                    NavigationLink(
+                        destination: HomeView(),
+                        isActive: $isLoggedIn,
+                        label: {
+                            EmptyView()
+                        }
+                    )
+                )
                 
                 VStack {
-                           if isSignInSuccessful {
-                               NavigationLink(destination: ContentView()) {
-                                   Text("Continue")
-                               }
-                           } else {
-                               SignInWithAppleButton(.continue) { request in
-                                   request.requestedScopes = [.email]
-                               } onCompletion: { result in
-                                   switch result {
-                                   case .success(let authResults):
-                                       print("Authorization successful")
-                                       isSignInSuccessful = true  // Set the flag to true
-                                   case .failure(let error):
-                                       print("Authorization failed: \(error.localizedDescription)")
-                                   }
-                               }
-                               .padding(.horizontal)
-                               .cornerRadius(10)
-                               .signInWithAppleButtonStyle(.black)
-                               .frame(height: 50)
-                           }
-                       }
+                    if isSignInSuccessful {
+                        NavigationLink(destination: ContentView()) {
+                            Text("Continue")
+                        }
+                    } else {
+                        SignInWithAppleButton(.continue) { request in
+                            request.requestedScopes = [.fullName, .email]
+                        } onCompletion: { result in
+                            switch result {
+                            case .success(let authResults):
+                                print("Authorization successful")
+                                isSignInSuccessful = true  // Set the flag to true
+                            case .failure(let error):
+                                print("Authorization failed: \(error.localizedDescription)")
+                            }
+                        }
+                        .padding(.horizontal)
+                        .cornerRadius(10)
+                        .signInWithAppleButtonStyle(.black)
+                        .frame(height: 50)
+                    }
+                }
                 
-//                Button(action: {
-//                    // Aksi tombol sign in with apple
-//                }) {
-//                    HStack {
-//                        Image(systemName: "applelogo")
-//                            .resizable()
-//                            .frame(width: 18, height: 22)
-//                        Text("Sign in with Apple")
-//                            .foregroundColor(.white)
-//                            .font(.system(size: 16, weight: .bold))
-//                            .frame(height: 22)
-//                            .padding(.top, 5)
-//                    }
-//                    .foregroundColor(.white)
-//                    .padding()
-//                    .frame(maxWidth: .infinity)
-//                    .background(Color.black)
-//                    .cornerRadius(10)
-//                }
-//                .padding(.horizontal)
+                //                Button(action: {
+                //                    // Aksi tombol sign in with apple
+                //                }) {
+                //                    HStack {
+                //                        Image(systemName: "applelogo")
+                //                            .resizable()
+                //                            .frame(width: 18, height: 22)
+                //                        Text("Sign in with Apple")
+                //                            .foregroundColor(.white)
+                //                            .font(.system(size: 16, weight: .bold))
+                //                            .frame(height: 22)
+                //                            .padding(.top, 5)
+                //                    }
+                //                    .foregroundColor(.white)
+                //                    .padding()
+                //                    .frame(maxWidth: .infinity)
+                //                    .background(Color.black)
+                //                    .cornerRadius(10)
+                //                }
+                //                .padding(.horizontal)
                 
                 HStack {
                     Text("New around here? ")

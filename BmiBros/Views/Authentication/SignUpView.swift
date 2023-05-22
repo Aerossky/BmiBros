@@ -7,6 +7,11 @@
 import SwiftUI
 
 struct SignUpView: View {
+    @StateObject private var viewModel = UserViewModel()
+    //    @State private var username = ""
+    //    @State private var password = ""
+    @State private var isRegistered = false
+    @State private var showSignUpSuccessAlert = false
     @State private var username: String = ""
     @State private var email: String = ""
     @State private var password: String = ""
@@ -103,8 +108,12 @@ struct SignUpView: View {
                 
                 VStack {
                     Button(action: {
-                        // Aksi tombol login
-                        isSignUpButtonAnimating.toggle() // Mengubah status animasi tombol
+                        viewModel.registerUser(username: username, email: email, password: password)
+                        if isRegistered {
+                            showSignUpSuccessAlert = true
+                        } else {
+                            // Optionally, you can show an error message or alert for failed registration
+                        }
                     }) {
                         Text("Sign Up")
                             .font(.custom("Poppins-SemiBold", size: 16))
@@ -115,6 +124,15 @@ struct SignUpView: View {
                             .cornerRadius(10)
                     }
                     .padding(.horizontal)
+                    .alert(isPresented: $showSignUpSuccessAlert) {
+                        Alert(
+                            title: Text("Sign Up Successful"),
+                            message: Text("You have successfully registered!"),
+                            dismissButton: .default(Text("OK")) {
+                                isRegistered = true
+                            }
+                        )
+                    }
                     
                     HStack {
                         Text("Already have an account?")
