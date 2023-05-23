@@ -97,10 +97,9 @@ struct SignUpView: View {
                     Text("By signing up, you have read and agreed to our")
                         .font(.custom("Poppins-Light", size: 15))
                         .padding(.horizontal)
-                    
-                    Text("Terms & conditions")
-                        .foregroundColor(Color(UIColor(hex: "#6D85FD")))
+                    NavigationLink("Terms & conditions", destination: ContentView())
                         .font(.custom("Poppins-Bold", size: 15))
+                        .foregroundColor(Color(UIColor(hex: "#6D85FD")))
                         .padding(.horizontal)
                 }
                 
