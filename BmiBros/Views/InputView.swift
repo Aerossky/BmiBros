@@ -1,3 +1,4 @@
+
 //
 //  InputView.swift
 //  BmiBros
@@ -8,14 +9,14 @@
 import SwiftUI
 
 struct InputView: View {
-    @State private var Gender = ""
-    @State private var Height = ""
-    @State private var Weight = ""
-    @State private var Age = ""
+    
+    // viewModel
+    @StateObject private var viewModel = InputViewModel()
+    
     @State private var selectedGender = 0
-    @State private var selectedHeight = "40"
-    @State private var selectedWeight = "20"
-    @State private var selectedAge = "20"
+    @State private var selectedHeight = ""
+    @State private var selectedWeight = ""
+    @State private var selectedAge = ""
     
     let genderOptions = ["Man", "Woman"]
     let minHeight = 40
@@ -28,18 +29,18 @@ struct InputView: View {
     @State private var activeAlert: ActiveAlert?
     
     enum ActiveAlert: Identifiable {
-        case Weight, Height, Age, SuccessInput
+        case weight, height, age, successInput
         
         var id: Int {
             // Return a unique identifier for each case
             switch self {
-            case .Weight:
+            case .weight:
                 return 0
-            case .Height:
+            case .height:
                 return 1
-            case .Age:
+            case .age:
                 return 2
-            case .SuccessInput:
+            case .successInput:
                 return 3
             }
         }
@@ -79,13 +80,15 @@ struct InputView: View {
                             .font(.custom("Poppins-Bold", size: 96))
                             .foregroundColor(.red)
                         
-                        Text("Obesitas")
+                        Text("Obesity")
                             .font(.custom("Poppins-Bold", size: 32))
                             .foregroundColor(.red)
+                        
                         HStack {
                             Text("Gender")
                                 .font(.custom("Poppins-Bold", size: 20))
                                 .foregroundColor(Color(UIColor(hex: "#76AAFA")))
+                            
                             Picker("Select an Option", selection: $selectedGender) {
                                 ForEach(0..<genderOptions.count) { index in
                                     Text(genderOptions[index])
@@ -103,7 +106,6 @@ struct InputView: View {
                                 .font(.custom("Poppins-Bold", size: 20))
                                 .foregroundColor(Color(UIColor(hex: "#76AAFA")))
                             
-                            
                             TextField("Enter a number", text: $selectedHeight)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
                                 .keyboardType(.numberPad)
@@ -117,13 +119,12 @@ struct InputView: View {
                             Text("Weight")
                                 .font(.custom("Poppins-Bold", size: 20))
                                 .foregroundColor(Color(UIColor(hex: "#76AAFA")))
-                            VStack{
-                                TextField("Enter a number", text: $selectedWeight)
-                                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                                    .keyboardType(.numberPad)
-                                    .padding(.leading, 20)
-                                    .padding(.trailing, 20)
-                            }
+                            
+                            TextField("Enter a number", text: $selectedWeight)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .keyboardType(.numberPad)
+                                .padding(.leading, 20)
+                                .padding(.trailing, 20)
                             
                         }
                         .padding(.leading, 20)
@@ -132,31 +133,28 @@ struct InputView: View {
                             Text("Age")
                                 .font(.custom("Poppins-Bold", size: 20))
                                 .foregroundColor(Color(UIColor(hex: "#76AAFA")))
-                            VStack{
-                                TextField("Enter a number", text: $selectedAge)
-                                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                                    .keyboardType(.numberPad)
-                                    .padding(.leading, 54)
-                                    .padding(.trailing, 20)
-                            }
+                            
+                            TextField("Enter a number", text: $selectedAge)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .keyboardType(.numberPad)
+                                .padding(.leading, 54)
+                                .padding(.trailing, 20)
                             
                         }
                         .padding(.leading, 20)
+                        
                         Spacer()
                         
                         Button(action: {
                             if !isInputHeightValid {
-                                activeAlert = .Height
-                            }
-                            else if(!isInputWeightValid){
-                                activeAlert = .Weight
-                            }
-                            else if(!isInputAgeValid){
-                                activeAlert = .Age
-                            }
-                            else if isInputHeightValid && isInputWeightValid && isInputAgeValid {
-                                Text("SUCCESS") // ini ganti buat lempar data
-                                activeAlert = .SuccessInput
+                                activeAlert = .height
+                            } else if !isInputWeightValid {
+                                activeAlert = .weight
+                            } else if !isInputAgeValid {
+                                activeAlert = .age
+                            } else if isInputHeightValid && isInputWeightValid && isInputAgeValid {
+                                // Replace the following line with your data submission code
+                                activeAlert = .successInput
                             }
                         }) {
                             Text("Submit")
@@ -164,22 +162,20 @@ struct InputView: View {
                                 .foregroundColor(.white)
                                 .padding()
                                 .frame(maxWidth: .infinity)
-                                .background((isInputHeightValid  && isInputWeightValid && isInputAgeValid) ? Color.blue : Color.gray)
-                            //                                .background(isInputWeightValid ? Color.blue : Color.gray)
+                                .background((isInputHeightValid && isInputWeightValid && isInputAgeValid) ? Color.blue : Color.gray)
                                 .cornerRadius(8)
                         }
                         .padding()
                         .alert(item: $activeAlert) { alertType in
                             switch alertType {
-                            case .Weight:
-                                return Alert(title: Text("Invalid Input"), message: Text("Weight Must Between \(minWeight) and \(maxWeight) ."), dismissButton: .default(Text("OK")))
-                            case .Height:
-                                return Alert(title: Text("Invalid Input"), message: Text("Height Must Between \(minHeight) and \(maxHeight) ."), dismissButton: .default(Text("OK")))
-                            case .Age:
-                                return Alert(title: Text("Invalid Input"), message: Text("Age Must Between \(minAge) and \(maxAge) ."), dismissButton: .default(Text("OK")))
-                                
-                            case .SuccessInput:
-                                return Alert(title: Text("Success"), message: Text("Data updated successfully!"), dismissButton: .default(Text("OK")))
+                            case .weight:
+                                return Alert(title: Text("Invalid Input"), message: Text("Weight must be between \(minWeight) and \(maxWeight)."), dismissButton: .default(Text("OK")))
+                            case .height:
+                                return Alert(title: Text("Invalid Input"), message: Text("Height must be between \(minHeight) and \(maxHeight)."), dismissButton: .default(Text("OK")))
+                            case .age:
+                                return Alert(title: Text("Invalid Input"), message: Text("Age must be between \(minAge) and \(maxAge)."), dismissButton: .default(Text("OK")))
+                            case .successInput:
+                                return Alert(title: Text("Success"), message: Text("\(InputViewModel().nambah(a: Double(selectedHeight) ?? 0, b: Double(selectedWeight) ?? 0, c: Double(selectedAge) ?? 0))"), dismissButton: .default(Text("OK")))
                             }
                         }
                     }
@@ -191,8 +187,6 @@ struct InputView: View {
         }
     }
 }
-
-
 
 struct InputView_Previews: PreviewProvider {
     static var previews: some View {

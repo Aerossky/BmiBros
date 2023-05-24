@@ -8,7 +8,9 @@ import SwiftUI
 import AuthenticationServices
 
 struct SignInView: View {
-    @StateObject private var viewModel = UserViewModel()
+    //describe view model
+    @EnvironmentObject private var viewModel: UserViewModel
+
     //    @State private var username = ""
     //    @State private var password = ""
     @State private var isLoggedIn = false
@@ -72,13 +74,23 @@ struct SignInView: View {
                 Spacer()
                 
                 Button(action: {
+//                    // Aksi tombol login
+//                    isLoggedIn = viewModel.loginUser(email: email, password: password)
+//                    if isLoggedIn {
+//                        showLoginSuccessAlert = true
+//                    } else {
+//                        showLoginSuccessAlert = false
+//                    }
+                    
                     // Aksi tombol login
-                    isLoggedIn = viewModel.loginUser(email: email, password: password)
-                    if isLoggedIn {
-                        showLoginSuccessAlert = true
-                    } else {
-                        showLoginSuccessAlert = false
-                    }
+                       isLoggedIn = viewModel.loginUser(email: email, password: password)
+                       if isLoggedIn {
+                           showLoginSuccessAlert = true
+                           isSignInSuccessful = true // Set the flag to true
+                       } else {
+                           showLoginSuccessAlert = false
+                           isSignInSuccessful = false // Set the flag to false
+                       }
                 }) {
                     Text("Sign In")
                         .font(.custom("Poppins-SemiBold", size: 16))
