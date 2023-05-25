@@ -142,27 +142,6 @@ struct SignInView: View {
                     }
                 }
                 
-                //                Button(action: {
-                //                    // Aksi tombol sign in with apple
-                //                }) {
-                //                    HStack {
-                //                        Image(systemName: "applelogo")
-                //                            .resizable()
-                //                            .frame(width: 18, height: 22)
-                //                        Text("Sign in with Apple")
-                //                            .foregroundColor(.white)
-                //                            .font(.system(size: 16, weight: .bold))
-                //                            .frame(height: 22)
-                //                            .padding(.top, 5)
-                //                    }
-                //                    .foregroundColor(.white)
-                //                    .padding()
-                //                    .frame(maxWidth: .infinity)
-                //                    .background(Color.black)
-                //                    .cornerRadius(10)
-                //                }
-                //                .padding(.horizontal)
-                
                 HStack {
                     Text("New around here? ")
                         .foregroundColor(.black)

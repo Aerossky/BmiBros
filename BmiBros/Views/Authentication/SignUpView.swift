@@ -31,7 +31,7 @@ struct SignUpView: View {
                 .frame(width: 262, height: 263)
                 .animation(.spring()) // Animasi untuk gambar
             
-            Spacer()
+//            Spacer()
             
             Text("Sign Up")
                 .font(.custom("Poppins-Bold", size: 24))
@@ -75,29 +75,86 @@ struct SignUpView: View {
                     .frame(width: 360, alignment: .leading)
             }
 //              PASSWORD
-                HStack {
-                    if isPasswordVisible {
-                        TextField("Password", text: $password)
-                    } else {
-                        SecureField("Password", text: $password)
-                    }
-                    Button(action: {
-                        isPasswordVisible.toggle()
-                    }) {
-                        Image(systemName: isPasswordVisible ? "eye" : "eye.slash")
-                            .foregroundColor(.gray)
-                    }
+            //PASSWORD
+            HStack {
+                if isPasswordVisible {
+                    TextField("Password", text: $password)
+                } else {
+                    SecureField("Password", text: $password)
                 }
-                .padding()
-                .background(
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(Color(UIColor(hex: "#ffffff")))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(Color.black, lineWidth: 1)
-                        )
-                )
-                .padding(.horizontal)
+                Button(action: {
+                    isPasswordVisible.toggle()
+                }) {
+                    Image(systemName: isPasswordVisible ? "eye" : "eye.slash")
+                        .foregroundColor(.gray)
+                }
+            }
+            .padding()
+            .background(
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(Color(UIColor(hex: "#ffffff")))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.black, lineWidth: 1)
+                    )
+            )
+            .padding(.horizontal)
+            .onChange(of: password) { newValue in
+                viewModel.validatePassword(newValue)
+            }
+
+            if !viewModel.isPasswordValid {
+//                if(password.count < 2){
+//                    Text("Password must be at least 8 characters")
+//                               .foregroundColor(.red)
+//                               .font(.custom("Poppins-Light", size: 12))
+//                               .multilineTextAlignment(.leading)
+//                               .frame(width: 360, alignment: .leading)
+//                }
+//                else if !password.contains(where: { $0.isUppercase }) {
+//                    Text("Password must contain at least one uppercase letter")
+//                        .foregroundColor(.red)
+//                        .font(.custom("Poppins-Light", size: 12))
+//                        .multilineTextAlignment(.leading)
+//                        .frame(width: 360, alignment: .leading)
+//                }else if !password.contains(where: { $0.isNumber }) {
+//                    Text("Password must contain at least one number")
+//                        .foregroundColor(.red)
+//                        .font(.custom("Poppins-Light", size: 12))
+//                        .multilineTextAlignment(.leading)
+//                        .frame(width: 360, alignment: .leading)
+//                }
+//                else {
+//                    Text("Invalid password")
+//                        .foregroundColor(.red)
+//                        .font(.custom("Poppins-Light", size: 12))
+//                        .multilineTextAlignment(.leading)
+//                        .frame(width: 360, alignment: .leading)
+//                }
+              
+                 if !password.contains(where: { $0.isUppercase }) {
+                    Text("Password must contain at least one uppercase letter")
+                        .foregroundColor(.red)
+                        .font(.custom("Poppins-Light", size: 12))
+                        .multilineTextAlignment(.leading)
+                        .frame(width: 360, alignment: .leading)
+                }  else if(password.count < 8){
+                    Text("Password must be at least 8 characters")
+                               .foregroundColor(.red)
+                               .font(.custom("Poppins-Light", size: 12))
+                               .multilineTextAlignment(.leading)
+                               .frame(width: 360, alignment: .leading)
+                }
+                else {
+                    Text("Invalid password")
+                        .foregroundColor(.red)
+                        .font(.custom("Poppins-Light", size: 12))
+                        .multilineTextAlignment(.leading)
+                        .frame(width: 360, alignment: .leading)
+                }
+            }
+
+            
                 
 //                GENDER
                 Picker("Gender", selection: $selectedGender) {
@@ -183,6 +240,6 @@ struct SignUpView: View {
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
         SignUpView()
-//            .environmentObject(UserViewModel())
+            .environmentObject(UserViewModel())
     }
 }
