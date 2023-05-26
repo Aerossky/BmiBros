@@ -28,7 +28,7 @@ struct SignInView: View {
                 Image("login")
                     .resizable()
                     .frame(width: 262, height: 263)
-                Spacer()
+
                 
                 //EMAIL
                 Text("Sign In")

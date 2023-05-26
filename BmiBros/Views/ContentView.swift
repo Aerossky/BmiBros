@@ -9,34 +9,34 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        NavigationStack {
+        NavigationView {
             TabView {
                 // Tampilan pertama
                 HomeView()
                     .tabItem {
-                        Image(systemName: "square.grid.2x2")
-                        Text("Home")
+                        Label("Home", systemImage: "square.grid.2x2")
+                            .symbolRenderingMode(.hierarchical)
                     }
                     .tag(0)
                 
                 // Tampilan kedua
                 InputView()
                     .tabItem {
-                        Image(systemName: "ruler")
-                        Text("Calculate")
+                        Label("Calculate", systemImage: "ruler")
+                            .symbolRenderingMode(.hierarchical)
                     }
                     .tag(1)
                 
                 // Tampilan ketiga
                 Text("Third View")
                     .tabItem {
-                        Image(systemName: "person.fill")
-                        Text("Account")
+                        Label("Account", systemImage: "person.fill")
+                            .symbolRenderingMode(.hierarchical)
                     }
                     .tag(2)
             }
         }
-        .toolbar(.hidden, for: .navigationBar)
+        .accentColor(Color(UIColor(hex: "#6D85FD"))) // Ubah warna ikon yang dipilih di sini
     }
 }
 
