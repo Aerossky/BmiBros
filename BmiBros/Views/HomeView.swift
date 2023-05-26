@@ -10,25 +10,51 @@ import SwiftUI
 struct HomeView: View {
     @State private var isShowingDetail1 = false
     @State private var isShowingDetail3 = false
+    
+    // Hari
+    let dateFormatter = DateFormatter()
+    
+    // Tanggal
+    var currentDate: String {
+        dateFormatter.dateFormat = "EEEE, dd MMMM yyyy"
+        return dateFormatter.string(from: Date())
+    }
+    
+    // Jam
+     var isMorning: Bool {
+         let calendar = Calendar.current
+         let hour = calendar.component(.hour, from: Date())
+         return hour >= 6 && hour < 18
+     }
+     
+    
+   
+    
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack {
                     HStack {
                         VStack(alignment: .leading){
-                            Text("Hello, Rey 👋")
+                            Text("Hello, 123")
                                 .font(.custom("Poppins-Bold", size: 36))
                                 .foregroundColor(Color(UIColor(hex: "#609FFF")))
-                            Text("How Are You Today?")
+                            Text("\(currentDate)")
                                 .font(.custom("Poppins-Regular", size: 16))
                                 .foregroundColor(Color(UIColor(hex: "#76AAFA")))
                         }
+                        //.padding(.trailing)
                         Spacer()
-                        Image(systemName: "person")
+                        Image(isMorning ? "Morning" : "Night")
                             .resizable()
-                            .frame(width: 50, height: 50)
-                            .clipShape(Circle())
-                    }.padding(.horizontal, 15)
+                        .frame(width: 95, height: 75)
+//                            .padding(.leading)
+//                        Image(systemName: "person")
+//                            .resizable()
+//                            .frame(width: 50, height: 50)
+//                            .clipShape(Circle())
+                    }
+                    .padding(.horizontal, 15)
                     .padding(.top, 20)
                     .padding(.bottom,20)
                     
@@ -40,37 +66,37 @@ struct HomeView: View {
                                 .cornerRadius(25)
                             
                             VStack(alignment: .center){
-                                var bmi : Double = 40 //ini perlu diganti kalo udh ada backend
+                                var bmi : Double = 24 //ini perlu diganti kalo udh ada backend
                                 Text("BMI")
-                                    .font(.custom("Poppins-SemiBold", size: 32))
+                                    .font(.custom("Poppins-SemiBold", size: 25))
                                     .foregroundColor(.white)
                                 Text(String(format: "%.1f" ,bmi))
-                                    .font(.custom("Poppins-Light", size: 16))
+                                    .font(.custom("Poppins-Light", size: 15))
                                     .foregroundColor(.white)
                                 if(bmi<18.5){
                                     Text("UnderWeight")
                                         .font(.custom("Poppins-SemiBold", size: 16))
-                                        .foregroundColor(.yellow)
+                                        .foregroundColor(Color(UIColor(hex: "#ED5656")))
                                 }else if(bmi<24.9){
                                     Text("Normal")
                                         .font(.custom("Poppins-SemiBold", size: 16))
-                                        .foregroundColor(.green)
+                                        .foregroundColor(Color(UIColor(hex: "#C1FF8F")))
                                 }else if(bmi<29.9){
                                     Text("OverWeight")
                                         .font(.custom("Poppins-SemiBold", size: 16))
-                                        .foregroundColor(.red)
+                                        .foregroundColor(Color(UIColor(hex: "#FFDF84")))
                                 }else if(bmi<34.9){
                                     Text("Obesity Class I")
                                         .font(.custom("Poppins-SemiBold", size: 16))
-                                        .foregroundColor(.red)
+                                        .foregroundColor(Color(UIColor(hex: "#FA6657")))
                                 }else if(bmi<39.9){
                                     Text("Obesity Class II")
                                         .font(.custom("Poppins-SemiBold", size: 16))
-                                        .foregroundColor(.red)
+                                        .foregroundColor(Color(UIColor(hex: "#FF5353")))
                                 }else if(bmi>=40){
                                     Text("Obesity Class III")
                                         .font(.custom("Poppins-SemiBold", size: 16))
-                                        .foregroundColor(.red)
+                                        .foregroundColor(Color(UIColor(hex: "#ED5656")))
                                 }
                             }
                         }
@@ -136,7 +162,7 @@ struct HomeView: View {
                                     
                                     Text("Food Information")
                                         .foregroundColor(.white)
-                                        .font(.custom("Poppins-Bold", size: 24))
+                                        .font(.custom("Poppins-Bold", size: 21))
                                 }
                             }
                         }

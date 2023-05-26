@@ -31,7 +31,7 @@ class UserViewModel: ObservableObject {
     }
     
     func validatePassword(_ password: String) {
-//        let passwordRegex = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$"
+
         let passwordRegex = "^(?=.*[A-Z])[A-Za-z\\d@$!%*?&]{8,}$"
         let passwordPredicate = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
         isPasswordValid = passwordPredicate.evaluate(with: password)
@@ -49,9 +49,7 @@ class UserViewModel: ObservableObject {
     func loginUser(email: String, password: String) -> Bool {
         if let login = users.first(where: { $0.email == email && $0.password == password }) {
             return true
-        
-        }
-        
+        }        
         debugPrint(users)
         return false
        
