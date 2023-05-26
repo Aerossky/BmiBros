@@ -149,7 +149,7 @@ struct SignInView: View {
                         }
                 .background(
                     NavigationLink(
-                        destination: HomeView(),
+                        destination: ContentView().navigationBarBackButtonHidden(true), //ini ak ganti jadi contentview soalnya kalo lempar ke homeview gaada tabviewnya
                         isActive: $isLoggedIn,
                         label: {
                             EmptyView()
@@ -163,7 +163,7 @@ struct SignInView: View {
                 
                 VStack {
                     if isSignInSuccessful {
-                        NavigationLink(destination: ContentView()) {
+                        NavigationLink(destination: ContentView().navigationBarBackButtonHidden(true)) { // ini jg ak ganti biar bar backnya hilang
                             Text("Continue")
                         }
                     } else {
