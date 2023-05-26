@@ -18,16 +18,19 @@ struct SignInView: View {
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var isPasswordVisible: Bool = false
-    @State private var isSignInSuccessful = false
+    @State private var isSignInSuccessful: Bool = false
     
     var body: some View {
         NavigationStack {
             VStack {
-                Spacer()
+
+        
                 Image("login")
                     .resizable()
                     .frame(width: 262, height: 263)
                 Spacer()
+                
+                //EMAIL
                 Text("Sign In")
                     .font(.custom("Poppins-Bold", size: 24))
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -45,7 +48,20 @@ struct SignInView: View {
                     )
                     .frame(maxWidth: .infinity)
                     .padding(.horizontal)
+//                EMAIL VALIDATOR
+//                    .onChange(of: email) { newValue in
+//                        viewModel.validateEmail(newValue)
+//                    }
+//
+//                if !viewModel.isEmailValid {
+//                    Text("Invalid email format")
+//                        .foregroundColor(.red)
+//                        .font(.custom("Poppins-Light", size: 12))
+//                        .multilineTextAlignment(.leading)
+//                        .frame(width: 360, alignment: .leading)
+//                }
                 
+                //PASSWORD
                 HStack {
                     if isPasswordVisible {
                         TextField("Password", text: $password)
@@ -71,7 +87,30 @@ struct SignInView: View {
                 )
                 .frame(maxWidth: .infinity)
                 .padding(.horizontal)
-                Spacer()
+                //password validator
+//                .onChange(of: password) { newValue in
+//                    viewModel.validatePassword(newValue)
+//                }
+//
+//                if !viewModel.isPasswordValid {
+//
+//                    if !password.contains(where: { $0.isUppercase }) {
+//                        Text("Password must contain at least one uppercase letter")
+//                            .foregroundColor(.red)
+//                            .font(.custom("Poppins-Light", size: 12))
+//                            .multilineTextAlignment(.leading)
+//                            .frame(width: 360, alignment: .leading)
+//                    }  else if(password.count < 8){
+//                        Text("Password must be at least 8 characters")
+//                            .foregroundColor(.red)
+//                            .font(.custom("Poppins-Light", size: 12))
+//                            .multilineTextAlignment(.leading)
+//                            .frame(width: 360, alignment: .leading)
+//                    }
+//
+//                }
+                
+
                 
                 Button(action: {
 //                    // Aksi tombol login
@@ -117,6 +156,10 @@ struct SignInView: View {
                         }
                     )
                 )
+//                BUTTON DISABLE
+//                .disabled(email.isEmpty || password.isEmpty || !viewModel.isPasswordValid) // Mengatur tombol menjadi nonaktif jika username, email, atau password kosong
+//                .opacity(email.isEmpty || password.isEmpty || !viewModel.isPasswordValid ? 0.5 : 1) // Mengatur opasitas tombol
+                
                 
                 VStack {
                     if isSignInSuccessful {
@@ -162,6 +205,6 @@ struct SignInView: View {
 
 struct SignInView_Previews: PreviewProvider {
     static var previews: some View {
-        SignInView()
+        SignInView().environmentObject(UserViewModel())
     }
 }
