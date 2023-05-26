@@ -66,7 +66,7 @@ struct HomeView: View {
                                 .cornerRadius(25)
                             
                             VStack(alignment: .center){
-                                var bmi : Double = 24 //ini perlu diganti kalo udh ada backend
+                                var bmi : Double = 24.93000 //ini perlu diganti kalo udh ada backend
                                 Text("BMI")
                                     .font(.custom("Poppins-SemiBold", size: 25))
                                     .foregroundColor(.white)

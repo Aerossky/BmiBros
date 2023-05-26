@@ -18,7 +18,7 @@ struct InputView: View {
     @State private var selectedWeight = ""
     @State private var selectedAge = ""
     
-    let genderOptions = ["Man", "Woman"]
+    let genderOptions = ["Male", "Female"]
     let minHeight = 40
     let maxHeight = 300
     let minWeight = 20
@@ -175,8 +175,12 @@ struct InputView: View {
                             case .age:
                                 return Alert(title: Text("Invalid Input"), message: Text("Age must be between \(minAge) and \(maxAge)."), dismissButton: .default(Text("OK")))
                             case .successInput:
-                                return Alert(title: Text("Success"), message: Text("\(InputViewModel().nambah(a: Double(selectedHeight) ?? 0, b: Double(selectedWeight) ?? 0, c: Double(selectedAge) ?? 0))"), dismissButton: .default(Text("OK")))
+                                return Alert(title: Text("Success"), message: Text(""), dismissButton: .default(Text("OK")))
                             }
+                           
+//                            viewModel.calculateBMIForChild(weight: Double(selectedWeight) ?? 0, height: Double(selectedHeight) ?? 0, age: Int(selectedAge) ?? 0, gender: "male")
+//                            InputViewModel().calculateBMI(adultWeight: Double(selectedWeight) ?? 0, adultHeight: Double(selectedHeight) ?? 0)
+                            
                         }
                     }
                     
