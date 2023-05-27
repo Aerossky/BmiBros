@@ -9,7 +9,8 @@ import AuthenticationServices
 
 struct SignInView: View {
     //describe view model
-    @EnvironmentObject private var viewModel: UserViewModel
+    @StateObject private var viewModel: UserViewModel = UserViewModel()
+    
 
     //    @State private var username = ""
     //    @State private var password = ""
@@ -123,13 +124,13 @@ struct SignInView: View {
                     
                     // Aksi tombol login
                        isLoggedIn = viewModel.loginUser(email: email, password: password)
-                       if isLoggedIn {
-                           showLoginSuccessAlert = true
-                           isSignInSuccessful = true // Set the flag to true
-                       } else {
-                           showLoginSuccessAlert = false
-                           isSignInSuccessful = false // Set the flag to false
-                       }
+//                       if isLoggedIn {
+//                           showLoginSuccessAlert = true
+//                           isSignInSuccessful = true // Set the flag to true
+//                       } else {
+//                           showLoginSuccessAlert = false
+//                           isSignInSuccessful = false // Set the flag to false
+//                       }
                 }) {
                     Text("Sign In")
                         .font(.custom("Poppins-SemiBold", size: 16))
@@ -205,6 +206,6 @@ struct SignInView: View {
 
 struct SignInView_Previews: PreviewProvider {
     static var previews: some View {
-        SignInView().environmentObject(UserViewModel())
+        SignInView()
     }
 }

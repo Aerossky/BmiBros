@@ -64,7 +64,6 @@ struct IntroductionView: View {
             }
             .padding(.bottom, 10)
         }
-        .environmentObject(viewModel)
         .toolbar(.hidden, for: .navigationBar)
     }
 }

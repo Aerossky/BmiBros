@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct SignUpView: View {
-    @EnvironmentObject private var viewModel: UserViewModel
+    @StateObject private var viewModel: UserViewModel = UserViewModel()
     
     @State private var isEmailValid: Bool = true
     @State private var isPasswordValid: Bool = true
@@ -203,6 +203,6 @@ struct SignUpView: View {
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
         SignUpView()
-            .environmentObject(UserViewModel())
+        
     }
 }

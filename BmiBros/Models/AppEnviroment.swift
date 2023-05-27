@@ -15,5 +15,7 @@ import Foundation
 //.environmentObject(AppEnvironment()).environmentObject(UserViewModel())
 
 class AppEnvironment: ObservableObject {
-    @Published var idLogin: Int?
+    @Published var idLogin: UUID?
+    @Published var isLogedin: Bool = false
+    @Published var loginUser : User =  User(id: UUID(),username: "JohnDoe", email: "Admin", password: "1", gender: "Male")
 }
