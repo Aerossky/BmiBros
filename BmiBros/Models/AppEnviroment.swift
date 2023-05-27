@@ -7,6 +7,13 @@
 
 import Foundation
 
+//cara menggunakan idGlobal
+//@EnvironmentObject var appEnvironment: AppEnvironment
+//@EnvironmentObject  var userViewModel: UserViewModel
+
+//jangan lupa pada view tambahkan
+//.environmentObject(AppEnvironment()).environmentObject(UserViewModel())
+
 class AppEnvironment: ObservableObject {
     @Published var idLogin: Int?
 }

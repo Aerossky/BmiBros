@@ -8,6 +8,11 @@
 import SwiftUI
 
 struct HomeView: View {
+    // deklarasi variable
+    @EnvironmentObject var appEnvironment: AppEnvironment
+    @EnvironmentObject  var userViewModel: UserViewModel
+
+    
     @State private var isShowingDetail1 = false
     @State private var isShowingDetail3 = false
     
@@ -39,6 +44,10 @@ struct HomeView: View {
                             Text("Hello, 123")
                                 .font(.custom("Poppins-Bold", size: 36))
                                 .foregroundColor(Color(UIColor(hex: "#609FFF")))
+//                            Text(String(appEnvironment.idLogin ?? 0))
+                            Text(String(userViewModel.appEnvironment.idLogin ?? 0))
+                                .font(.custom("Poppins-Regular", size: 16))
+                                .foregroundColor(Color(UIColor(hex: "#76AAFA")))
                             Text("\(currentDate)")
                                 .font(.custom("Poppins-Regular", size: 16))
                                 .foregroundColor(Color(UIColor(hex: "#76AAFA")))
@@ -197,6 +206,7 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        HomeView().environmentObject(AppEnvironment()).environmentObject(UserViewModel())
+        
     }
 }

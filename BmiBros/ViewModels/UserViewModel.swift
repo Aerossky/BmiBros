@@ -9,7 +9,9 @@ import Foundation
 import Combine
 
 class UserViewModel: ObservableObject {
-    @Published var idLogin = 0
+
+    @Published var appEnvironment = AppEnvironment()
+    
     @Published var users: [User] = []
     @Published var userInfos: [UserInfo]
     //validate variable
@@ -21,6 +23,11 @@ class UserViewModel: ObservableObject {
         users = [
             User(username: "JohnDoe", email: "Admin", password: "1", gender: "Male"),
             User(username: "JaneSmith", email: "Admin1", password: "2", gender: "Female"),
+            User(username: "JaneSmith", email: "Admin2", password: "3", gender: "Female"),
+            User(username: "JaneSmith", email: "Admin3", password: "4", gender: "Female"),
+            User(username: "JaneSmith", email: "Admin4", password: "5", gender: "Female"),
+            User(username: "JaneSmith", email: "Admin5", password: "6", gender: "Female"),
+
             // Tambahkan pengguna lainnya sesuai kebutuhan
         ]
         userInfos = [
@@ -56,11 +63,11 @@ class UserViewModel: ObservableObject {
     
     func loginUser(email: String, password: String) -> Bool {
         if let index = users.firstIndex(where: { $0.email == email && $0.password == password }) {
-            debugPrint(idLogin)
-            idLogin = index
+            appEnvironment.idLogin = index
+            debugPrint(index)
             return true
         }
-        debugPrint(idLogin)
+        debugPrint(index)
         return false
     }
 
@@ -71,11 +78,6 @@ class UserViewModel: ObservableObject {
             userInfos[index].weight = newWeight
         }
         debugPrint(userInfos)
-    }
-    
-    func checkLogin(){
-        debugPrint(idLogin)
-
     }
     
     
