@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct IntroductionView: View {
+    @StateObject private var viewModel = UserViewModel()
+   
+    
     var body: some View {
-         
         NavigationStack {
             VStack(alignment: .center) {
                 Image("introduction")
@@ -38,6 +40,7 @@ struct IntroductionView: View {
                             .frame(width: 300)
                             .background(Color(UIColor(hex: "#98A8F8")))
                             .cornerRadius(10)
+                           
                     }
                     
                 }
@@ -55,11 +58,13 @@ struct IntroductionView: View {
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(Color(UIColor(hex: "#7D7777")), lineWidth: 2)
                             )
+                     
                     }
                 }
             }
             .padding(.bottom, 10)
         }
+        .environmentObject(viewModel)
         .toolbar(.hidden, for: .navigationBar)
     }
 }
@@ -67,5 +72,8 @@ struct IntroductionView: View {
 struct IntroductionView_Previews: PreviewProvider {
     static var previews: some View {
         IntroductionView()
+
     }
 }
+
+

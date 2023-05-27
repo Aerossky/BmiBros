@@ -10,6 +10,8 @@
 		04100DEA2A1B538600160C69 /* FoodInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04100DE92A1B538600160C69 /* FoodInformationView.swift */; };
 		04100DED2A1B543000160C69 /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04100DEC2A1B543000160C69 /* Food.swift */; };
 		04100DF22A1BCEC900160C69 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04100DF12A1BCEC900160C69 /* User.swift */; };
+		043279A52A1CD37400669EA5 /* InputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043279A42A1CD37400669EA5 /* InputViewModel.swift */; };
+		043279A72A1CD3A600669EA5 /* Input.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043279A62A1CD3A600669EA5 /* Input.swift */; };
 		044D50252A18C05800DE0AD4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FBE79A2A11C61200059DBF /* ContentView.swift */; };
 		04703BB92A1A19C1008723A7 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04703BB82A1A19C1008723A7 /* SignInView.swift */; };
 		04703BBD2A1A2894008723A7 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04703BBC2A1A2894008723A7 /* SignUpView.swift */; };
@@ -50,6 +52,8 @@
 		04100DEC2A1B543000160C69 /* Food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
 		04100DF02A1B957D00160C69 /* BmiBros.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BmiBros.entitlements; sourceTree = "<group>"; };
 		04100DF12A1BCEC900160C69 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		043279A42A1CD37400669EA5 /* InputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewModel.swift; sourceTree = "<group>"; };
+		043279A62A1CD3A600669EA5 /* Input.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Input.swift; sourceTree = "<group>"; };
 		04703BB82A1A19C1008723A7 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		04703BBC2A1A2894008723A7 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		048249602A1E5808005FA213 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
@@ -102,6 +106,7 @@
 			children = (
 				04100DEC2A1B543000160C69 /* Food.swift */,
 				04100DF12A1BCEC900160C69 /* User.swift */,
+				043279A62A1CD3A600669EA5 /* Input.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -159,6 +164,7 @@
 			children = (
 				04E203782A1BA13800F61375 /* FoodViewModel.swift */,
 				048FE7A92A1BDE6C00A295F5 /* UserViewModel.swift */,
+				043279A42A1CD37400669EA5 /* InputViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -316,9 +322,11 @@
 				04E203792A1BA13800F61375 /* FoodViewModel.swift in Sources */,
 				04DBD89C2A18F27A0037792E /* FoodDetailView.swift in Sources */,
 				048FE7AA2A1BDE6C00A295F5 /* UserViewModel.swift in Sources */,
+				043279A72A1CD3A600669EA5 /* Input.swift in Sources */,
 				04BB453E2A18F81100539210 /* IntroductionView.swift in Sources */,
 				04100DEA2A1B538600160C69 /* FoodInformationView.swift in Sources */,
 				04FBE7992A11C61200059DBF /* BmiBrosApp.swift in Sources */,
+				043279A52A1CD37400669EA5 /* InputViewModel.swift in Sources */,
 				04DBD8A12A18F57F0037792E /* InputView.swift in Sources */,
 				048249612A1E5808005FA213 /* SearchBarView.swift in Sources */,
 				04DBD86A2A18C6BA0037792E /* HomeView.swift in Sources */,

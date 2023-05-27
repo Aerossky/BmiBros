@@ -8,7 +8,9 @@ import SwiftUI
 import AuthenticationServices
 
 struct SignInView: View {
-    @StateObject private var viewModel = UserViewModel()
+    //describe view model
+    @EnvironmentObject private var viewModel: UserViewModel
+
     //    @State private var username = ""
     //    @State private var password = ""
     @State private var isLoggedIn = false
@@ -16,16 +18,19 @@ struct SignInView: View {
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var isPasswordVisible: Bool = false
-    @State private var isSignInSuccessful = false
+    @State private var isSignInSuccessful: Bool = false
     
     var body: some View {
         NavigationStack {
             VStack {
-                Spacer()
+
+        
                 Image("login")
                     .resizable()
                     .frame(width: 262, height: 263)
                 Spacer()
+                
+                //EMAIL
                 Text("Sign In")
                     .font(.custom("Poppins-Bold", size: 24))
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -43,7 +48,20 @@ struct SignInView: View {
                     )
                     .frame(maxWidth: .infinity)
                     .padding(.horizontal)
+//                EMAIL VALIDATOR
+//                    .onChange(of: email) { newValue in
+//                        viewModel.validateEmail(newValue)
+//                    }
+//
+//                if !viewModel.isEmailValid {
+//                    Text("Invalid email format")
+//                        .foregroundColor(.red)
+//                        .font(.custom("Poppins-Light", size: 12))
+//                        .multilineTextAlignment(.leading)
+//                        .frame(width: 360, alignment: .leading)
+//                }
                 
+                //PASSWORD
                 HStack {
                     if isPasswordVisible {
                         TextField("Password", text: $password)
@@ -69,16 +87,49 @@ struct SignInView: View {
                 )
                 .frame(maxWidth: .infinity)
                 .padding(.horizontal)
-                Spacer()
+                //password validator
+//                .onChange(of: password) { newValue in
+//                    viewModel.validatePassword(newValue)
+//                }
+//
+//                if !viewModel.isPasswordValid {
+//
+//                    if !password.contains(where: { $0.isUppercase }) {
+//                        Text("Password must contain at least one uppercase letter")
+//                            .foregroundColor(.red)
+//                            .font(.custom("Poppins-Light", size: 12))
+//                            .multilineTextAlignment(.leading)
+//                            .frame(width: 360, alignment: .leading)
+//                    }  else if(password.count < 8){
+//                        Text("Password must be at least 8 characters")
+//                            .foregroundColor(.red)
+//                            .font(.custom("Poppins-Light", size: 12))
+//                            .multilineTextAlignment(.leading)
+//                            .frame(width: 360, alignment: .leading)
+//                    }
+//
+//                }
+                
+
                 
                 Button(action: {
+//                    // Aksi tombol login
+//                    isLoggedIn = viewModel.loginUser(email: email, password: password)
+//                    if isLoggedIn {
+//                        showLoginSuccessAlert = true
+//                    } else {
+//                        showLoginSuccessAlert = false
+//                    }
+                    
                     // Aksi tombol login
-                    isLoggedIn = viewModel.loginUser(email: email, password: password)
-                    if isLoggedIn {
-                        showLoginSuccessAlert = true
-                    } else {
-                        showLoginSuccessAlert = false
-                    }
+                       isLoggedIn = viewModel.loginUser(email: email, password: password)
+                       if isLoggedIn {
+                           showLoginSuccessAlert = true
+                           isSignInSuccessful = true // Set the flag to true
+                       } else {
+                           showLoginSuccessAlert = false
+                           isSignInSuccessful = false // Set the flag to false
+                       }
                 }) {
                     Text("Sign In")
                         .font(.custom("Poppins-SemiBold", size: 16))
@@ -98,17 +149,21 @@ struct SignInView: View {
                         }
                 .background(
                     NavigationLink(
-                        destination: HomeView(),
+                        destination: ContentView().navigationBarBackButtonHidden(true), //ini ak ganti jadi contentview soalnya kalo lempar ke homeview gaada tabviewnya
                         isActive: $isLoggedIn,
                         label: {
                             EmptyView()
                         }
                     )
                 )
+//                BUTTON DISABLE
+//                .disabled(email.isEmpty || password.isEmpty || !viewModel.isPasswordValid) // Mengatur tombol menjadi nonaktif jika username, email, atau password kosong
+//                .opacity(email.isEmpty || password.isEmpty || !viewModel.isPasswordValid ? 0.5 : 1) // Mengatur opasitas tombol
+                
                 
                 VStack {
                     if isSignInSuccessful {
-                        NavigationLink(destination: ContentView()) {
+                        NavigationLink(destination: ContentView().navigationBarBackButtonHidden(true)) { // ini jg ak ganti biar bar backnya hilang
                             Text("Continue")
                         }
                     } else {
@@ -130,27 +185,6 @@ struct SignInView: View {
                     }
                 }
                 
-                //                Button(action: {
-                //                    // Aksi tombol sign in with apple
-                //                }) {
-                //                    HStack {
-                //                        Image(systemName: "applelogo")
-                //                            .resizable()
-                //                            .frame(width: 18, height: 22)
-                //                        Text("Sign in with Apple")
-                //                            .foregroundColor(.white)
-                //                            .font(.system(size: 16, weight: .bold))
-                //                            .frame(height: 22)
-                //                            .padding(.top, 5)
-                //                    }
-                //                    .foregroundColor(.white)
-                //                    .padding()
-                //                    .frame(maxWidth: .infinity)
-                //                    .background(Color.black)
-                //                    .cornerRadius(10)
-                //                }
-                //                .padding(.horizontal)
-                
                 HStack {
                     Text("New around here? ")
                         .foregroundColor(.black)
@@ -171,6 +205,6 @@ struct SignInView: View {
 
 struct SignInView_Previews: PreviewProvider {
     static var previews: some View {
-        SignInView()
+        SignInView().environmentObject(UserViewModel())
     }
 }

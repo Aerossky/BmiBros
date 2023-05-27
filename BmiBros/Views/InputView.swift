@@ -404,8 +404,6 @@ struct InputView: View {
     }
 }
 
-
-
 struct InputView_Previews: PreviewProvider {
     static var previews: some View {
         InputView()
