@@ -12,6 +12,13 @@
 		04100DF22A1BCEC900160C69 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04100DF12A1BCEC900160C69 /* User.swift */; };
 		043279A52A1CD37400669EA5 /* InputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043279A42A1CD37400669EA5 /* InputViewModel.swift */; };
 		043279A72A1CD3A600669EA5 /* Input.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043279A62A1CD3A600669EA5 /* Input.swift */; };
+		044B6A842A21096E00C1BF7A /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044B6A832A21096E00C1BF7A /* ProfileView.swift */; };
+		044B6A8C2A22481000C1BF7A /* BmiBros_Watch_AppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044B6A8B2A22481000C1BF7A /* BmiBros_Watch_AppApp.swift */; };
+		044B6A8E2A22481000C1BF7A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044B6A8D2A22481000C1BF7A /* ContentView.swift */; };
+		044B6A902A22481200C1BF7A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 044B6A8F2A22481200C1BF7A /* Assets.xcassets */; };
+		044B6A932A22481200C1BF7A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 044B6A922A22481200C1BF7A /* Preview Assets.xcassets */; };
+		044B6A962A22481200C1BF7A /* BmiBros Watch App Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 044B6A892A22481000C1BF7A /* BmiBros Watch App Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		044B6A9C2A22491400C1BF7A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04FBE79C2A11C61400059DBF /* Assets.xcassets */; };
 		044D50252A18C05800DE0AD4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FBE79A2A11C61200059DBF /* ContentView.swift */; };
 		04703BB92A1A19C1008723A7 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04703BB82A1A19C1008723A7 /* SignInView.swift */; };
 		04703BBD2A1A2894008723A7 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04703BBC2A1A2894008723A7 /* SignUpView.swift */; };
@@ -46,6 +53,30 @@
 		04FBE7A02A11C61400059DBF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04FBE79F2A11C61400059DBF /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		044B6A942A22481200C1BF7A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 04FBE78D2A11C61200059DBF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 044B6A882A22481000C1BF7A;
+			remoteInfo = "BmiBros Watch App Watch App";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		044B6A9A2A22481200C1BF7A /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				044B6A962A22481200C1BF7A /* BmiBros Watch App Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		04100DE92A1B538600160C69 /* FoodInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodInformationView.swift; sourceTree = "<group>"; };
 		04100DEC2A1B543000160C69 /* Food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
@@ -53,6 +84,12 @@
 		04100DF12A1BCEC900160C69 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		043279A42A1CD37400669EA5 /* InputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewModel.swift; sourceTree = "<group>"; };
 		043279A62A1CD3A600669EA5 /* Input.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Input.swift; sourceTree = "<group>"; };
+		044B6A832A21096E00C1BF7A /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		044B6A892A22481000C1BF7A /* BmiBros Watch App Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BmiBros Watch App Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		044B6A8B2A22481000C1BF7A /* BmiBros_Watch_AppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BmiBros_Watch_AppApp.swift; sourceTree = "<group>"; };
+		044B6A8D2A22481000C1BF7A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		044B6A8F2A22481200C1BF7A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		044B6A922A22481200C1BF7A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		04703BB82A1A19C1008723A7 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		04703BBC2A1A2894008723A7 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		048FE7A92A1BDE6C00A295F5 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
@@ -89,6 +126,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		044B6A862A22481000C1BF7A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		04FBE7922A11C61200059DBF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -109,9 +153,37 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		044537352A22542F001CBB56 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				044B6A8D2A22481000C1BF7A /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		044B6A8A2A22481000C1BF7A /* BmiBros Watch App Watch App */ = {
+			isa = PBXGroup;
+			children = (
+				044B6A8B2A22481000C1BF7A /* BmiBros_Watch_AppApp.swift */,
+				044537352A22542F001CBB56 /* Views */,
+				044B6A8F2A22481200C1BF7A /* Assets.xcassets */,
+				044B6A912A22481200C1BF7A /* Preview Content */,
+			);
+			path = "BmiBros Watch App Watch App";
+			sourceTree = "<group>";
+		};
+		044B6A912A22481200C1BF7A /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				044B6A922A22481200C1BF7A /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
 		04DBD8662A18C2F70037792E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				044B6A832A21096E00C1BF7A /* ProfileView.swift */,
 				04BB453D2A18F81100539210 /* IntroductionView.swift */,
 				04DBD8692A18C6BA0037792E /* HomeView.swift */,
 				04FBE79A2A11C61200059DBF /* ContentView.swift */,
@@ -189,6 +261,7 @@
 			children = (
 				04DBD86C2A18CE340037792E /* Poppins */,
 				04FBE7972A11C61200059DBF /* BmiBros */,
+				044B6A8A2A22481000C1BF7A /* BmiBros Watch App Watch App */,
 				04FBE7962A11C61200059DBF /* Products */,
 			);
 			sourceTree = "<group>";
@@ -197,6 +270,7 @@
 			isa = PBXGroup;
 			children = (
 				04FBE7952A11C61200059DBF /* BmiBros.app */,
+				044B6A892A22481000C1BF7A /* BmiBros Watch App Watch App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -227,6 +301,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		044B6A882A22481000C1BF7A /* BmiBros Watch App Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 044B6A972A22481200C1BF7A /* Build configuration list for PBXNativeTarget "BmiBros Watch App Watch App" */;
+			buildPhases = (
+				044B6A852A22481000C1BF7A /* Sources */,
+				044B6A862A22481000C1BF7A /* Frameworks */,
+				044B6A872A22481000C1BF7A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "BmiBros Watch App Watch App";
+			productName = "BmiBros Watch App Watch App";
+			productReference = 044B6A892A22481000C1BF7A /* BmiBros Watch App Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
 		04FBE7942A11C61200059DBF /* BmiBros */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 04FBE7A32A11C61400059DBF /* Build configuration list for PBXNativeTarget "BmiBros" */;
@@ -234,10 +325,12 @@
 				04FBE7912A11C61200059DBF /* Sources */,
 				04FBE7922A11C61200059DBF /* Frameworks */,
 				04FBE7932A11C61200059DBF /* Resources */,
+				044B6A9A2A22481200C1BF7A /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				044B6A952A22481200C1BF7A /* PBXTargetDependency */,
 			);
 			name = BmiBros;
 			productName = BmiBros;
@@ -251,9 +344,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1420;
+				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
+					044B6A882A22481000C1BF7A = {
+						CreatedOnToolsVersion = 14.3;
+					};
 					04FBE7942A11C61200059DBF = {
 						CreatedOnToolsVersion = 14.2;
 					};
@@ -273,11 +369,22 @@
 			projectRoot = "";
 			targets = (
 				04FBE7942A11C61200059DBF /* BmiBros */,
+				044B6A882A22481000C1BF7A /* BmiBros Watch App Watch App */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		044B6A872A22481000C1BF7A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				044B6A932A22481200C1BF7A /* Preview Assets.xcassets in Resources */,
+				044B6A9C2A22491400C1BF7A /* Assets.xcassets in Resources */,
+				044B6A902A22481200C1BF7A /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		04FBE7932A11C61200059DBF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -309,6 +416,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		044B6A852A22481000C1BF7A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				044B6A8E2A22481000C1BF7A /* ContentView.swift in Sources */,
+				044B6A8C2A22481000C1BF7A /* BmiBros_Watch_AppApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		04FBE7912A11C61200059DBF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -322,6 +438,7 @@
 				043279A72A1CD3A600669EA5 /* Input.swift in Sources */,
 				04BB453E2A18F81100539210 /* IntroductionView.swift in Sources */,
 				04100DEA2A1B538600160C69 /* FoodInformationView.swift in Sources */,
+				044B6A842A21096E00C1BF7A /* ProfileView.swift in Sources */,
 				04FBE7992A11C61200059DBF /* BmiBrosApp.swift in Sources */,
 				043279A52A1CD37400669EA5 /* InputViewModel.swift in Sources */,
 				04DBD8A12A18F57F0037792E /* InputView.swift in Sources */,
@@ -334,7 +451,75 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		044B6A952A22481200C1BF7A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 044B6A882A22481000C1BF7A /* BmiBros Watch App Watch App */;
+			targetProxy = 044B6A942A22481200C1BF7A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		044B6A982A22481200C1BF7A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"BmiBros Watch App Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "BmiBros Watch App";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = KodingKu.BmiBros;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = KodingKu.BmiBros.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 9.4;
+			};
+			name = Debug;
+		};
+		044B6A992A22481200C1BF7A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"BmiBros Watch App Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "BmiBros Watch App";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = KodingKu.BmiBros;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = KodingKu.BmiBros.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 9.4;
+			};
+			name = Release;
+		};
 		04FBE7A12A11C61400059DBF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -452,6 +637,7 @@
 		04FBE7A42A11C61400059DBF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = BmiBros/BmiBros.entitlements;
@@ -483,6 +669,7 @@
 		04FBE7A52A11C61400059DBF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = BmiBros/BmiBros.entitlements;
@@ -514,6 +701,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		044B6A972A22481200C1BF7A /* Build configuration list for PBXNativeTarget "BmiBros Watch App Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				044B6A982A22481200C1BF7A /* Debug */,
+				044B6A992A22481200C1BF7A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		04FBE7902A11C61200059DBF /* Build configuration list for PBXProject "BmiBros" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
