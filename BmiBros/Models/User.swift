@@ -14,6 +14,17 @@ struct User {
     let gender: String
 }
 
+struct UserInfo {
+    let id: Int
+    let userId: String
+    var age: Int
+    var height: Double
+    var weight: Double
+    var bmi: Double
+    var calories: Double
+    let date: Date
+}
+
 
 
 //struct User: Identifiable, Hashable {

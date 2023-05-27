@@ -12,11 +12,16 @@ struct InputView: View {
     
     // viewModel
     @StateObject private var viewModel = InputViewModel()
+    @StateObject private var userViewModel = UserViewModel()
     
-    @State private var selectedGender = 0
+    @State private var gender = 0
     @State private var selectedHeight = ""
     @State private var selectedWeight = ""
     @State private var selectedAge = ""
+    
+    //Gender
+    @State private var  selectedGender: String = ""
+
     
     let genderOptions = ["Male", "Female"]
     let minHeight = 40
@@ -89,7 +94,7 @@ struct InputView: View {
                                 .font(.custom("Poppins-Bold", size: 20))
                                 .foregroundColor(Color(UIColor(hex: "#76AAFA")))
                             
-                            Picker("Select an Option", selection: $selectedGender) {
+                            Picker("Select an Option", selection: $gender) {
                                 ForEach(0..<genderOptions.count) { index in
                                     Text(genderOptions[index])
                                         .tag(index)
@@ -143,6 +148,12 @@ struct InputView: View {
                         }
                         .padding(.leading, 20)
                         
+                        List(userViewModel.userInfos.filter { $0.id == 1 }, id: \.id) { userInfo in
+                            Text(String(userInfo.weight))
+                        }
+
+
+                        
                         Spacer()
                         
                         Button(action: {
@@ -153,6 +164,14 @@ struct InputView: View {
                             } else if !isInputAgeValid {
                                 activeAlert = .age
                             } else if isInputHeightValid && isInputWeightValid && isInputAgeValid {
+                                //gender
+                                if (gender == 0){
+                                    selectedGender = "male"
+                                }else if(gender == 1){
+                                    selectedGender = "female"
+                                    
+                                }
+                                
                                 // Replace the following line with your data submission code
                                 activeAlert = .successInput
                             }
@@ -175,10 +194,21 @@ struct InputView: View {
                             case .age:
                                 return Alert(title: Text("Invalid Input"), message: Text("Age must be between \(minAge) and \(maxAge)."), dismissButton: .default(Text("OK")))
                             case .successInput:
-                                return Alert(title: Text("Success"), message: Text(""), dismissButton: .default(Text("OK")))
+//                                return Alert(title: Text("Success"), message: Text("Success"), dismissButton: .default(Text("OK")))
+                                return Alert(
+                                    title: Text("Success"),
+                                    message: Text("User data updated"),
+                                    dismissButton: .default(Text("OK")) {
+                                        userViewModel.updateUserData(id: 1, newWeight: Double(selectedWeight) ?? 0)
+                                    }
+                                )
+
+
                             }
+                    
                            
-//                            viewModel.calculateBMIForChild(weight: Double(selectedWeight) ?? 0, height: Double(selectedHeight) ?? 0, age: Int(selectedAge) ?? 0, gender: "male")
+                          
+//                            viewModel.calculateBMIForChild(weight: Double(selectedWeight) ?? 0, height: Double(selectedHeight) ?? 0, age: Int(selectedAge) ?? 0, gender: selectedGender)
 //                            InputViewModel().calculateBMI(adultWeight: Double(selectedWeight) ?? 0, adultHeight: Double(selectedHeight) ?? 0)
                             
                         }
@@ -190,6 +220,7 @@ struct InputView: View {
             .multilineTextAlignment(.center)
         }
     }
+    
 }
 
 struct InputView_Previews: PreviewProvider {
