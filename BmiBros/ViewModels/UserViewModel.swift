@@ -5,12 +5,13 @@
 //  Created by MacBook Pro on 23/05/23.
 //
 
+import SwiftUI
 import Foundation
 import Combine
 
 class UserViewModel: ObservableObject {
-
-    @Published var appEnvironment = AppEnvironment()
+    
+    @EnvironmentObject var appEnvironment : AppEnvironment
     
     @Published var users: [User] = []
     @Published var userInfos: [UserInfo]
@@ -21,19 +22,19 @@ class UserViewModel: ObservableObject {
     init() {
         // Tambahkan kode di bawah ini untuk membuat default data users
         users = [
-            User(username: "JohnDoe", email: "Admin", password: "1", gender: "Male"),
-            User(username: "JaneSmith", email: "Admin1", password: "2", gender: "Female"),
-            User(username: "JaneSmith", email: "Admin2", password: "3", gender: "Female"),
-            User(username: "JaneSmith", email: "Admin3", password: "4", gender: "Female"),
-            User(username: "JaneSmith", email: "Admin4", password: "5", gender: "Female"),
-            User(username: "JaneSmith", email: "Admin5", password: "6", gender: "Female"),
-
+            User(id: UUID(),username: "JohnDoe", email: "Admin", password: "1", gender: "Male"),
+            User(id: UUID(),username: "JaneSmith", email: "Admin1", password: "2", gender: "Female"),
+            User(id: UUID(),username: "JaneSmith", email: "Admin2", password: "3", gender: "Female"),
+            User(id: UUID(),username: "JaneSmith", email: "Admin3", password: "4", gender: "Female"),
+            User(id: UUID(),username: "JaneSmith", email: "Admin4", password: "5", gender: "Female"),
+            User(id: UUID(),username: "JaneSmith", email: "Admin5", password: "6", gender: "Female"),
+            
             // Tambahkan pengguna lainnya sesuai kebutuhan
         ]
         userInfos = [
-//            UserInfo(id: 2, userId: "1", age: 30, height: 170, weight: 70, bmi: 0, calories: 0, date: Date()),
-//            UserInfo(id: 2, userId: "1", age: 30, height: 170, weight: 90, bmi: 0, calories: 0, date: Date()),
-//            UserInfo(id: 3, userId: "1", age: 30, height: 170, weight: 90, bmi: 0, calories: 0, date: Date()),
+            //            UserInfo(id: 2, userId: "1", age: 30, height: 170, weight: 70, bmi: 0, calories: 0, date: Date()),
+            //            UserInfo(id: 2, userId: "1", age: 30, height: 170, weight: 90, bmi: 0, calories: 0, date: Date()),
+            //            UserInfo(id: 3, userId: "1", age: 30, height: 170, weight: 90, bmi: 0, calories: 0, date: Date()),
             UserInfo(id: 1, userId: "1", age: 30, height: 170, weight: 90, bmi: 0, calories: 0, date: Date()),
             UserInfo(id: 2, userId: "2", age: 25, height: 160, weight: 55, bmi: 0, calories: 0, date: Date())
         ]
@@ -51,28 +52,57 @@ class UserViewModel: ObservableObject {
         let passwordPredicate = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
         isPasswordValid = passwordPredicate.evaluate(with: password)
     }
-
-
+    
+    
     //authentication
+    //    func registerUser(username: String, email: String, password: String, gender: String) {
+    //        let newUser = User(username: username, email: email, password: password, gender: gender)
+    //        users.append(newUser)
+    //
+    //        debugPrint(users)
+    //    }
+    
     func registerUser(username: String, email: String, password: String, gender: String) {
-        let newUser = User(username: username, email: email, password: password, gender: gender)
+        let newUserId = UUID()
+        let newUser = User(id: newUserId, username: username, email: email, password: password, gender: gender)
         users.append(newUser)
-
+        
         debugPrint(users)
     }
     
+    
+    //    func loginUser(email: String, password: String) -> Bool {
+    //        if let index = users.firstIndex(where: { $0.email == email && $0.password == password }) {
+    //            appEnvironment.idLogin = index
+    //            debugPrint(index)
+    //            return true
+    //        }
+    //        debugPrint(index)
+    //        return false
+    //    }
     func loginUser(email: String, password: String) -> Bool {
-        if let index = users.firstIndex(where: { $0.email == email && $0.password == password }) {
-            appEnvironment.idLogin = index
-            debugPrint(index)
+        if let user = users.first(where: { $0.email == email && $0.password == password }) {
+            appEnvironment.idLogin = user.id
+            appEnvironment.isLogedin = true
+            appEnvironment.loginUser = user
+            debugPrint(user.id)
             return true
         }
-        debugPrint(index)
+        debugPrint("User not found")
+        debugPrint(users)
         return false
     }
-
+    
     
     //user
+    
+    func getUserData(id: UUID) -> (username: String, email: String, gender: String)? {
+        if let user = users.first(where: { $0.id == id }) {
+            return (username: user.username, email: user.email, gender: user.gender)
+        }
+        return nil
+    }
+    
     func updateUserData(id: Int, newWeight:Double){
         if let index = userInfos.firstIndex(where: { $0.id == id }) {
             userInfos[index].weight = newWeight
@@ -81,6 +111,8 @@ class UserViewModel: ObservableObject {
     }
     
     
+    
+
     //function getUserId
     //function getUserData(filter by id)
     //function updateUserData

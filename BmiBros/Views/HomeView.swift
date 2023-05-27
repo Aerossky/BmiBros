@@ -10,11 +10,15 @@ import SwiftUI
 struct HomeView: View {
     // deklarasi variable
     @EnvironmentObject var appEnvironment: AppEnvironment
-    @EnvironmentObject  var userViewModel: UserViewModel
+//    @EnvironmentObject var userViewModel: UserViewModel
 
-    
+//    @State private var id = userViewModel.appEnvironment.idLogin
     @State private var isShowingDetail1 = false
     @State private var isShowingDetail3 = false
+    @State private var id: UUID?
+       
+     
+    
     
     // Hari
     let dateFormatter = DateFormatter()
@@ -41,27 +45,17 @@ struct HomeView: View {
                 VStack {
                     HStack {
                         VStack(alignment: .leading){
-                            Text("Hello, 123")
+                            Text("Hello, \(appEnvironment.loginUser.username)")
                                 .font(.custom("Poppins-Bold", size: 36))
                                 .foregroundColor(Color(UIColor(hex: "#609FFF")))
-//                            Text(String(appEnvironment.idLogin ?? 0))
-                            Text(String(userViewModel.appEnvironment.idLogin ?? 0))
-                                .font(.custom("Poppins-Regular", size: 16))
-                                .foregroundColor(Color(UIColor(hex: "#76AAFA")))
                             Text("\(currentDate)")
                                 .font(.custom("Poppins-Regular", size: 16))
                                 .foregroundColor(Color(UIColor(hex: "#76AAFA")))
                         }
-                        //.padding(.trailing)
                         Spacer()
                         Image(isMorning ? "Morning" : "Night")
                             .resizable()
                         .frame(width: 95, height: 75)
-//                            .padding(.leading)
-//                        Image(systemName: "person")
-//                            .resizable()
-//                            .frame(width: 50, height: 50)
-//                            .clipShape(Circle())
                     }
                     .padding(.horizontal, 15)
                     .padding(.top, 20)
@@ -206,7 +200,7 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView().environmentObject(AppEnvironment()).environmentObject(UserViewModel())
+        HomeView().environmentObject(AppEnvironment())
         
     }
 }

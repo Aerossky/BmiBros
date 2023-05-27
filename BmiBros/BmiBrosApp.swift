@@ -9,9 +9,10 @@ import SwiftUI
 
 @main
 struct BmiBrosApp: App {
+    var appEnviroment = AppEnvironment()
     var body: some Scene {
         WindowGroup {
-            IntroductionView()
+            ContentView().environmentObject(appEnviroment)
         }
     }
 }
