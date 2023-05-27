@@ -27,4 +27,9 @@ struct Food: Identifiable, Hashable {
         self.carbs = carbs
         self.fat = fat
     }
+    enum FilterType: String, CaseIterable {
+        case protein
+        case carbohydrate
+        case fat
+    }
 }
