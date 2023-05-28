@@ -9,6 +9,8 @@ import SwiftUI
 
 struct InputView: View {
     @State private var selectedOption = 0
+   
+    
     let options = ["BMI Calculator", "Calories Calculator"]
     
     var body: some View {
@@ -23,7 +25,6 @@ struct InputView: View {
             //            Spacer()
             if selectedOption == 0 {
                 BMIView()
-                
             } else {
                 CaloriesView()
             }
@@ -31,25 +32,33 @@ struct InputView: View {
     }
     
     struct BMIView: View {
+        @State private var inputViewModel = InputViewModel()
         //variable data
-        @State private var Gender = ""
         @State private var Height = ""
         @State private var Weight = ""
         @State private var Age = ""
-        @State private var selectedHeight = "40"
+        @State private var selectedGender = "male"
+        @State private var selectedAge = "2"
+        @State private var selectedHeight = "20"
         @State private var selectedWeight = "20"
-        @State private var selectedAge = "20"
+  
+        
+        @State private var bmi:Double = 1
+        
+        @State private var bmiCategory : (String, Color) = ("", .clear)
+        @State private var bmiColor : (String, Color) = ("", .clear)
+
         
         //picker gender
-        @State private var selectedGender = 0
-        let genderOptions = ["Man", "Woman"]
-        
-        let minHeight = 40
+        @State private var gender = 0
+        let genderOptions = ["Male", "Female"]
+       
+        let minHeight = 10
         let maxHeight = 300
         let minWeight = 20
         let maxWeight = 300
-        let minAge = 1
-        let maxAge = 200
+        let minAge = 2
+        let maxAge = 130
         
         @State private var activeAlert: ActiveAlert?
         enum ActiveAlert: Identifiable {
@@ -78,10 +87,10 @@ struct InputView: View {
         }
         
         var isInputWeightValid: Bool {
-            guard let value = Int(selectedWeight) else {
+            guard let value = Double(selectedWeight) else {
                 return false
             }
-            return value >= minWeight && value <= maxWeight
+            return Int(Double(value)) >= minWeight && Int(Double(value)) <= maxWeight
         }
         
         var isInputAgeValid: Bool {
@@ -98,27 +107,47 @@ struct InputView: View {
                             Text("BMI Score")
                                 .font(.custom("Poppins-Bold", size: 32))
                                 .foregroundColor(Color(UIColor(hex: "#76AAFA")))
-                            
-                            Text("99.9")
+                            //BMI RESULT
+                            Text("\(String(format: "%.1f", bmi))")
                                 .font(.custom("Poppins-Bold", size: 96))
-                                .foregroundColor(.red)
-                            
-                            Text("Obesitas")
+                                .foregroundColor(Color(UIColor(hex: "#76AAFA")))
+                            //BMI CATEGORY
+                            //getBMICategory.{0 = category, 1 = color}
+                            Text(bmiCategory.0)
                                 .font(.custom("Poppins-Bold", size: 32))
-                                .foregroundColor(.red)
+                                .foregroundColor(bmiColor.1)
                             HStack {
                                 Text("Gender")
                                     .font(.custom("Poppins-Bold", size: 20))
                                     .foregroundColor(Color(UIColor(hex: "#76AAFA")))
-                                Picker("Select an Option", selection: $selectedGender) {
+                                Picker("Select an Option", selection: $gender) {
                                     ForEach(0..<genderOptions.count) { index in
                                         Text(genderOptions[index])
                                             .tag(index)
                                     }
                                 }
+                                .onChange(of: gender) { newValue in
+                                    selectedGender = genderOptions[newValue].lowercased()
+                                }
                                 .padding(.trailing, 20)
                                 .pickerStyle(SegmentedPickerStyle())
                                 .padding(.leading, 20)
+                            }
+
+                            .padding(.leading, 20)
+                            
+                            HStack {
+                                Text("Age")
+                                    .font(.custom("Poppins-Bold", size: 20))
+                                    .foregroundColor(Color(UIColor(hex: "#76AAFA")))
+                                VStack{
+                                    TextField("Enter a number", text: $selectedAge)
+                                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                                        .keyboardType(.numberPad)
+                                        .padding(.leading, 54)
+                                        .padding(.trailing, 20)
+                                }
+                                
                             }
                             .padding(.leading, 20)
                             
@@ -152,20 +181,7 @@ struct InputView: View {
                             }
                             .padding(.leading, 20)
                             
-                            HStack {
-                                Text("Age")
-                                    .font(.custom("Poppins-Bold", size: 20))
-                                    .foregroundColor(Color(UIColor(hex: "#76AAFA")))
-                                VStack{
-                                    TextField("Enter a number", text: $selectedAge)
-                                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                                        .keyboardType(.numberPad)
-                                        .padding(.leading, 54)
-                                        .padding(.trailing, 20)
-                                }
-                                
-                            }
-                            .padding(.leading, 20)
+                 
                             Spacer()
                             
                             Button(action: {
@@ -179,16 +195,20 @@ struct InputView: View {
                                     activeAlert = .Age
                                 }
                                 else if isInputHeightValid && isInputWeightValid && isInputAgeValid {
+                                    //hitung bmmi
+                                    bmi = inputViewModel.calculateBMI(weight: Double(selectedWeight) ?? 0, height: Double(selectedHeight) ?? 0, age: Int(selectedAge) ?? 0, gender: selectedGender)
+                                     bmiCategory = inputViewModel.getBMICategory(bmi: bmi, age: Int(selectedAge) ?? 0)
+                                     bmiColor = inputViewModel.getBMICategory(bmi: bmi, age: Int(selectedAge) ?? 1)
                                     Text("SUCCESS") // ini ganti buat lempar data
                                     activeAlert = .SuccessInput
                                 }
                             }) {
-                                Text("Submit")
+                                Text("Check")
                                     .font(.headline)
                                     .foregroundColor(.white)
                                     .padding()
                                     .frame(maxWidth: .infinity)
-                                    .background((isInputHeightValid  && isInputWeightValid && isInputAgeValid) ? Color.blue : Color.gray)
+                                    .background((isInputHeightValid  && isInputWeightValid && isInputAgeValid) ? Color(UIColor(hex: "#6D85FD")): Color.gray)
                                 //                                .background(isInputWeightValid ? Color.blue : Color.gray)
                                     .cornerRadius(8)
                             }
@@ -203,7 +223,7 @@ struct InputView: View {
                                     return Alert(title: Text("Invalid Input"), message: Text("Age Must Between \(minAge) and \(maxAge) ."), dismissButton: .default(Text("OK")))
                                     
                                 case .SuccessInput:
-                                    return Alert(title: Text("Success"), message: Text("Data updated successfully!"), dismissButton: .default(Text("OK")))
+                                    return Alert(title: Text("Success"), message: Text("Bmi Calculate "), dismissButton: .default(Text("OK")))
                                 }
                             }
                         }
@@ -217,18 +237,20 @@ struct InputView: View {
     }
     
     struct CaloriesView: View {
+        @State private var inputViewModel = InputViewModel()
         //variable data
-        @State private var Gender = ""
         @State private var Height = ""
         @State private var Weight = ""
         @State private var Age = ""
-        @State private var selectedHeight = "40"
-        @State private var selectedWeight = "20"
-        @State private var selectedAge = "20"
+        @State private var selectedGender = "male"
+        @State private var selectedAge = "30"
+        @State private var selectedHeight = "183"
+        @State private var selectedWeight = "75"
         
         //picker gender
-        @State private var selectedGender = 0
-        let genderOptions = ["Man", "Woman"]
+
+        let genderOptions = ["Male", "Female"]
+        @State private var gender = 0
         
         let minHeight = 40
         let maxHeight = 300
@@ -236,6 +258,8 @@ struct InputView: View {
         let maxWeight = 300
         let minAge = 1
         let maxAge = 200
+        
+        @State private var calorie:Double = 1
         
         @State private var activeAlert: ActiveAlert?
         
@@ -286,7 +310,7 @@ struct InputView: View {
                                 .font(.custom("Poppins-Bold", size: 32))
                                 .foregroundColor(Color(UIColor(hex: "#76AAFA")))
                             
-                            Text("2456")
+                            Text(String(format: "%.0f", calorie))
                                 .font(.custom("Poppins-Bold", size: 96))
                                 .foregroundColor(.green)
                             
@@ -297,15 +321,34 @@ struct InputView: View {
                                 Text("Gender")
                                     .font(.custom("Poppins-Bold", size: 20))
                                     .foregroundColor(Color(UIColor(hex: "#76AAFA")))
-                                Picker("Select an Option", selection: $selectedGender) {
+                                Picker("Select an Option", selection: $gender) {
                                     ForEach(0..<genderOptions.count) { index in
                                         Text(genderOptions[index])
                                             .tag(index)
                                     }
                                 }
+                                .onChange(of: gender) { newValue in
+                                    selectedGender = genderOptions[newValue].lowercased()
+                                }
                                 .padding(.trailing, 20)
                                 .pickerStyle(SegmentedPickerStyle())
                                 .padding(.leading, 20)
+                            }
+
+                            .padding(.leading, 20)
+                            
+                            HStack {
+                                Text("Age")
+                                    .font(.custom("Poppins-Bold", size: 20))
+                                    .foregroundColor(Color(UIColor(hex: "#76AAFA")))
+                                VStack{
+                                    TextField("Enter a number", text: $selectedAge)
+                                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                                        .keyboardType(.numberPad)
+                                        .padding(.leading, 54)
+                                        .padding(.trailing, 20)
+                                }
+                                
                             }
                             .padding(.leading, 20)
                             
@@ -339,20 +382,7 @@ struct InputView: View {
                             }
                             .padding(.leading, 20)
                             
-                            HStack {
-                                Text("Age")
-                                    .font(.custom("Poppins-Bold", size: 20))
-                                    .foregroundColor(Color(UIColor(hex: "#76AAFA")))
-                                VStack{
-                                    TextField("Enter a number", text: $selectedAge)
-                                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                                        .keyboardType(.numberPad)
-                                        .padding(.leading, 54)
-                                        .padding(.trailing, 20)
-                                }
-                                
-                            }
-                            .padding(.leading, 20)
+                           
                             Spacer()
                             
                             Button(action: {
@@ -367,15 +397,16 @@ struct InputView: View {
                                 }
                                 else if isInputHeightValid && isInputWeightValid && isInputAgeValid {
                                     Text("SUCCESS") // ini ganti buat lempar data
+                                    calorie = inputViewModel.calculateCalorie(weight: Double(selectedWeight) ?? 0, height: Double(selectedHeight) ?? 0, age: Double(selectedAge) ?? 0, gender: selectedGender)
                                     activeAlert = .SuccessInput
                                 }
                             }) {
-                                Text("Submit")
+                                Text("Check")
                                     .font(.headline)
                                     .foregroundColor(.white)
                                     .padding()
                                     .frame(maxWidth: .infinity)
-                                    .background((isInputHeightValid  && isInputWeightValid && isInputAgeValid) ? Color.blue : Color.gray)
+                                    .background((isInputHeightValid  && isInputWeightValid && isInputAgeValid) ? Color(UIColor(hex: "#6D85FD")) : Color.gray)
                                 //                                .background(isInputWeightValid ? Color.blue : Color.gray)
                                     .cornerRadius(8)
                             }
@@ -390,7 +421,7 @@ struct InputView: View {
                                     return Alert(title: Text("Invalid Input"), message: Text("Age Must Between \(minAge) and \(maxAge) ."), dismissButton: .default(Text("OK")))
                                     
                                 case .SuccessInput:
-                                    return Alert(title: Text("Success"), message: Text("Data updated successfully!"), dismissButton: .default(Text("OK")))
+                                    return Alert(title: Text("Success"), message: Text("Calories Calculate"), dismissButton: .default(Text("OK")))
                                 }
                             }
                         }
@@ -409,4 +440,3 @@ struct InputView_Previews: PreviewProvider {
         InputView()
     }
 }
-
