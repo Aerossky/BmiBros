@@ -14,32 +14,36 @@ struct ContentView: View {
     @EnvironmentObject var appEnvironment: AppEnvironment
     
     var body: some View {
-        NavigationView {
-            TabView {
-                HomeView()
-                    .tabItem {
-                        Label("Home", systemImage: "square.grid.2x2")
-                            .symbolRenderingMode(.hierarchical)
-                    }
-                    .tag(0)
-                
-                InputView()
-                    .tabItem {
-                        Label("Calculate", systemImage: "ruler")
-                            .symbolRenderingMode(.hierarchical)
-                    }
-                    .tag(1)
-                
-                ProfileView()
-                    .tabItem {
-                        Label("Account", systemImage: "person.fill")
-                            .symbolRenderingMode(.hierarchical)
-                    }
-                    .tag(2)
+        if viewModel.loggedInUser != nil{
+            NavigationView {
+                TabView {
+                    HomeView()
+                        .tabItem {
+                            Label("Home", systemImage: "square.grid.2x2")
+                                .symbolRenderingMode(.hierarchical)
+                        }
+                        .tag(0)
+                    
+                    InputView()
+                        .tabItem {
+                            Label("Calculate", systemImage: "ruler")
+                                .symbolRenderingMode(.hierarchical)
+                        }
+                        .tag(1)
+                    
+                    ProfileView()
+                        .tabItem {
+                            Label("Account", systemImage: "person.fill")
+                                .symbolRenderingMode(.hierarchical)
+                        }
+                        .tag(2)
+                }
             }
+            
+            .accentColor(Color(UIColor(hex: "#6D85FD"))) // Ubah warna ikon yang dipilih di sini
+        }else{
+            IntroductionView()
         }
-        
-        .accentColor(Color(UIColor(hex: "#6D85FD"))) // Ubah warna ikon yang dipilih di sini
     }
 }
 
