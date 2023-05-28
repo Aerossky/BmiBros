@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct IntroductionView: View {
-    @StateObject private var viewModel = UserViewModel()
-   
     
+    @EnvironmentObject var session: SessionManager
+    @EnvironmentObject var viewModel: UserViewModel
+    @EnvironmentObject var appEnvironment: AppEnvironment
+   
     var body: some View {
         NavigationStack {
             VStack(alignment: .center) {
@@ -71,7 +73,9 @@ struct IntroductionView: View {
 struct IntroductionView_Previews: PreviewProvider {
     static var previews: some View {
         IntroductionView()
-
+            .environmentObject(SessionManager())
+            .environmentObject(UserViewModel())
+            .environmentObject(AppEnvironment())
     }
 }
 

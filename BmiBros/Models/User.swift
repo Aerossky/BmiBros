@@ -6,14 +6,17 @@
 //
 
 import Foundation
+import SwiftUI
 
-struct User {
-    let id: UUID
-    let username: String
-    let email: String
-    let password: String
-    let gender: String
-}
+//extension UserViewModel {
+    struct User {
+        let id: UUID
+        let username: String
+        let email: String
+        let password: String
+        let gender: String
+    }
+//}
 
 struct UserInfo {
     let id: Int

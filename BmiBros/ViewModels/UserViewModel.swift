@@ -11,13 +11,15 @@ import Combine
 
 class UserViewModel: ObservableObject {
     
-    @EnvironmentObject var appEnvironment : AppEnvironment
-    
     @Published var users: [User] = []
     @Published var userInfos: [UserInfo]
+    @Published var loggedInUser: User?
     //validate variable
     @Published var isEmailValid: Bool = true
     @Published var isPasswordValid: Bool = true
+    
+    @Published var hasError = false
+    @Published var error: SignUpError?
     
     init() {
         // Tambahkan kode di bawah ini untuk membuat default data users
@@ -82,15 +84,14 @@ class UserViewModel: ObservableObject {
     //    }
     func loginUser(email: String, password: String) -> Bool {
         if let user = users.first(where: { $0.email == email && $0.password == password }) {
-            appEnvironment.idLogin = user.id
-            appEnvironment.isLogedin = true
-            appEnvironment.loginUser = user
-            debugPrint(user.id)
+            loggedInUser = user
+            debugPrint(loggedInUser)
             return true
+        } else {
+            debugPrint("User not found")
+            debugPrint(users)
+            return false
         }
-        debugPrint("User not found")
-        debugPrint(users)
-        return false
     }
     
     
@@ -110,11 +111,31 @@ class UserViewModel: ObservableObject {
         debugPrint(userInfos)
     }
     
+    func logoutUser() {
+        loggedInUser = nil
+    }
     
-    
-
     //function getUserId
     //function getUserData(filter by id)
     //function updateUserData
     //function logout
+}
+
+extension UserViewModel {
+    enum SignUpError: LocalizedError {
+        case emptyUsername
+        case emptyEmail
+        case emptyPassword
+        
+        var errorDescription: String? {
+            switch self {
+            case .emptyUsername:
+                return "Username is empty"
+            case .emptyEmail:
+                return "Email is empty"
+            case .emptyPassword:
+                return "Password is empty"
+            }
+        }
+    }
 }

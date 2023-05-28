@@ -9,10 +9,18 @@ import SwiftUI
 
 @main
 struct BmiBrosApp: App {
-    var appEnviroment = AppEnvironment()
+//    var appEnviroment = AppEnvironment()
+    
+    @StateObject private var session = SessionManager()
+    @StateObject private var viewModel = UserViewModel()
+    @StateObject private var appEnvironment = AppEnvironment()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView().environmentObject(appEnviroment)
+            MainAppView()
+                .environmentObject(session)
+                .environmentObject(viewModel)
+                .environmentObject(appEnvironment)
         }
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 //cara menggunakan idGlobal
 //@EnvironmentObject var appEnvironment: AppEnvironment
@@ -16,6 +17,7 @@ import Foundation
 
 class AppEnvironment: ObservableObject {
     @Published var idLogin: UUID?
-    @Published var isLogedin: Bool = false
-    @Published var loginUser : User =  User(id: UUID(),username: "JohnDoe", email: "Admin", password: "1", gender: "Male")
+    @Published var isLoggedIn: Bool = false
+//    @Published var loginUser: User = User(id: UUID(), username: "JohnDoe", email: "Admin", password: "1", gender: "Male")
+    @Published var loginUser: User?
 }

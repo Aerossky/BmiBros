@@ -13,6 +13,11 @@
 		0412D6412A21BE2500909BD7 /* AppEnviroment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0412D6402A21BE2500909BD7 /* AppEnviroment.swift */; };
 		043279A52A1CD37400669EA5 /* InputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043279A42A1CD37400669EA5 /* InputViewModel.swift */; };
 		043279A72A1CD3A600669EA5 /* Input.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043279A62A1CD3A600669EA5 /* Input.swift */; };
+		044537372A2330A3001CBB56 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044537362A2330A3001CBB56 /* SessionManager.swift */; };
+		044537392A234BA5001CBB56 /* MainAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044537382A234BA5001CBB56 /* MainAppView.swift */; };
+		0445373B2A234DCB001CBB56 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0445373A2A234DCB001CBB56 /* OnboardingView.swift */; };
+		0445373D2A234F9A001CBB56 /* OnboardingInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0445373C2A234F9A001CBB56 /* OnboardingInfoView.swift */; };
+		0445373F2A235199001CBB56 /* OnboardingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0445373E2A235199001CBB56 /* OnboardingManager.swift */; };
 		044B6A842A21096E00C1BF7A /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044B6A832A21096E00C1BF7A /* ProfileView.swift */; };
 		044B6A8C2A22481000C1BF7A /* BmiBros_Watch_AppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044B6A8B2A22481000C1BF7A /* BmiBros_Watch_AppApp.swift */; };
 		044B6A8E2A22481000C1BF7A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044B6A8D2A22481000C1BF7A /* ContentView.swift */; };
@@ -87,6 +92,12 @@
 		0412D6402A21BE2500909BD7 /* AppEnviroment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnviroment.swift; sourceTree = "<group>"; };
 		043279A42A1CD37400669EA5 /* InputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewModel.swift; sourceTree = "<group>"; };
 		043279A62A1CD3A600669EA5 /* Input.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Input.swift; sourceTree = "<group>"; };
+		044537362A2330A3001CBB56 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
+		044537382A234BA5001CBB56 /* MainAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAppView.swift; sourceTree = "<group>"; };
+		0445373A2A234DCB001CBB56 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		0445373C2A234F9A001CBB56 /* OnboardingInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingInfoView.swift; sourceTree = "<group>"; };
+		0445373E2A235199001CBB56 /* OnboardingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingManager.swift; sourceTree = "<group>"; };
+		044537442A2396AE001CBB56 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		044B6A832A21096E00C1BF7A /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		044B6A892A22481000C1BF7A /* BmiBros Watch App Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BmiBros Watch App Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		044B6A8B2A22481000C1BF7A /* BmiBros_Watch_AppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BmiBros_Watch_AppApp.swift; sourceTree = "<group>"; };
@@ -154,6 +165,8 @@
 				04100DF12A1BCEC900160C69 /* User.swift */,
 				043279A62A1CD3A600669EA5 /* Input.swift */,
 				0412D6402A21BE2500909BD7 /* AppEnviroment.swift */,
+				044537362A2330A3001CBB56 /* SessionManager.swift */,
+				0445373E2A235199001CBB56 /* OnboardingManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -164,6 +177,14 @@
 				044B6A8D2A22481000C1BF7A /* ContentView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		044537432A2396AE001CBB56 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				044537442A2396AE001CBB56 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		044B6A8A2A22481000C1BF7A /* BmiBros Watch App Watch App */ = {
@@ -188,6 +209,9 @@
 		04DBD8662A18C2F70037792E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				044537382A234BA5001CBB56 /* MainAppView.swift */,
+				0445373A2A234DCB001CBB56 /* OnboardingView.swift */,
+				0445373C2A234F9A001CBB56 /* OnboardingInfoView.swift */,
 				044B6A832A21096E00C1BF7A /* ProfileView.swift */,
 				04BB453D2A18F81100539210 /* IntroductionView.swift */,
 				04DBD8692A18C6BA0037792E /* HomeView.swift */,
@@ -269,6 +293,7 @@
 				04FBE7972A11C61200059DBF /* BmiBros */,
 				044B6A8A2A22481000C1BF7A /* BmiBros Watch App Watch App */,
 				04FBE7962A11C61200059DBF /* Products */,
+				044537432A2396AE001CBB56 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -339,6 +364,8 @@
 				044B6A952A22481200C1BF7A /* PBXTargetDependency */,
 			);
 			name = BmiBros;
+			packageProductDependencies = (
+			);
 			productName = BmiBros;
 			productReference = 04FBE7952A11C61200059DBF /* BmiBros.app */;
 			productType = "com.apple.product-type.application";
@@ -370,6 +397,8 @@
 				Base,
 			);
 			mainGroup = 04FBE78C2A11C61200059DBF;
+			packageReferences = (
+			);
 			productRefGroup = 04FBE7962A11C61200059DBF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -435,11 +464,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0445373F2A235199001CBB56 /* OnboardingManager.swift in Sources */,
 				04100DF22A1BCEC900160C69 /* User.swift in Sources */,
 				04100DED2A1B543000160C69 /* Food.swift in Sources */,
 				044D50252A18C05800DE0AD4 /* ContentView.swift in Sources */,
 				04E203792A1BA13800F61375 /* FoodViewModel.swift in Sources */,
 				04DBD89C2A18F27A0037792E /* FoodDetailView.swift in Sources */,
+				0445373D2A234F9A001CBB56 /* OnboardingInfoView.swift in Sources */,
 				048FE7AA2A1BDE6C00A295F5 /* UserViewModel.swift in Sources */,
 				043279A72A1CD3A600669EA5 /* Input.swift in Sources */,
 				04BB453E2A18F81100539210 /* IntroductionView.swift in Sources */,
@@ -451,9 +482,12 @@
 				04DBD8A12A18F57F0037792E /* InputView.swift in Sources */,
 				048249612A1E5808005FA213 /* SearchBarView.swift in Sources */,
 				04DBD86A2A18C6BA0037792E /* HomeView.swift in Sources */,
+				044537392A234BA5001CBB56 /* MainAppView.swift in Sources */,
 				04703BB92A1A19C1008723A7 /* SignInView.swift in Sources */,
 				04703BBD2A1A2894008723A7 /* SignUpView.swift in Sources */,
+				044537372A2330A3001CBB56 /* SessionManager.swift in Sources */,
 				04DBD89F2A18F54F0037792E /* UIColor.swift in Sources */,
+				0445373B2A234DCB001CBB56 /* OnboardingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

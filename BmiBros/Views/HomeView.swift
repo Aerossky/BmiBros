@@ -9,17 +9,15 @@ import SwiftUI
 
 struct HomeView: View {
     // deklarasi variable
+    @EnvironmentObject var session: SessionManager
+    @EnvironmentObject var viewModel: UserViewModel
     @EnvironmentObject var appEnvironment: AppEnvironment
-//    @EnvironmentObject var userViewModel: UserViewModel
 
 //    @State private var id = userViewModel.appEnvironment.idLogin
     @State private var isShowingDetail1 = false
     @State private var isShowingDetail3 = false
     @State private var id: UUID?
        
-     
-    
-    
     // Hari
     let dateFormatter = DateFormatter()
     
@@ -35,9 +33,6 @@ struct HomeView: View {
          let hour = calendar.component(.hour, from: Date())
          return hour >= 6 && hour < 18
      }
-     
-    
-   
     
     var body: some View {
         NavigationStack {
@@ -45,7 +40,8 @@ struct HomeView: View {
                 VStack {
                     HStack {
                         VStack(alignment: .leading){
-                            Text("Hello, \(appEnvironment.loginUser.username)")
+//                            Text("Hello, \(viewModel.loggedInUser.username)")
+                            Text("Hello, \(viewModel.loggedInUser?.username ?? "")")
                                 .font(.custom("Poppins-Bold", size: 36))
                                 .foregroundColor(Color(UIColor(hex: "#609FFF")))
                             Text("\(currentDate)")
@@ -200,7 +196,9 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView().environmentObject(AppEnvironment())
-        
+        HomeView()
+            .environmentObject(SessionManager())
+            .environmentObject(UserViewModel())
+            .environmentObject(AppEnvironment())
     }
 }

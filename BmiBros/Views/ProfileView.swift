@@ -10,6 +10,10 @@ import PhotosUI
 
 struct ProfileView: View {
     
+    @EnvironmentObject var session: SessionManager
+    @EnvironmentObject var viewModel: UserViewModel
+    @EnvironmentObject var appEnvironment: AppEnvironment
+    
     enum Country: String, CaseIterable {
         case Indonesia
         case Japan
@@ -30,6 +34,7 @@ struct ProfileView: View {
     @State private var showPassword: Bool = false
     @State private var passwordSecurityCheckProgress: Double = 0
     @State private var isPasswordLengthValid: Bool = false
+    @State private var showLogoutAlert = false
     
     @State private var ageHidden: Bool = false
     @State private var age: Double = 18
@@ -154,17 +159,38 @@ struct ProfileView: View {
                     }
                     DatePicker("Date of birth", selection: $dateOfBirth, displayedComponents: .date)
                 }
-            }
-            .navigationTitle("Profile Settings")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Submit") {
-                        // fill later
-                    }
-                    .disabled(!isPasswordLengthValid || passwordSecurityCheckProgress < 0.5)
+                
+                Button(action: {
+                    viewModel.logoutUser()
+                    showLogoutAlert = true
+                }) {
+                    Text("Sign Out")
                 }
+                .alert(isPresented: $showLogoutAlert) {
+                    Alert(
+                        title: Text("Success"),
+                        message: Text("You have logged out."),
+                        dismissButton: .default(Text("OK"))
+                    )
+                }
+                .background(NavigationLink(destination: IntroductionView()
+                    .navigationBarBackButtonHidden(true),
+                    label: {
+                        EmptyView()
+                    })
+                )
+                
             }
+//            .navigationTitle("Profile Settings")
+//            .navigationBarTitleDisplayMode(.inline)
+            //            .toolbar {
+            //                ToolbarItem(placement: .navigationBarTrailing) {
+            //                    Button("Submit") {
+            //                        // fill later
+            //                    }
+            //                    .disabled(!isPasswordLengthValid || passwordSecurityCheckProgress < 0.5)
+            //                }
+            //            }
         }
     }
     
@@ -200,5 +226,8 @@ struct ProfileView: View {
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileView()
+            .environmentObject(SessionManager())
+            .environmentObject(UserViewModel())
+            .environmentObject(AppEnvironment())
     }
 }
