@@ -9,11 +9,15 @@ import SwiftUI
 
 struct FoodInformationView: View {
     @StateObject private var viewModel = FoodViewModel()
-    @State private var searchText = ""
-    @State private var selectedFood: Food? = nil
-    @State private var isPopoverPresented = false
     
-    @State var filterArray:[Food] = []
+    //pakai search
+    @State private var searchText = ""
+    
+    // arahin ke detail
+    @State private var selectedFood: Food? = nil
+    
+    // filter data berdasarkan protein, carbs dan fat
+    @State private var isPopoverPresented = false
     @State private var isProteinFilterOn = false
     @State private var isCarbohydrateFilterOn = false
     @State private var isFatFilterOn = false
@@ -21,20 +25,25 @@ struct FoodInformationView: View {
     var body: some View {
         VStack{
             HStack{
+                Text("Food Information")
+                    .font(.custom("Poppins-Bold", size: 24))
+                    .padding(.horizontal)
                 Spacer()
                 Button(action: {
                     isPopoverPresented = true
                 }) {
-                    Image("filter")
-                        .resizable()
-                        .frame(width: 50, height: 50)
-                        .padding(.trailing, 16)
-                        .alignmentGuide(HorizontalAlignment.trailing) { dimension in
-                            dimension[HorizontalAlignment.trailing]
-                        }
-                        .alignmentGuide(VerticalAlignment.top) { dimension in
-                            dimension[VerticalAlignment.top]
-                        }
+                    HStack {
+                        Image("filter")
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                            .padding(.trailing, 16)
+                            .alignmentGuide(HorizontalAlignment.trailing) { dimension in
+                                dimension[HorizontalAlignment.trailing]
+                            }
+                            .alignmentGuide(VerticalAlignment.top) { dimension in
+                                dimension[VerticalAlignment.top]
+                            }
+                    }
                 }.popover(isPresented: $isPopoverPresented, arrowEdge: .top) {
                     VStack {
                         VStack {
@@ -44,14 +53,15 @@ struct FoodInformationView: View {
                             Toggle("Fat", isOn: $isFatFilterOn)
                         }
                         .onChange(of: isProteinFilterOn) { value in
-                            applyFilter()
+                            viewModel.setProteinFilterOn(isProteinFilterOn)
                         }
                         .onChange(of: isCarbohydrateFilterOn) { value in
-                            applyFilter()
+                            viewModel.setCarbohydrateFilterOn(isCarbohydrateFilterOn)
                         }
                         .onChange(of: isFatFilterOn) { value in
-                            applyFilter()
+                            viewModel.setFatFilterOn(isFatFilterOn)
                         }
+                        .padding(.all)
                         Button(action: {
                             isPopoverPresented = false
                         }) {
@@ -72,7 +82,7 @@ struct FoodInformationView: View {
                 VStack {
                     SearchBarView(searchText: $searchText)
                     List {
-                        if filterArray.isEmpty {
+                        if isProteinFilterOn == false && isFatFilterOn == false && isCarbohydrateFilterOn == false {
                             ForEach(viewModel.foods) { food in
                                 Button(action: {
                                     selectedFood = food
@@ -99,7 +109,7 @@ struct FoodInformationView: View {
                                 .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
                             }
                         }else {
-                            ForEach(filterArray) { food in
+                            ForEach(viewModel.filteredFoods) { food in
                                 Button(action: {
                                     selectedFood = food
                                 }) {
@@ -128,28 +138,11 @@ struct FoodInformationView: View {
                     }
                     .listStyle(PlainListStyle())
                     .accentColor(.clear)
-                    .navigationTitle("Food List")
+                    
                     .sheet(item: $selectedFood) { food in
                         FoodDetailView(food: food)
                     }
                 }
-            }
-        }
-    }
-    private func applyFilter() {
-        // Reset filterArray
-        filterArray.removeAll()
-        
-        // Apply filters based on selected options
-        for foodFilter in viewModel.foods {
-            if isProteinFilterOn && foodFilter.prot > 0 {
-                filterArray.append(foodFilter)
-            }
-            if isCarbohydrateFilterOn && foodFilter.carbs > 0 {
-                filterArray.append(foodFilter)
-            }
-            if isFatFilterOn && foodFilter.fat > 0 {
-                filterArray.append(foodFilter)
             }
         }
     }

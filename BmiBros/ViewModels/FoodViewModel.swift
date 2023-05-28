@@ -10,6 +10,12 @@ import Foundation
 class FoodViewModel: ObservableObject {
     @Published var foods: [Food] = []
     
+    @Published var filteredFoods: [Food] = []
+       
+    private var isProteinFilterOn = false
+    private var isCarbohydrateFilterOn = false
+    private var isFatFilterOn = false
+    
     init() {
         fetchFoods()
     }
@@ -75,5 +81,47 @@ class FoodViewModel: ObservableObject {
         
         // Assign data yang diambil ke properti foods
         self.foods = sampleFoods
+        
+        applyFilter()
+    }
+    
+    private func applyFilter() {
+        // Reset filteredFoods
+        filteredFoods = []
+        
+        // Apply filters based on selected options
+        for food in foods {
+            var check = false
+            
+            if isProteinFilterOn && food.prot > 0 {
+                check = true
+            }
+            if isCarbohydrateFilterOn && food.carbs > 0 {
+                check = true
+            }
+            if isFatFilterOn && food.fat > 0 {
+                check = true
+            }
+            
+            if check {
+                filteredFoods.append(food)
+            }
+        }
+    }
+    
+    // Functions to update filter options
+    func setProteinFilterOn(_ isOn: Bool) {
+        isProteinFilterOn = isOn
+        applyFilter()
+    }
+    
+    func setCarbohydrateFilterOn(_ isOn: Bool) {
+        isCarbohydrateFilterOn = isOn
+        applyFilter()
+    }
+    
+    func setFatFilterOn(_ isOn: Bool) {
+        isFatFilterOn = isOn
+        applyFilter()
     }
 }
