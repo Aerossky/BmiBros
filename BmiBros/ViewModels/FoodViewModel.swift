@@ -25,30 +25,30 @@ class FoodViewModel: ObservableObject {
         let sampleFoods = [
             Food(
                 image: "food Image",
-                name: "Salad Babi",
-                description: "Salad isi babi ala Joseph yang enaknya wauwwwww makjos slebew (aku diajarin Rey)",
-                cal: 478,
-                prot: 30,
-                carbs: 25,
+                name: "Nasi Goreng Babi",
+                description: "Nasi goreng khas surabaya yang dimasak oleh jovan dengan bumbu khas batam",
+                cal: 580,
+                prot: 34,
+                carbs: 50,
                 fat: 12
             ),
             Food(
                 image: "food Image",
-                name: "Sushi Babi",
-                description: "Sushi isi babi ala Joseph yang enaknya wauwwwww makjos slebew (aku diajarin Rey)",
-                cal: 1,
-                prot: 2,
-                carbs: 3,
-                fat: 4
+                name: "Steak Wahyu A5",
+                description: "250 Gram / servings",
+                cal: 300,
+                prot: 25,
+                carbs: 0,
+                fat: 15
             ),
             Food(
                 image: "food Image",
-                name: "masak Babi",
-                description: "Joseph isi babi ala Joseph yang enaknya wauwwwww makjos slebew (aku diajarin Rey)",
-                cal: 5,
-                prot: 6,
-                carbs: 7,
-                fat: 8
+                name: "Kentang Kukus",
+                description: "per 100 gram",
+                cal: 87,
+                prot: 0,
+                carbs: 20,
+                fat: 0
             ),
             Food(
                 image: "food Image",
@@ -76,6 +76,15 @@ class FoodViewModel: ObservableObject {
                 prot: 0,
                 carbs: 0,
                 fat: 23
+            ),
+            Food(
+                image: "food Image",
+                name: "Minyak Zam Zam",
+                description: "per 100 gram",
+                cal: 530,
+                prot: 0,
+                carbs: 0,
+                fat: 100
             )
         ]
         
