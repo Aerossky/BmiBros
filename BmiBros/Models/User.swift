@@ -9,26 +9,14 @@ import Foundation
 import SwiftUI
 
 //extension UserViewModel {
-    struct User {
-        let id: UUID
-        let username: String
-        let email: String
-        let password: String
-        let gender: String
-    }
-//}
-
-struct UserInfo {
-    let id: Int
-    let userId: String
-    var age: Int
-    var height: Double
-    var weight: Double
-    var bmi: Double
-    var calories: Double
-    let date: Date
+struct User {
+    let id: UUID
+    let username: String
+    let email: String
+    let password: String
+    let gender: String
 }
-
+//}
 
 
 //struct User: Identifiable, Hashable {

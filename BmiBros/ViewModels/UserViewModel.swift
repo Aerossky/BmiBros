@@ -34,9 +34,6 @@ class UserViewModel: ObservableObject {
             // Tambahkan pengguna lainnya sesuai kebutuhan
         ]
         userInfos = [
-            //            UserInfo(id: 2, userId: "1", age: 30, height: 170, weight: 70, bmi: 0, calories: 0, date: Date()),
-            //            UserInfo(id: 2, userId: "1", age: 30, height: 170, weight: 90, bmi: 0, calories: 0, date: Date()),
-            //            UserInfo(id: 3, userId: "1", age: 30, height: 170, weight: 90, bmi: 0, calories: 0, date: Date()),
             UserInfo(id: 1, userId: "1", age: 30, height: 170, weight: 90, bmi: 0, calories: 0, date: Date()),
             UserInfo(id: 2, userId: "2", age: 25, height: 160, weight: 55, bmi: 0, calories: 0, date: Date())
         ]
@@ -113,6 +110,12 @@ class UserViewModel: ObservableObject {
     
     func logoutUser() {
         loggedInUser = nil
+    }
+    
+//    user info
+
+    func addUserInfo(_id:Int, _userID: String, _age: Int, _height: Double, _weight: Double, _bmi: Double, _calories: Double, _date: Date ){
+        
     }
     
     //function getUserId

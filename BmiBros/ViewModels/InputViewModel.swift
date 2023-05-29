@@ -15,8 +15,8 @@ class InputViewModel: ObservableObject {
         let heightInMeters = height / 100
         let bmi = weight / (heightInMeters * heightInMeters)
         
-        var ageFactor: Double = 0.0
-        var genderFactor: Double = 0.0
+//        var ageFactor: Double = 0.0
+//        var genderFactor: Double = 0.0
         
         //        if age >= 2 && age <= 5 {
         //            ageFactor = 0.1

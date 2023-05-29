@@ -12,12 +12,12 @@ struct HomeView: View {
     @EnvironmentObject var session: SessionManager
     @EnvironmentObject var viewModel: UserViewModel
     @EnvironmentObject var appEnvironment: AppEnvironment
-
-//    @State private var id = userViewModel.appEnvironment.idLogin
+    
+    //    @State private var id = userViewModel.appEnvironment.idLogin
     @State private var isShowingDetail1 = false
     @State private var isShowingDetail3 = false
     @State private var id: UUID?
-       
+    
     // Hari
     let dateFormatter = DateFormatter()
     
@@ -28,11 +28,11 @@ struct HomeView: View {
     }
     
     // Jam
-     var isMorning: Bool {
-         let calendar = Calendar.current
-         let hour = calendar.component(.hour, from: Date())
-         return hour >= 6 && hour < 18
-     }
+    var isMorning: Bool {
+        let calendar = Calendar.current
+        let hour = calendar.component(.hour, from: Date())
+        return hour >= 6 && hour < 18
+    }
     
     var body: some View {
         NavigationStack {
@@ -40,7 +40,7 @@ struct HomeView: View {
                 VStack {
                     HStack {
                         VStack(alignment: .leading){
-//                            Text("Hello, \(viewModel.loggedInUser.username)")
+                            //                            Text("Hello, \(viewModel.loggedInUser.username)")
                             Text("Hello, \(viewModel.loggedInUser?.username ?? "")")
                                 .font(.custom("Poppins-Bold", size: 36))
                                 .foregroundColor(Color(UIColor(hex: "#609FFF")))
@@ -51,7 +51,7 @@ struct HomeView: View {
                         Spacer()
                         Image(isMorning ? "Morning" : "Night")
                             .resizable()
-                        .frame(width: 95, height: 75)
+                            .frame(width: 95, height: 75)
                     }
                     .padding(.horizontal, 15)
                     .padding(.top, 20)
@@ -181,7 +181,13 @@ struct HomeView: View {
                             }
                         }
                         .sheet(isPresented: $isShowingDetail3) {
-                            Text("GRAPH VIEW")
+                            VStack {
+                                HStack {
+                                    Image("chart")
+                                }
+                            }
+                            .frame(width: 75, height: 75)
+                            .padding(.all)
                         }
                         .padding(.trailing,15)
                         .padding(.leading,15)
