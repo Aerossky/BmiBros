@@ -165,6 +165,7 @@ struct ProfileView: View {
                     showLogoutAlert = true
                 }) {
                     Text("Sign Out")
+                        .padding(.trailing)
                 }
                 .alert(isPresented: $showLogoutAlert) {
                     Alert(
