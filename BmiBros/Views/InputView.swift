@@ -16,8 +16,8 @@ struct InputView: View {
     var body: some View {
         VStack {
             Picker("Pilih Konten", selection: $selectedOption) {
-                ForEach(0..<options.count) { index in
-                    Text(options[index]).tag(index)
+                ForEach(options.indices, id: \.self) { index in
+                    Text(options[index]).tag(options[index])
                 }
             }
             .pickerStyle(SegmentedPickerStyle())
@@ -121,7 +121,7 @@ struct InputView: View {
                                     .font(.custom("Poppins-Bold", size: 20))
                                     .foregroundColor(Color(UIColor(hex: "#76AAFA")))
                                 Picker("Select an Option", selection: $gender) {
-                                    ForEach(0..<genderOptions.count) { index in
+                                    ForEach(genderOptions.indices, id: \.self) { index in
                                         Text(genderOptions[index])
                                             .tag(index)
                                     }
@@ -322,7 +322,7 @@ struct InputView: View {
                                     .font(.custom("Poppins-Bold", size: 20))
                                     .foregroundColor(Color(UIColor(hex: "#76AAFA")))
                                 Picker("Select an Option", selection: $gender) {
-                                    ForEach(0..<genderOptions.count) { index in
+                                    ForEach(Array(0..<genderOptions.count), id: \.self) { index in
                                         Text(genderOptions[index])
                                             .tag(index)
                                     }

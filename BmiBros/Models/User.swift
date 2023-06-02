@@ -11,10 +11,10 @@ import SwiftUI
 //extension UserViewModel {
     struct User {
         let id: UUID
-        let username: String
+        var username: String
         let email: String
-        let password: String
-        let gender: String
+        var password: String
+        var gender: String
     }
 //}
 
