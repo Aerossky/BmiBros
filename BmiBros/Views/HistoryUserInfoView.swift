@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HistoryUserInfoView: View {
     @State private var selectedOption = 0
+    
     let options = ["BMI History", "Calories History"]
     
     var body: some View {
@@ -41,11 +42,11 @@ struct HistoryUserInfoView: View {
         var body: some View{
             List {
                 ForEach(viewModel.userInfos) { userInfo in
-                    if userInfo.userId == viewModel.loggedInUser?.id.uuidString {
+//                    if userInfo.userId == viewModel.loggedInUser?.id.uuidString {
                         if userInfo.bmi != 0 || userInfo.bmi > 0 {
                             HStack {
-                                Text("Age")
-                                Text("\(Int(userInfo.age))")
+                                Text("Date")
+                                Text("\(viewModel.formatDate(userInfo.date))")
                                     .font(.headline)
                                 Spacer()
                                 Text("BMI")
@@ -58,7 +59,7 @@ struct HistoryUserInfoView: View {
                             .cornerRadius(20)
                             .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
                         }
-                    }
+//                    }
                 }
             }
             .listStyle(PlainListStyle())
@@ -78,8 +79,9 @@ struct HistoryUserInfoView: View {
                     if userInfo.userId == viewModel.loggedInUser?.id.uuidString {
                         if userInfo.calories != 0 || userInfo.calories > 0 {
                             HStack {
-                                Text("Age")
-                                Text("\(Int(userInfo.age))")
+                                Text("Date")
+                                Text("\(viewModel.formatDate(userInfo.date))")
+                                    .font(.headline)
                                     .font(.headline)
                                 Spacer()
                                 Text("Cals")

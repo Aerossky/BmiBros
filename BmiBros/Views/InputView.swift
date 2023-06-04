@@ -223,12 +223,12 @@ struct InputView: View {
                                         activeAlert = .SuccessInput
                                     }
                                 }) {
-                                    Text("Count")
+                                    Text("Check")
                                         .font(.headline)
                                         .foregroundColor(.white)
                                         .padding()
                                         .frame(maxWidth: .infinity)
-                                        .background((isInputHeightValid  && isInputWeightValid && isInputAgeValid) ? Color(UIColor(hex: "#98A8F8")): Color.gray)
+                                        .background((isInputHeightValid  && isInputWeightValid && isInputAgeValid) ? Color(UIColor(hex: "#6D85FD")): Color.gray)
                                         .cornerRadius(8)
                                 }
                                 .padding()
@@ -478,12 +478,12 @@ struct InputView: View {
                                         activeAlert = .SuccessInput
                                     }
                                 }) {
-                                    Text("Count")
+                                    Text("Check")
                                         .font(.headline)
                                         .foregroundColor(.white)
                                         .padding()
                                         .frame(maxWidth: .infinity)
-                                        .background((isInputHeightValid  && isInputWeightValid && isInputAgeValid) ? Color(UIColor(hex: "#98A8F8")) : Color.gray)
+                                        .background((isInputHeightValid  && isInputWeightValid && isInputAgeValid) ? Color(UIColor(hex: "#6D85FD")): Color.gray)
                                         .cornerRadius(8)
                                 }
                                 .padding()
