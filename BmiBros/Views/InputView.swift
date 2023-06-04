@@ -223,7 +223,7 @@ struct InputView: View {
                                     bmi = inputViewModel.calculateBMI(weight: Double(selectedWeight) ?? 0, height: Double(selectedHeight) ?? 0, age: Int(selectedAge) ?? 0, gender: selectedGender)
                                     bmiCategory = inputViewModel.getBMICategory(bmi: bmi, age: Int(selectedAge) ?? 0)
                                     bmiColor = inputViewModel.getBMICategory(bmi: bmi, age: Int(selectedAge) ?? 1)
-                                    //                                    let getUserID = userViewModel.loggedInUser?.id.uuidString
+                                    let getUserID = viewModel.loggedInUser?.id.uuidString ?? ""
                                     //
                                     //                                    let age = Int(Age) // Mengkonversi Age ke tipe data Int
                                     //                                    let height = Double(Height) // Mengkonversi Height ke tipe data Double
@@ -231,7 +231,6 @@ struct InputView: View {
                                     //                                  var setUserInfo = userViewModel.addUserInfo(UUID(), getUserID!,                                     age!, height!, weight!, bmi, 0, Date())
                                     
                                     let id = UUID()
-                                    let userID = "1"
                                     let age = Int(selectedAge)
                                     let height = Double(selectedHeight)
                                     let weight = Double(selectedWeight)
@@ -239,7 +238,7 @@ struct InputView: View {
                                     let calories = 0
                                     let date = Date()
                                     
-                                    userViewModel.addUserInfo(id, userID, age!, height!, weight!, bmi, Double(calories), date)
+                                    viewModel.addUserInfo(id, getUserID, age!, height!, weight!, bmi, Double(calories), date)
                                     
                                     
                                     //                                    Text("SUCCESS") // ini ganti buat lempar data

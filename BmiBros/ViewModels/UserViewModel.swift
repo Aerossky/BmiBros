@@ -35,9 +35,9 @@ class UserViewModel: ObservableObject {
             // Tambahkan pengguna lainnya sesuai kebutuhan
         ]
         userInfos = [
-            UserInfo(UUID(), "1", 30, 170, 90, 0, 0, Date()),
-            UserInfo(UUID(), "2", 25, 160, 55, 0, 0, Date()),
-            UserInfo(UUID(), "3", 25, 160, 55, 50, 2500, Date())
+            UserInfo(id: UUID(), userId: "1", age: 30, height: 170, weight: 90, bmi: 0, calories: 0, date: Date()),
+            UserInfo(id: UUID(), userId: "2", age: 25, height: 160, weight: 55, bmi: 0, calories: 0, date: Date()),
+            UserInfo(id: UUID(), userId: "3", age: 25, height: 160, weight: 55, bmi: 50, calories: 2500, date: Date())
         ]
     }
     

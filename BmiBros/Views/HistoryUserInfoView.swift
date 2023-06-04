@@ -13,7 +13,7 @@ struct HistoryUserInfoView: View {
     var body: some View {
         NavigationView{
             List {
-                ForEach(viewModel.history) { user in
+                ForEach(viewModel.userInfos) { user in
                     Button(action: {
                         
                     }) {
