@@ -10,7 +10,6 @@ import SwiftUI
 struct InputView: View {
     @State private var selectedOption = 0
     
-    
     let options = ["BMI Calculator", "Calories Calculator"]
     
     var body: some View {
@@ -49,9 +48,6 @@ struct InputView: View {
     }
     
     struct BMIView: View {
-//        @State private var inputViewModel = InputViewModel()
-//        @State private var userViewModel = UserViewModel()
-        
         @EnvironmentObject var session: SessionManager
         @EnvironmentObject var viewModel: UserViewModel
         @EnvironmentObject var inputViewModel: InputViewModel
@@ -219,18 +215,13 @@ struct InputView: View {
                                     activeAlert = .Age
                                 }
                                 else if isInputHeightValid && isInputWeightValid && isInputAgeValid {
-                                    //hitung bmmi
+                                    //hitung bmi
                                     bmi = inputViewModel.calculateBMI(weight: Double(selectedWeight) ?? 0, height: Double(selectedHeight) ?? 0, age: Int(selectedAge) ?? 0, gender: selectedGender)
                                     bmiCategory = inputViewModel.getBMICategory(bmi: bmi, age: Int(selectedAge) ?? 0)
                                     bmiColor = inputViewModel.getBMICategory(bmi: bmi, age: Int(selectedAge) ?? 1)
-                                    let getUserID = viewModel.loggedInUser?.id.uuidString ?? ""
-                                    //
-                                    //                                    let age = Int(Age) // Mengkonversi Age ke tipe data Int
-                                    //                                    let height = Double(Height) // Mengkonversi Height ke tipe data Double
-                                    //                                    let weight = Double(Weight) // Mengkonversi Weight ke tipe data Double
-                                    //                                  var setUserInfo = userViewModel.addUserInfo(UUID(), getUserID!,                                     age!, height!, weight!, bmi, 0, Date())
                                     
                                     let id = UUID()
+                                    let getUserID = viewModel.loggedInUser?.id.uuidString ?? ""
                                     let age = Int(selectedAge)
                                     let height = Double(selectedHeight)
                                     let weight = Double(selectedWeight)
@@ -239,9 +230,6 @@ struct InputView: View {
                                     let date = Date()
                                     
                                     viewModel.addUserInfo(id, getUserID, age!, height!, weight!, bmi, Double(calories), date)
-                                    
-                                    
-                                    //                                    Text("SUCCESS") // ini ganti buat lempar data
                                     activeAlert = .SuccessInput
                                 }
                             }) {
@@ -279,15 +267,19 @@ struct InputView: View {
     }
     
     struct CaloriesView: View {
-        @State private var inputViewModel = InputViewModel()
+        @EnvironmentObject var session: SessionManager
+        @EnvironmentObject var viewModel: UserViewModel
+        @EnvironmentObject var inputViewModel: InputViewModel
+        @EnvironmentObject var appEnvironment: AppEnvironment
+        
         //variable data
         @State private var Height = ""
         @State private var Weight = ""
         @State private var Age = ""
         @State private var selectedGender = "male"
-        @State private var selectedAge = "30"
-        @State private var selectedHeight = "183"
-        @State private var selectedWeight = "75"
+        @State private var selectedAge = "20"
+        @State private var selectedHeight = "170"
+        @State private var selectedWeight = "70"
         
         //picker gender
         
@@ -438,9 +430,20 @@ struct InputView: View {
                                     activeAlert = .Age
                                 }
                                 else if isInputHeightValid && isInputWeightValid && isInputAgeValid {
-                                    Text("SUCCESS") // ini ganti buat lempar data
                                     calorie = inputViewModel.calculateCalorie(weight: Double(selectedWeight) ?? 0, height: Double(selectedHeight) ?? 0, age: Double(selectedAge) ?? 0, gender: selectedGender)
                                     activeAlert = .SuccessInput
+                                    
+                                    let id = UUID()
+                                    let getUserID = viewModel.loggedInUser?.id.uuidString ?? ""
+                                    let age = Int(selectedAge)
+                                    let height = Double(selectedHeight)
+                                    let weight = Double(selectedWeight)
+                                    let bmi = 0
+                                    let calories = calorie
+                                    let date = Date()
+                                    
+                                    viewModel.addUserInfo(id, getUserID, age!, height!, weight!, Double(bmi), Double(calories), date)
+                                    
                                 }
                             }) {
                                 Text("Check")
