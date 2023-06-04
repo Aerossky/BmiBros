@@ -15,20 +15,16 @@ struct HistoryUserInfoView: View {
     
     var body: some View {
         NavigationView{
-            List(viewModel.userInfos, id: \.id) { user in
-                ForEach(viewModel.userInfos){ history in
-                    if history.userId == viewModel.loggedInUser?.id.uuidString ?? "" {
+            List {
+                ForEach(viewModel.userInfos) { userInfo in
+                    if userInfo.userId == viewModel.loggedInUser?.id.uuidString {
                         HStack {
-                            HStack {
-                                Text("BMI")
-                                Text("\(Int(user.bmi))")
-                                    .font(.headline)
-                            }
+                            Text("BMI")
+                            Text("\(Int(userInfo.bmi))")
+                                .font(.headline)
                             Spacer()
-                            HStack {
-                                Text("CALS")
-                                Text("\(Int(user.calories))")
-                            }
+                            Text("CALS")
+                            Text("\(Int(userInfo.calories))")
                         }
                         .padding()
                         .listRowSeparator(.hidden)
