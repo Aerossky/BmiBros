@@ -14,6 +14,7 @@ struct SignUpView: View {
     
     @State private var isEmailValid: Bool = true
     @State private var isPasswordValid: Bool = true
+    @State private var navigateToSignUp = false
     
     @State private var showSignUpSuccessAlert = false
     @State private var username: String = ""
@@ -175,9 +176,14 @@ struct SignUpView: View {
                             title: Text("Sign Up Successful \(username)"),
                             message: Text("You have successfully registered!"),
                             dismissButton: .default(Text("OK")) {
+                                navigateToSignUp = true
                             }
                         )
-                    } .disabled(username.isEmpty || email.isEmpty || password.isEmpty || !viewModel.isPasswordValid)
+                    }
+                    .fullScreenCover(isPresented: $navigateToSignUp) {
+                        SignUpView()
+                    }
+                    .disabled(username.isEmpty || email.isEmpty || password.isEmpty || !viewModel.isPasswordValid)
                     // Mengatur tombol menjadi nonaktif jika username, email, atau password kosong
                         .opacity(username.isEmpty || email.isEmpty || password.isEmpty || !viewModel.isPasswordValid ? 0.5 : 1) // Mengatur opasitas tombol
                     
