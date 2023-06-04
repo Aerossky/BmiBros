@@ -143,7 +143,12 @@ class UserViewModel: ObservableObject {
         if loginUserInfo.isEmpty {
             return 0.0
         }else{
-            return loginUserInfo.last?.bmi ?? 0
+            
+            return loginUserInfo.filter{
+                debugPrint("User info bmi apakah 0? \($0.bmi != 0)")
+                return $0.bmi != 0
+                
+            }.last?.bmi ?? 0
         }
     }
     
@@ -159,7 +164,11 @@ class UserViewModel: ObservableObject {
         if loginUserInfo.isEmpty {
             return 0.0
         }else{
-            return loginUserInfo.last?.calories ?? 0
+            return loginUserInfo.filter{
+                debugPrint("User info kalori apakah 0? \($0.calories != 0)")
+                return $0.calories != 0
+                
+            }.last?.calories ?? 0
         }
     }
     
