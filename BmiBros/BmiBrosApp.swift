@@ -13,6 +13,7 @@ struct BmiBrosApp: App {
     
     @StateObject private var session = SessionManager()
     @StateObject private var inputViewModel = InputViewModel()
+    @StateObject private var foodViewModel = FoodViewModel()
     @StateObject private var viewModel = UserViewModel()
     @StateObject private var appEnvironment = AppEnvironment()
 
@@ -22,6 +23,7 @@ struct BmiBrosApp: App {
             MainAppView()
                 .environmentObject(session)
                 .environmentObject(viewModel)
+                .environmentObject(foodViewModel)
                 .environmentObject(inputViewModel)
                 .environmentObject(appEnvironment)
         }

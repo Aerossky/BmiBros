@@ -14,6 +14,9 @@ struct FoodRecommendationView: View {
     @EnvironmentObject var inputViewModel: InputViewModel
     @EnvironmentObject var appEnvironment: AppEnvironment
     
+    // arahin ke detail
+    @State private var selectedFood: Food? = nil
+    
 //    untuk menentukan berapa item per row
     let gridLayout = [GridItem(.flexible()), GridItem(.flexible())]
     
@@ -22,9 +25,10 @@ struct FoodRecommendationView: View {
             ScrollView {
                 let getID = viewModel.loggedInUser?.id.uuidString
                 let userInfo = viewModel.getLastUserInfoCalories(getID ?? "")
+                let calsMakan = Int(userInfo)/3
                 LazyVGrid(columns: gridLayout, spacing: 16) {
                     ForEach(foodViewModel.foods, id: \.self) { item in
-                        if item.cal <= Int(userInfo) {
+                        if item.cal <= calsMakan {
                             ZStack {
                                 Rectangle()
                                     .foregroundColor(.white)

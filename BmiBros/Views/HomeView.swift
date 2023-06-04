@@ -127,32 +127,29 @@ struct HomeView: View {
                         
                         VStack{
                             Button(action: {
-                                isShowingDetail1.toggle()
+                                //food recom button
                             }){
-                                ZStack{
-                                    Rectangle()
-                                        .fill(ImagePaint(image: Image("MealRSHBG")))
-                                        .frame(width: 370, height: 125)
-                                        .cornerRadius(25)
-                                    
-                                    
-                                    
-                                    VStack(alignment: .center) {
-                                        Text("Meal")
-                                            .foregroundColor(.white)
-                                            .font(.custom("Poppins-Bold", size: 24))
+                                NavigationLink(destination: FoodRecommendationView()) {
+                                    ZStack{
+                                        Rectangle()
+                                            .fill(ImagePaint(image: Image("MealRSHBG")))
+                                            .frame(width: 370, height: 125)
+                                            .cornerRadius(25)
                                         
-                                        Text("Recommendation")
-                                            .foregroundColor(.white)
-                                            .font(.custom("Poppins-Bold", size: 24))
+                                        
+                                        
+                                        VStack(alignment: .center) {
+                                            Text("Meal")
+                                                .foregroundColor(.white)
+                                                .font(.custom("Poppins-Bold", size: 24))
+                                            
+                                            Text("Recommendation")
+                                                .foregroundColor(.white)
+                                                .font(.custom("Poppins-Bold", size: 24))
+                                        }
                                     }
                                 }
                             }
-                            .sheet(isPresented: $isShowingDetail1) {
-                                Text("MEAL RECOM VIEW")
-                            }
-                            .padding(.trailing,15)
-                            .padding(.leading,15)
                             
                             Button(action: {
                                 // Food Information Button

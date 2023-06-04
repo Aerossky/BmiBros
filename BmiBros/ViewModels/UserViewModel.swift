@@ -13,7 +13,7 @@ class UserViewModel: ObservableObject {
     
     @Published var users: [User]
     @Published var userInfos: [UserInfo]
-    @Published var loginUserInfo: [UserInfo] = []
+//    @Published var loginUserInfo: [UserInfo] = []
     @Published var loggedInUser: User?
     //validate variable
     @Published var isEmailValid: Bool = true
@@ -127,7 +127,7 @@ class UserViewModel: ObservableObject {
     
 //    user info
     func getLastUserInfoBMI(_ userID: String) -> Double {
-        loginUserInfo = []
+        var loginUserInfo: [UserInfo] = []
         
         for info in userInfos {
             if info.userId == userID {
@@ -143,7 +143,7 @@ class UserViewModel: ObservableObject {
     }
     
     func getLastUserInfoCalories(_ userID: String) -> Double {
-        loginUserInfo = []
+        var loginUserInfo: [UserInfo] = []
         
         for info in userInfos {
             if info.userId == userID {

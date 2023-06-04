@@ -87,6 +87,15 @@ class FoodViewModel: ObservableObject {
                 prot: 0,
                 carbs: 0,
                 fat: 100
+            ),
+            Food(
+                image: "food Image",
+                name: "Makanan ASUUU COOKK",
+                description: "per 100 gram",
+                cal: 5300,
+                prot: 0,
+                carbs: 0,
+                fat: 100
             )
         ]
         
