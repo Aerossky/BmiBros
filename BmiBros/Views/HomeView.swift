@@ -43,6 +43,7 @@ struct HomeView: View {
             NavigationStack {
                 ScrollView {
                     VStack {
+                        let getID = viewModel.loggedInUser?.id.uuidString
                         HStack {
                             VStack(alignment: .leading){
                                 //                            Text("Hello, \(viewModel.loggedInUser.username)")
@@ -70,7 +71,7 @@ struct HomeView: View {
                                     .cornerRadius(25)
                                 
                                 VStack(alignment: .center){
-                                    let bmi : Double = 24.93000 //ini perlu diganti kalo udh ada backend
+                                    let bmi = viewModel.getLastUserInfoBMI(getID!)//ini perlu diganti kalo udh ada backend
                                     Text("BMI")
                                         .font(.custom("Poppins-SemiBold", size: 25))
                                         .foregroundColor(.white)
@@ -106,7 +107,7 @@ struct HomeView: View {
                             }
                             
                             ZStack{
-                                let cal: Double = 1000 // ini butuh diganti kalo sdh backend
+                                let cal: Double = viewModel.getLastUserInfoCalories(getID!) // ini butuh diganti kalo sdh backend
                                 Rectangle()
                                     .fill(ImagePaint(image: Image("CalorieShowBG")))
                                     .frame(width: 220, height: 125)
