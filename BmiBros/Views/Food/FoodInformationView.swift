@@ -81,33 +81,64 @@ struct FoodInformationView: View {
             NavigationView {
                 VStack {
                     SearchBarView(searchText: $searchText)
+                    
                     List {
                         if isProteinFilterOn == false && isFatFilterOn == false && isCarbohydrateFilterOn == false {
-                            ForEach(viewModel.foods) { food in
-                                Button(action: {
-                                    selectedFood = food
-                                }) {
-                                    HStack {
-                                        Image(food.image)
-                                            .resizable()
-                                            .frame(width: 50, height: 50)
-                                        Text(food.name)
-                                            .font(.headline)
-                                        Spacer()
+                            if(searchText == ""){
+                                ForEach(viewModel.foods) { food in
+                                    Button(action: {
+                                        selectedFood = food
+                                    }) {
                                         HStack {
-                                            Text("kcal")
-                                            Text("\(food.cal)")
+                                            Image(food.image)
+                                                .resizable()
+                                                .frame(width: 50, height: 50)
+                                            Text(food.name)
+                                                .font(.headline)
+                                            Spacer()
+                                            HStack {
+                                                Text("kcal")
+                                                Text("\(food.cal)")
+                                            }
                                         }
+                                        .padding()
                                     }
-                                    .padding()
+                                    .buttonStyle(PlainButtonStyle())
+                                    .listRowSeparator(.hidden)
+                                    .listRowInsets(EdgeInsets(top: 8, leading: 20, bottom: 8, trailing: 20))
+                                    .background(Color(UIColor(hex: "#F7F7F7")))
+                                    .cornerRadius(20)
+                                    .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
                                 }
-                                .buttonStyle(PlainButtonStyle())
-                                .listRowSeparator(.hidden)
-                                .listRowInsets(EdgeInsets(top: 8, leading: 20, bottom: 8, trailing: 20))
-                                .background(Color(UIColor(hex: "#F7F7F7")))
-                                .cornerRadius(20)
-                                .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
+                            }else{
+                                ForEach(viewModel.filteredFoods) { food in
+                                    Button(action: {
+                                        selectedFood = food
+                                    }) {
+                                        HStack {
+                                            Image(food.image)
+                                                .resizable()
+                                                .frame(width: 50, height: 50)
+                                            Text(food.name)
+                                                .font(.headline)
+                                            Spacer()
+                                            HStack {
+                                                Text("kcal")
+                                                Text("\(food.cal)")
+                                            }
+                                        }
+                                        .padding()
+                                    }
+                                    .buttonStyle(PlainButtonStyle())
+                                    .listRowSeparator(.hidden)
+                                    .listRowInsets(EdgeInsets(top: 8, leading: 20, bottom: 8, trailing: 20))
+                                    .background(Color(UIColor(hex: "#F7F7F7")))
+                                    .cornerRadius(20)
+                                    .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
+                                }
                             }
+                            
+                            
                         }else {
                             ForEach(viewModel.filteredFoods) { food in
                                 Button(action: {
@@ -144,6 +175,9 @@ struct FoodInformationView: View {
                     }
                 }
             }
+        }
+        .onChange(of: searchText){ newValue in
+            viewModel.search(with: newValue)
         }
     }
 }
