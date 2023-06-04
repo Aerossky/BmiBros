@@ -181,7 +181,7 @@ struct SignUpView: View {
                         )
                     }
                     .fullScreenCover(isPresented: $navigateToSignUp) {
-                        SignUpView()
+                        SignInView()
                     }
                     .disabled(username.isEmpty || email.isEmpty || password.isEmpty || !viewModel.isPasswordValid)
                     // Mengatur tombol menjadi nonaktif jika username, email, atau password kosong
