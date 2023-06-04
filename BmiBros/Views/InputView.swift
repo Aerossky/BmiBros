@@ -9,24 +9,41 @@ import SwiftUI
 
 struct InputView: View {
     @State private var selectedOption = 0
-   
+    
     
     let options = ["BMI Calculator", "Calories Calculator"]
     
     var body: some View {
-        VStack {
-            Picker("Pilih Konten", selection: $selectedOption) {
-                ForEach(options.indices, id: \.self) { index in
-                    Text(options[index]).tag(options[index])
+        NavigationStack {
+            VStack {
+                HStack(){
+                    Spacer()
+                    Button(action: {
+                        // UserInfo
+                    }){
+                        NavigationLink(destination: HistoryUserInfoView()) {
+                            ZStack{
+                                Text("History")
+                                    .foregroundColor(.black)
+                                    .font(.headline)
+                                    .padding(.all)
+                            }
+                        }
+                    }
                 }
-            }
-            .pickerStyle(SegmentedPickerStyle())
-            .padding(.horizontal, 50)
-            //            Spacer()
-            if selectedOption == 0 {
-                BMIView()
-            } else {
-                CaloriesView()
+                Picker("Pilih Konten", selection: $selectedOption) {
+                    ForEach(options.indices, id: \.self) { index in
+                        Text(options[index]).tag(options[index])
+                    }
+                }
+                .pickerStyle(SegmentedPickerStyle())
+                .padding(.horizontal, 50)
+                //            Spacer()
+                if selectedOption == 0 {
+                    BMIView()
+                } else {
+                    CaloriesView()
+                }
             }
         }
     }
@@ -42,18 +59,18 @@ struct InputView: View {
         @State private var selectedAge = "2"
         @State private var selectedHeight = "20"
         @State private var selectedWeight = "20"
-  
+        
         
         @State private var bmi:Double = 1
         
         @State private var bmiCategory : (String, Color) = ("", .clear)
         @State private var bmiColor : (String, Color) = ("", .clear)
-
+        
         
         //picker gender
         @State private var gender = 0
         let genderOptions = ["Male", "Female"]
-       
+        
         let minHeight = 10
         let maxHeight = 300
         let minWeight = 20
@@ -134,7 +151,7 @@ struct InputView: View {
                                 .pickerStyle(SegmentedPickerStyle())
                                 .padding(.leading, 20)
                             }
-
+                            
                             .padding(.leading, 20)
                             
                             HStack {
@@ -182,7 +199,7 @@ struct InputView: View {
                             }
                             .padding(.leading, 20)
                             
-                 
+                            
                             Spacer()
                             
                             Button(action: {
@@ -198,15 +215,15 @@ struct InputView: View {
                                 else if isInputHeightValid && isInputWeightValid && isInputAgeValid {
                                     //hitung bmmi
                                     bmi = inputViewModel.calculateBMI(weight: Double(selectedWeight) ?? 0, height: Double(selectedHeight) ?? 0, age: Int(selectedAge) ?? 0, gender: selectedGender)
-                                     bmiCategory = inputViewModel.getBMICategory(bmi: bmi, age: Int(selectedAge) ?? 0)
+                                    bmiCategory = inputViewModel.getBMICategory(bmi: bmi, age: Int(selectedAge) ?? 0)
                                     bmiColor = inputViewModel.getBMICategory(bmi: bmi, age: Int(selectedAge) ?? 1)
-//                                    let getUserID = userViewModel.loggedInUser?.id.uuidString
-//
-//                                    let age = Int(Age) // Mengkonversi Age ke tipe data Int
-//                                    let height = Double(Height) // Mengkonversi Height ke tipe data Double
-//                                    let weight = Double(Weight) // Mengkonversi Weight ke tipe data Double
-//                                  var setUserInfo = userViewModel.addUserInfo(UUID(), getUserID!,                                     age!, height!, weight!, bmi, 0, Date())
-                                   
+                                    //                                    let getUserID = userViewModel.loggedInUser?.id.uuidString
+                                    //
+                                    //                                    let age = Int(Age) // Mengkonversi Age ke tipe data Int
+                                    //                                    let height = Double(Height) // Mengkonversi Height ke tipe data Double
+                                    //                                    let weight = Double(Weight) // Mengkonversi Weight ke tipe data Double
+                                    //                                  var setUserInfo = userViewModel.addUserInfo(UUID(), getUserID!,                                     age!, height!, weight!, bmi, 0, Date())
+                                    
                                     let id = UUID()
                                     let userID = "1"
                                     let age = Int(selectedAge)
@@ -215,11 +232,11 @@ struct InputView: View {
                                     let bmi = bmi
                                     let calories = 0
                                     let date = Date()
-
-                                    userViewModel.addUserInfo(id, userID, age!, height!, weight!, bmi, Double(calories), date)
-
                                     
-//                                    Text("SUCCESS") // ini ganti buat lempar data
+                                    userViewModel.addUserInfo(id, userID, age!, height!, weight!, bmi, Double(calories), date)
+                                    
+                                    
+                                    //                                    Text("SUCCESS") // ini ganti buat lempar data
                                     activeAlert = .SuccessInput
                                 }
                             }) {
@@ -268,7 +285,7 @@ struct InputView: View {
         @State private var selectedWeight = "75"
         
         //picker gender
-
+        
         let genderOptions = ["Male", "Female"]
         @State private var gender = 0
         
@@ -354,7 +371,7 @@ struct InputView: View {
                                 .pickerStyle(SegmentedPickerStyle())
                                 .padding(.leading, 20)
                             }
-
+                            
                             .padding(.leading, 20)
                             
                             HStack {
@@ -402,7 +419,7 @@ struct InputView: View {
                             }
                             .padding(.leading, 20)
                             
-                           
+                            
                             Spacer()
                             
                             Button(action: {

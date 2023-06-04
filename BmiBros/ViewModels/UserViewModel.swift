@@ -13,6 +13,7 @@ class UserViewModel: ObservableObject {
     
     @Published var users: [User] = []
     @Published var userInfos: [UserInfo]
+    @Published var history: [UserInfo] = []
     @Published var loggedInUser: User?
     //validate variable
     @Published var isEmailValid: Bool = true
@@ -35,7 +36,8 @@ class UserViewModel: ObservableObject {
         ]
         userInfos = [
             UserInfo(UUID(), "1", 30, 170, 90, 0, 0, Date()),
-            UserInfo(UUID(), "2", 25, 160, 55, 0, 0, Date())
+            UserInfo(UUID(), "2", 25, 160, 55, 0, 0, Date()),
+            UserInfo(UUID(), "3", 25, 160, 55, 50, 2500, Date())
         ]
     }
     
@@ -127,8 +129,8 @@ class UserViewModel: ObservableObject {
 
     func addUserInfo(_ id:UUID, _ userID: String, _ age: Int, _ height: Double, _ weight: Double, _ bmi: Double, _ calories: Double, _ date: Date){
         let userInfo = UserInfo(id, userID, age, height, weight, bmi, calories, date)
-        userInfos.append(userInfo)
-        debugPrint(userInfos)
+        history.append(userInfo)
+//        debugPrint(history)
     }
     
     //function getUserId

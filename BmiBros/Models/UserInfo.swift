@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct UserInfo {
+struct UserInfo: Identifiable {
     let id: UUID
     let userId: String
     var age: Int
