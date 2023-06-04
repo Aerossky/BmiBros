@@ -40,7 +40,12 @@ class UserViewModel: ObservableObject {
             UserInfo(id: UUID(), userId: "3", age: 25, height: 160, weight: 55, bmi: 50, calories: 2500, date: Date())
         ]
     }
-    
+    //date convert
+    func formatDate(_ date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMMM yyyy"
+        return dateFormatter.string(from: date)
+    }
     //validate
     func validateEmail(_ email: String) {
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
