@@ -33,6 +33,7 @@ struct InputView: View {
     
     struct BMIView: View {
         @State private var inputViewModel = InputViewModel()
+        @State private var userViewModel = UserViewModel()
         //variable data
         @State private var Height = ""
         @State private var Weight = ""
@@ -198,8 +199,27 @@ struct InputView: View {
                                     //hitung bmmi
                                     bmi = inputViewModel.calculateBMI(weight: Double(selectedWeight) ?? 0, height: Double(selectedHeight) ?? 0, age: Int(selectedAge) ?? 0, gender: selectedGender)
                                      bmiCategory = inputViewModel.getBMICategory(bmi: bmi, age: Int(selectedAge) ?? 0)
-                                     bmiColor = inputViewModel.getBMICategory(bmi: bmi, age: Int(selectedAge) ?? 1)
-                                    Text("SUCCESS") // ini ganti buat lempar data
+                                    bmiColor = inputViewModel.getBMICategory(bmi: bmi, age: Int(selectedAge) ?? 1)
+//                                    let getUserID = userViewModel.loggedInUser?.id.uuidString
+//
+//                                    let age = Int(Age) // Mengkonversi Age ke tipe data Int
+//                                    let height = Double(Height) // Mengkonversi Height ke tipe data Double
+//                                    let weight = Double(Weight) // Mengkonversi Weight ke tipe data Double
+//                                  var setUserInfo = userViewModel.addUserInfo(UUID(), getUserID!,                                     age!, height!, weight!, bmi, 0, Date())
+                                   
+                                    let id = UUID()
+                                    let userID = "1"
+                                    let age = Int(selectedAge)
+                                    let height = Double(selectedHeight)
+                                    let weight = Double(selectedWeight)
+                                    let bmi = bmi
+                                    let calories = 0
+                                    let date = Date()
+
+                                    userViewModel.addUserInfo(id, userID, age!, height!, weight!, bmi, Double(calories), date)
+
+                                    
+//                                    Text("SUCCESS") // ini ganti buat lempar data
                                     activeAlert = .SuccessInput
                                 }
                             }) {

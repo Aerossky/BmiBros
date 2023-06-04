@@ -34,8 +34,8 @@ class UserViewModel: ObservableObject {
             // Tambahkan pengguna lainnya sesuai kebutuhan
         ]
         userInfos = [
-            UserInfo(id: 1, userId: "1", age: 30, height: 170, weight: 90, bmi: 0, calories: 0, date: Date()),
-            UserInfo(id: 2, userId: "2", age: 25, height: 160, weight: 55, bmi: 0, calories: 0, date: Date())
+            UserInfo(UUID(), "1", 30, 170, 90, 0, 0, Date()),
+            UserInfo(UUID(), "2", 25, 160, 55, 0, 0, Date())
         ]
     }
     
@@ -101,12 +101,12 @@ class UserViewModel: ObservableObject {
         return nil
     }
     
-    func updateUserData(id: Int, newWeight:Double){
-        if let index = userInfos.firstIndex(where: { $0.id == id }) {
-            userInfos[index].weight = newWeight
-        }
-        debugPrint(userInfos)
-    }
+//    func updateUserData(id: Int, newWeight:Double){
+//        if let index = userInfos.firstIndex(where: { $0.id == id }) {
+//            userInfos[index].weight = newWeight
+//        }
+//        debugPrint(userInfos)
+//    }
     
     func logoutUser() {
         loggedInUser = nil
@@ -114,8 +114,10 @@ class UserViewModel: ObservableObject {
     
 //    user info
 
-    func addUserInfo(_id:Int, _userID: String, _age: Int, _height: Double, _weight: Double, _bmi: Double, _calories: Double, _date: Date ){
-        
+    func addUserInfo(_ id:UUID, _ userID: String, _ age: Int, _ height: Double, _ weight: Double, _ bmi: Double, _ calories: Double, _ date: Date){
+        let userInfo = UserInfo(id, userID, age, height, weight, bmi, calories, date)
+        userInfos.append(userInfo)
+        debugPrint(userInfos)
     }
     
     //function getUserId
