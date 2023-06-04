@@ -17,7 +17,7 @@ struct FoodRecommendationView: View {
     // arahin ke detail
     @State private var selectedFood: Food? = nil
     
-//    untuk menentukan berapa item per row
+    //    untuk menentukan berapa item per row
     let gridLayout = [GridItem(.flexible()), GridItem(.flexible())]
     
     var body: some View {
@@ -29,21 +29,27 @@ struct FoodRecommendationView: View {
                 LazyVGrid(columns: gridLayout, spacing: 16) {
                     ForEach(foodViewModel.foods, id: \.self) { item in
                         if item.cal <= calsMakan {
-                            ZStack {
-                                Rectangle()
-                                    .foregroundColor(.white)
-                                    .cornerRadius(25)
-                                    .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
-                                
-                                VStack {
-                                    Image(item.image)
-                                        .resizable()
-                                        .frame(width: 50, height: 50)
-                                    Text(item.name)
+                            Button(action: {
+                                selectedFood = item
+                            }) {
+                                ZStack {
+                                    Rectangle()
+                                        .foregroundColor(.white)
+                                        .cornerRadius(25)
+                                        .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
+                                    
+                                    VStack {
+                                        Image(item.image)
+                                            .resizable()
+                                            .frame(width: 50, height: 50)
+                                        Text(item.name)
+                                    }
+                                    .padding()
                                 }
-                                .padding()
                             }
                         }
+                    }.sheet(item: $selectedFood) { food in
+                        FoodDetailView(food: food)
                     }
                 }
                 .padding()
@@ -61,6 +67,6 @@ struct FoodRecommendationView_Previews: PreviewProvider {
             .environmentObject(FoodViewModel())
             .environmentObject(InputViewModel())
             .environmentObject(AppEnvironment())
-
+        
     }
 }
