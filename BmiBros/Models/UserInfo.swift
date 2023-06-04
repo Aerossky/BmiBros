@@ -17,8 +17,8 @@ struct UserInfo {
     var calories: Double
     let date: Date
     
-    init(_ id: UUID, _ userId: String, _ age: Int, _ height: Double, _ weight: Double, _ bmi: Double, _ calories: Double, _ date: Date) {
-        self.id = UUID()
+    init(id: UUID, userId: String, age: Int, height: Double, weight: Double, bmi: Double, calories: Double, date: Date) {
+        self.id = id
         self.userId = userId
         self.age = age
         self.height = height

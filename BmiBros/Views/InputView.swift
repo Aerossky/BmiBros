@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct InputView: View {
+    
+
     @State private var selectedOption = 0
    
     
@@ -32,8 +34,14 @@ struct InputView: View {
     }
     
     struct BMIView: View {
-        @State private var inputViewModel = InputViewModel()
-        @State private var userViewModel = UserViewModel()
+//        @State private var inputViewModel = InputViewModel()
+//        @State private var userViewModel = UserViewModel()
+        
+        @EnvironmentObject var session: SessionManager
+        @EnvironmentObject var viewModel: UserViewModel
+        @EnvironmentObject var inputViewModel: InputViewModel
+        @EnvironmentObject var appEnvironment: AppEnvironment
+        
         //variable data
         @State private var Height = ""
         @State private var Weight = ""
@@ -208,15 +216,16 @@ struct InputView: View {
 //                                  var setUserInfo = userViewModel.addUserInfo(UUID(), getUserID!,                                     age!, height!, weight!, bmi, 0, Date())
                                    
                                     let id = UUID()
-                                    let userID = "1"
+                                    let userID = viewModel.loggedInUser?.id.uuidString ?? ""
                                     let age = Int(selectedAge)
                                     let height = Double(selectedHeight)
                                     let weight = Double(selectedWeight)
                                     let bmi = bmi
                                     let calories = 0
                                     let date = Date()
+//                                    userViewModel.loggedInUser?.id.uuidString ?? "id123"
 
-                                    userViewModel.addUserInfo(id, userID, age!, height!, weight!, bmi, Double(calories), date)
+                                    viewModel.addUserInfo(id, userID, age!, height!, weight!, bmi, Double(calories), date)
 
                                     
 //                                    Text("SUCCESS") // ini ganti buat lempar data
@@ -458,5 +467,9 @@ struct InputView: View {
 struct InputView_Previews: PreviewProvider {
     static var previews: some View {
         InputView()
+            .environmentObject(SessionManager())
+            .environmentObject(UserViewModel())
+            .environmentObject(InputViewModel())
+            .environmentObject(AppEnvironment())
     }
 }

@@ -11,7 +11,7 @@ import Combine
 
 class UserViewModel: ObservableObject {
     
-    @Published var users: [User] = []
+    @Published var users: [User]
     @Published var userInfos: [UserInfo]
     @Published var loggedInUser: User?
     //validate variable
@@ -34,8 +34,6 @@ class UserViewModel: ObservableObject {
             // Tambahkan pengguna lainnya sesuai kebutuhan
         ]
         userInfos = [
-            UserInfo(UUID(), "1", 30, 170, 90, 0, 0, Date()),
-            UserInfo(UUID(), "2", 25, 160, 55, 0, 0, Date())
         ]
     }
     
@@ -126,7 +124,7 @@ class UserViewModel: ObservableObject {
 //    user info
 
     func addUserInfo(_ id:UUID, _ userID: String, _ age: Int, _ height: Double, _ weight: Double, _ bmi: Double, _ calories: Double, _ date: Date){
-        let userInfo = UserInfo(id, userID, age, height, weight, bmi, calories, date)
+        let userInfo = UserInfo(id: id, userId: userID, age: age, height: height, weight: weight, bmi: bmi, calories: calories, date: date)
         userInfos.append(userInfo)
         debugPrint(userInfos)
     }
