@@ -208,7 +208,6 @@ struct HomeView: View {
                     VStack {
                         HStack {
                             VStack(alignment: .leading){
-                                //                            Text("Hello, \(viewModel.loggedInUser.username)")
                                 Text("Hello, \(viewModel.loggedInUser?.username ?? "Admin")")
                                     .font(.custom("Poppins-Bold", size: 36))
                                     .foregroundColor(Color(UIColor(hex: "#609FFF")))
