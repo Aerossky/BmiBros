@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct HomeView: View {
     // deklarasi variable
@@ -208,7 +209,6 @@ struct HomeView: View {
                     VStack {
                         HStack {
                             VStack(alignment: .leading){
-                                //                            Text("Hello, \(viewModel.loggedInUser.username)")
                                 Text("Hello, \(viewModel.loggedInUser?.username ?? "Admin")")
                                     .font(.custom("Poppins-Bold", size: 36))
                                     .foregroundColor(Color(UIColor(hex: "#609FFF")))
@@ -219,9 +219,10 @@ struct HomeView: View {
                             Spacer()
                             Image(isMorning ? "Morning" : "Night")
                                 .resizable()
-                                .frame(width: 90, height: 90)
+                                .frame(width: 120, height: 90)
                         }
-                        .padding(.horizontal, 120)
+//                        .padding(.horizontal, 120)
+                        .frame(maxWidth: horizontalSizeClass == .compact ? .infinity : 800)
                         .padding(.top, 20)
                         .padding(.bottom,20)
                         
