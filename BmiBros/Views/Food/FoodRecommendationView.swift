@@ -20,9 +20,26 @@ struct FoodRecommendationView: View {
     var body: some View {
         NavigationView {
             ScrollView {
+                let getID = viewModel.loggedInUser?.id.uuidString
+                let userInfo = viewModel.getLastUserInfoCalories(getID ?? "")
                 LazyVGrid(columns: gridLayout, spacing: 16) {
                     ForEach(foodViewModel.foods, id: \.self) { item in
-                        
+                        if item.cal <= Int(userInfo) {
+                            ZStack {
+                                Rectangle()
+                                    .foregroundColor(.white)
+                                    .cornerRadius(25)
+                                    .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
+                                
+                                VStack {
+                                    Image(item.image)
+                                        .resizable()
+                                        .frame(width: 50, height: 50)
+                                    Text(item.name)
+                                }
+                                .padding()
+                            }
+                        }
                     }
                 }
                 .padding()

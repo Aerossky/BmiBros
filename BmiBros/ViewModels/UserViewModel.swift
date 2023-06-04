@@ -126,7 +126,7 @@ class UserViewModel: ObservableObject {
     }
     
 //    user info
-    func getLastUserInfo(_ userID: String) -> Double {
+    func getLastUserInfoBMI(_ userID: String) -> Double {
         loginUserInfo = []
         
         for info in userInfos {
@@ -138,10 +138,24 @@ class UserViewModel: ObservableObject {
         if loginUserInfo.isEmpty {
             return 0.0
         }else{
-//            loginUserInfo.last.
+            return loginUserInfo.last?.bmi ?? 0
+        }
+    }
+    
+    func getLastUserInfoCalories(_ userID: String) -> Double {
+        loginUserInfo = []
+        
+        for info in userInfos {
+            if info.userId == userID {
+                loginUserInfo.append(info)
+            }
         }
         
-        return 0.0
+        if loginUserInfo.isEmpty {
+            return 0.0
+        }else{
+            return loginUserInfo.last?.calories ?? 0
+        }
     }
     
     func addUserInfo(_ id:UUID, _ userID: String, _ age: Int, _ height: Double, _ weight: Double, _ bmi: Double, _ calories: Double, _ date: Date){
