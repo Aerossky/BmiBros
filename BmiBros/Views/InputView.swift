@@ -49,8 +49,14 @@ struct InputView: View {
     }
     
     struct BMIView: View {
-        @State private var inputViewModel = InputViewModel()
-        @State private var userViewModel = UserViewModel()
+//        @State private var inputViewModel = InputViewModel()
+//        @State private var userViewModel = UserViewModel()
+        
+        @EnvironmentObject var session: SessionManager
+        @EnvironmentObject var viewModel: UserViewModel
+        @EnvironmentObject var inputViewModel: InputViewModel
+        @EnvironmentObject var appEnvironment: AppEnvironment
+        
         //variable data
         @State private var Height = ""
         @State private var Weight = ""
@@ -475,5 +481,9 @@ struct InputView: View {
 struct InputView_Previews: PreviewProvider {
     static var previews: some View {
         InputView()
+            .environmentObject(SessionManager())
+            .environmentObject(UserViewModel())
+            .environmentObject(InputViewModel())
+            .environmentObject(AppEnvironment())
     }
 }

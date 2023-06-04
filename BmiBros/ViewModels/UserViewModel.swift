@@ -11,7 +11,7 @@ import Combine
 
 class UserViewModel: ObservableObject {
     
-    @Published var users: [User] = []
+    @Published var users: [User]
     @Published var userInfos: [UserInfo]
     @Published var history: [UserInfo] = []
     @Published var loggedInUser: User?
@@ -128,9 +128,9 @@ class UserViewModel: ObservableObject {
 //    user info
 
     func addUserInfo(_ id:UUID, _ userID: String, _ age: Int, _ height: Double, _ weight: Double, _ bmi: Double, _ calories: Double, _ date: Date){
-        let userInfo = UserInfo(id, userID, age, height, weight, bmi, calories, date)
-        history.append(userInfo)
-//        debugPrint(history)
+        let userInfo = UserInfo(id: id, userId: userID, age: age, height: height, weight: weight, bmi: bmi, calories: calories, date: date)
+        userInfos.append(userInfo)
+        debugPrint(userInfos)
     }
     
     //function getUserId

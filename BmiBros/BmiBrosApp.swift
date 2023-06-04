@@ -12,14 +12,17 @@ struct BmiBrosApp: App {
     var appEnviroment = AppEnvironment()
     
     @StateObject private var session = SessionManager()
+    @StateObject private var inputViewModel = InputViewModel()
     @StateObject private var viewModel = UserViewModel()
     @StateObject private var appEnvironment = AppEnvironment()
+
     
     var body: some Scene {
         WindowGroup {
             MainAppView()
                 .environmentObject(session)
                 .environmentObject(viewModel)
+                .environmentObject(inputViewModel)
                 .environmentObject(appEnvironment)
         }
     }
