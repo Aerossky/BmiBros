@@ -112,8 +112,6 @@ struct HomeView: View {
                                     .fill(ImagePaint(image: Image("CalorieShowBG")))
                                     .frame(width: 220, height: 125)
                                     .cornerRadius(25)
-                                
-                                
                                 VStack(alignment: .center){
                                     Text("Calorie Information")
                                         .font(.custom("Poppins-Bold", size: 20))
