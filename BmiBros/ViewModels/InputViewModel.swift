@@ -18,29 +18,29 @@ class InputViewModel: ObservableObject {
 //        var ageFactor: Double = 0.0
 //        var genderFactor: Double = 0.0
         
-        //        if age >= 2 && age <= 5 {
-        //            ageFactor = 0.1
-        //        } else if age >= 6 && age <= 12 {
-        //            ageFactor = 0.2
-        //        } else if age >= 13 && age <= 19 {
-        //            ageFactor = 0.3
-        //        } else if age >= 20 && age <= 30 {
-        //            ageFactor = 0.4
-        //        } else if age >= 31 && age <= 120 {
-        //            ageFactor = 0.5
-        //        }
-        //
-        //        if gender == "male" {
-        //            genderFactor = 0.1
-        //        } else if gender == "female" {
-        //            genderFactor = 0.2
-        //        }
+        if age >= 2 && age <= 5 {
+            ageFactor = 0.1
+        } else if age >= 6 && age <= 12 {
+            ageFactor = 0.2
+        } else if age >= 13 && age <= 19 {
+            ageFactor = 0.3
+        } else if age >= 20 && age <= 30 {
+            ageFactor = 0.4
+        } else if age >= 31 && age <= 120 {
+            ageFactor = 0.5
+        }
         
-        //        let adjustedBMI = bmi + ageFactor + genderFactor
-        let adjustedBMI = bmi
-        let roundedBMI = adjustedBMI
+        if gender == "male" {
+            genderFactor = 0.1
+        } else if gender == "female" {
+            genderFactor = 0.2
+        }
         
-        return roundedBMI
+        let adjustedBMI = bmi + ageFactor + genderFactor
+//        let adjustedBMI = bmi
+//        let roundedBMI = adjustedBMI
+        
+        return adjustedBMI
     }
     func getBMICategory(bmi: Double, age: Int) -> (String, Color) {
         var category: String = ""

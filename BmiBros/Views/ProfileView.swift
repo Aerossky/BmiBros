@@ -11,9 +11,11 @@ import PhotosUI
 struct ProfileView: View {
     
     @EnvironmentObject var session: SessionManager
-    @EnvironmentObject var viewModel: UserViewModel
+    @EnvironmentObject var userViewModel: UserViewModel
     @EnvironmentObject var appEnvironment: AppEnvironment
     
+    
+    @State private var username = ""
     enum Country: String, CaseIterable {
         case Indonesia
         case Japan
@@ -28,13 +30,13 @@ struct ProfileView: View {
     @State private var profilePictureSelection: PhotosPickerItem?
     @State private var profilePictureObject: UIImage?
     
-    @State private var username: String = ""
     @State private var password: String = ""
     @State private var passwordConfirmation: String = ""
     @State private var showPassword: Bool = false
     @State private var passwordSecurityCheckProgress: Double = 0
     @State private var isPasswordLengthValid: Bool = false
     @State private var showLogoutAlert = false
+    @State private var showChangeUsernameAlert = false
     
     @State private var ageHidden: Bool = false
     @State private var age: Double = 18
@@ -82,13 +84,31 @@ struct ProfileView: View {
                 }
                 
                 Section {
-                    Text("Current Username")
+                    Text("Hello, \(userViewModel.loggedInUser?.username ?? "Admin")")
+                    Text("\(userViewModel.loggedInUser?.id.uuidString ?? "id123")")
                     TextField("New Username", text: $username)
                         .keyboardType(.asciiCapable)
                         .autocorrectionDisabled(true)
                         .textInputAutocapitalization(.never)
                 } header: {
                     Text("Username")
+                };
+                
+                Button(action: {
+                    if let id = userViewModel.loggedInUser?.id {
+                        userViewModel.updateUsername(id: id, newUsername: username)
+                        showChangeUsernameAlert = true
+                    }
+                }) {
+                    Text("Change Username")
+                        .padding(.trailing)
+                }
+                .alert(isPresented: $showChangeUsernameAlert) {
+                    Alert(
+                        title: Text("Success"),
+                        message: Text("You have changed your username to \(userViewModel.loggedInUser?.username ?? "Admin")."),
+                        dismissButton: .default(Text("OK"))
+                    )
                 }
                 
                 Section("Password") {
@@ -161,10 +181,11 @@ struct ProfileView: View {
                 }
                 
                 Button(action: {
-                    viewModel.logoutUser()
+                    userViewModel.logoutUser()
                     showLogoutAlert = true
                 }) {
                     Text("Sign Out")
+                        .padding(.trailing)
                 }
                 .alert(isPresented: $showLogoutAlert) {
                     Alert(

@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct BmiBrosApp: App {
-//    var appEnviroment = AppEnvironment()
+    var appEnviroment = AppEnvironment()
     
     @StateObject private var session = SessionManager()
     @StateObject private var viewModel = UserViewModel()

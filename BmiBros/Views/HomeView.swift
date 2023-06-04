@@ -40,8 +40,8 @@ struct HomeView: View {
                 VStack {
                     HStack {
                         VStack(alignment: .leading){
-                            //                            Text("Hello, \(viewModel.loggedInUser.username)")
-                            Text("Hello, \(viewModel.loggedInUser?.username ?? "")")
+//                            Text("Hello, \(viewModel.loggedInUser.username)")
+                            Text("Hello, \(viewModel.loggedInUser?.username ?? "Admin")")
                                 .font(.custom("Poppins-Bold", size: 36))
                                 .foregroundColor(Color(UIColor(hex: "#609FFF")))
                             Text("\(currentDate)")
@@ -65,7 +65,7 @@ struct HomeView: View {
                                 .cornerRadius(25)
                             
                             VStack(alignment: .center){
-                                var bmi : Double = 24.93000 //ini perlu diganti kalo udh ada backend
+                                let bmi : Double = 24.93000 //ini perlu diganti kalo udh ada backend
                                 Text("BMI")
                                     .font(.custom("Poppins-SemiBold", size: 25))
                                     .foregroundColor(.white)
@@ -101,7 +101,7 @@ struct HomeView: View {
                         }
                         
                         ZStack{
-                            var cal: Double = 1000 // ini butuh diganti kalo sdh backend
+                            let cal: Double = 1000 // ini butuh diganti kalo sdh backend
                             Rectangle()
                                 .fill(ImagePaint(image: Image("CalorieShowBG")))
                                 .frame(width: 220, height: 125)
