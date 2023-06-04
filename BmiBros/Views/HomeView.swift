@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     // deklarasi variable
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass //variabel untuk tau ukuran device yang dipake
     @EnvironmentObject var session: SessionManager
     @EnvironmentObject var viewModel: UserViewModel
     @EnvironmentObject var appEnvironment: AppEnvironment
@@ -35,168 +36,340 @@ struct HomeView: View {
     }
     
     var body: some View {
-        NavigationStack {
-            ScrollView {
-                VStack {
-                    HStack {
-                        VStack(alignment: .leading){
-//                            Text("Hello, \(viewModel.loggedInUser.username)")
-                            Text("Hello, \(viewModel.loggedInUser?.username ?? "Admin")")
-                                .font(.custom("Poppins-Bold", size: 36))
-                                .foregroundColor(Color(UIColor(hex: "#609FFF")))
-                            Text("\(currentDate)")
-                                .font(.custom("Poppins-Regular", size: 16))
-                                .foregroundColor(Color(UIColor(hex: "#76AAFA")))
-                        }
-                        Spacer()
-                        Image(isMorning ? "Morning" : "Night")
-                            .resizable()
-                            .frame(width: 95, height: 75)
-                    }
-                    .padding(.horizontal, 15)
-                    .padding(.top, 20)
-                    .padding(.bottom,20)
-                    
-                    HStack{
-                        ZStack{
-                            Rectangle()
-                                .frame(width: 150, height: 125)
-                                .foregroundColor(Color(UIColor(hex: "#98A8F8")))
-                                .cornerRadius(25)
-                            
-                            VStack(alignment: .center){
-                                let bmi : Double = 24.93000 //ini perlu diganti kalo udh ada backend
-                                Text("BMI")
-                                    .font(.custom("Poppins-SemiBold", size: 25))
-                                    .foregroundColor(.white)
-                                Text(String(format: "%.1f" ,bmi))
-                                    .font(.custom("Poppins-Light", size: 15))
-                                    .foregroundColor(.white)
-                                if(bmi<18.5){
-                                    Text("UnderWeight")
-                                        .font(.custom("Poppins-SemiBold", size: 16))
-                                        .foregroundColor(Color(UIColor(hex: "#ED5656")))
-                                }else if(bmi<24.9){
-                                    Text("Normal")
-                                        .font(.custom("Poppins-SemiBold", size: 16))
-                                        .foregroundColor(Color(UIColor(hex: "#C1FF8F")))
-                                }else if(bmi<29.9){
-                                    Text("OverWeight")
-                                        .font(.custom("Poppins-SemiBold", size: 16))
-                                        .foregroundColor(Color(UIColor(hex: "#FFDF84")))
-                                }else if(bmi<34.9){
-                                    Text("Obesity Class I")
-                                        .font(.custom("Poppins-SemiBold", size: 16))
-                                        .foregroundColor(Color(UIColor(hex: "#FA6657")))
-                                }else if(bmi<39.9){
-                                    Text("Obesity Class II")
-                                        .font(.custom("Poppins-SemiBold", size: 16))
-                                        .foregroundColor(Color(UIColor(hex: "#FF5353")))
-                                }else if(bmi>=40){
-                                    Text("Obesity Class III")
-                                        .font(.custom("Poppins-SemiBold", size: 16))
-                                        .foregroundColor(Color(UIColor(hex: "#ED5656")))
-                                }
+        
+        if horizontalSizeClass == .compact {
+            // Tampilan untuk iPhone
+            NavigationStack {
+                ScrollView {
+                    VStack {
+                        HStack {
+                            VStack(alignment: .leading){
+                                //                            Text("Hello, \(viewModel.loggedInUser.username)")
+                                Text("Hello, \(viewModel.loggedInUser?.username ?? "Admin")")
+                                    .font(.custom("Poppins-Bold", size: 36))
+                                    .foregroundColor(Color(UIColor(hex: "#609FFF")))
+                                Text("\(currentDate)")
+                                    .font(.custom("Poppins-Regular", size: 16))
+                                    .foregroundColor(Color(UIColor(hex: "#76AAFA")))
                             }
+                            Spacer()
+                            Image(isMorning ? "Morning" : "Night")
+                                .resizable()
+                                .frame(width: 95, height: 75)
                         }
+                        .padding(.horizontal, 15)
+                        .padding(.top, 20)
+                        .padding(.bottom,20)
                         
-                        ZStack{
-                            let cal: Double = 1000 // ini butuh diganti kalo sdh backend
-                            Rectangle()
-                                .fill(ImagePaint(image: Image("CalorieShowBG")))
-                                .frame(width: 220, height: 125)
-                                .cornerRadius(25)
-                            
-                            
-                            VStack(alignment: .center){
-                                Text("Calorie Information")
-                                    .font(.custom("Poppins-Bold", size: 20))
-                                    .foregroundColor(.white)
-                                
-                                Text("\(String(format: "%.0f" ,cal))/Day")
-                                    .font(.custom("Poppins-SemiBold", size: 15))
-                                    .foregroundColor(.white)
-                            }
-                        }
-                    }
-                    
-                    VStack{
-                        Button(action: {
-                            isShowingDetail1.toggle()
-                        }){
+                        HStack{
                             ZStack{
                                 Rectangle()
-                                    .fill(ImagePaint(image: Image("MealRSHBG")))
-                                    .frame(width: 370, height: 125)
+                                    .frame(width: 150, height: 125)
+                                    .foregroundColor(Color(UIColor(hex: "#98A8F8")))
+                                    .cornerRadius(25)
+                                
+                                VStack(alignment: .center){
+                                    let bmi : Double = 24.93000 //ini perlu diganti kalo udh ada backend
+                                    Text("BMI")
+                                        .font(.custom("Poppins-SemiBold", size: 25))
+                                        .foregroundColor(.white)
+                                    Text(String(format: "%.1f" ,bmi))
+                                        .font(.custom("Poppins-Light", size: 15))
+                                        .foregroundColor(.white)
+                                    if(bmi<18.5){
+                                        Text("UnderWeight")
+                                            .font(.custom("Poppins-SemiBold", size: 16))
+                                            .foregroundColor(Color(UIColor(hex: "#ED5656")))
+                                    }else if(bmi<24.9){
+                                        Text("Normal")
+                                            .font(.custom("Poppins-SemiBold", size: 16))
+                                            .foregroundColor(Color(UIColor(hex: "#C1FF8F")))
+                                    }else if(bmi<29.9){
+                                        Text("OverWeight")
+                                            .font(.custom("Poppins-SemiBold", size: 16))
+                                            .foregroundColor(Color(UIColor(hex: "#FFDF84")))
+                                    }else if(bmi<34.9){
+                                        Text("Obesity Class I")
+                                            .font(.custom("Poppins-SemiBold", size: 16))
+                                            .foregroundColor(Color(UIColor(hex: "#FA6657")))
+                                    }else if(bmi<39.9){
+                                        Text("Obesity Class II")
+                                            .font(.custom("Poppins-SemiBold", size: 16))
+                                            .foregroundColor(Color(UIColor(hex: "#FF5353")))
+                                    }else if(bmi>=40){
+                                        Text("Obesity Class III")
+                                            .font(.custom("Poppins-SemiBold", size: 16))
+                                            .foregroundColor(Color(UIColor(hex: "#ED5656")))
+                                    }
+                                }
+                            }
+                            
+                            ZStack{
+                                let cal: Double = 1000 // ini butuh diganti kalo sdh backend
+                                Rectangle()
+                                    .fill(ImagePaint(image: Image("CalorieShowBG")))
+                                    .frame(width: 220, height: 125)
                                     .cornerRadius(25)
                                 
                                 
-                                
-                                VStack(alignment: .center) {
-                                    Text("Meal")
+                                VStack(alignment: .center){
+                                    Text("Calorie Information")
+                                        .font(.custom("Poppins-Bold", size: 20))
                                         .foregroundColor(.white)
-                                        .font(.custom("Poppins-Bold", size: 24))
                                     
-                                    Text("Recommendation")
+                                    Text("\(String(format: "%.0f" ,cal))/Day")
+                                        .font(.custom("Poppins-Light", size: 15))
                                         .foregroundColor(.white)
-                                        .font(.custom("Poppins-Bold", size: 24))
                                 }
                             }
                         }
-                        .sheet(isPresented: $isShowingDetail1) {
-                            Text("MEAL RECOM VIEW")
-                        }
-                        .padding(.trailing,15)
-                        .padding(.leading,15)
                         
-                        Button(action: {
-                            // Food Information Button
-                        }){
-                            NavigationLink(destination: FoodInformationView()) {
+                        VStack{
+                            Button(action: {
+                                isShowingDetail1.toggle()
+                            }){
                                 ZStack{
                                     Rectangle()
-                                        .fill(ImagePaint(image: Image("FoodInfoBG")))
+                                        .fill(ImagePaint(image: Image("MealRSHBG")))
                                         .frame(width: 370, height: 125)
                                         .cornerRadius(25)
                                     
-                                    Text("Food Information")
+                                    
+                                    
+                                    VStack(alignment: .center) {
+                                        Text("Meal")
+                                            .foregroundColor(.white)
+                                            .font(.custom("Poppins-Bold", size: 24))
+                                        
+                                        Text("Recommendation")
+                                            .foregroundColor(.white)
+                                            .font(.custom("Poppins-Bold", size: 24))
+                                    }
+                                }
+                            }
+                            .sheet(isPresented: $isShowingDetail1) {
+                                Text("MEAL RECOM VIEW")
+                            }
+                            .padding(.trailing,15)
+                            .padding(.leading,15)
+                            
+                            Button(action: {
+                                // Food Information Button
+                            }){
+                                NavigationLink(destination: FoodInformationView()) {
+                                    ZStack{
+                                        Rectangle()
+                                            .fill(ImagePaint(image: Image("FoodInfoBG")))
+                                            .frame(width: 370, height: 125)
+                                            .cornerRadius(25)
+                                        
+                                        Text("Food Information")
+                                            .foregroundColor(.white)
+                                            .font(.custom("Poppins-Bold", size: 21))
+                                    }
+                                }
+                            }
+                            
+                            Button(action: {
+                                isShowingDetail3.toggle()
+                            }){
+                                ZStack{
+                                    Rectangle()
+                                        .fill(ImagePaint(image: Image("GraphBG")))
+                                        .frame(width: 370, height: 125)
+                                        .cornerRadius(25)
+                                    
+                                    Text("GRAPH")
                                         .foregroundColor(.white)
-                                        .font(.custom("Poppins-Bold", size: 21))
+                                        .font(.custom("Poppins-Bold", size: 24))
+                                }
+                            }
+                            .sheet(isPresented: $isShowingDetail3) {
+                                VStack {
+                                    HStack {
+                                        Image("chart")
+                                    }
+                                }
+                                .frame(width: 75, height: 75)
+                                .padding(.all)
+                            }
+                            .padding(.trailing,15)
+                            .padding(.leading,15)
+                        }
+                        Spacer()
+                    }
+                    .padding(15)
+                }
+            }
+        } else {
+            // Tampilan untuk iPad
+            NavigationStack {
+                ScrollView {
+                    VStack {
+                        HStack {
+                            VStack(alignment: .leading){
+                                //                            Text("Hello, \(viewModel.loggedInUser.username)")
+                                Text("Hello, \(viewModel.loggedInUser?.username ?? "Admin")")
+                                    .font(.custom("Poppins-Bold", size: 36))
+                                    .foregroundColor(Color(UIColor(hex: "#609FFF")))
+                                Text("\(currentDate)")
+                                    .font(.custom("Poppins-Regular", size: 16))
+                                    .foregroundColor(Color(UIColor(hex: "#76AAFA")))
+                            }
+                            Spacer()
+                            Image(isMorning ? "Morning" : "Night")
+                                .resizable()
+                                .frame(width: 90, height: 90)
+                        }
+                        .padding(.horizontal, 120)
+                        .padding(.top, 20)
+                        .padding(.bottom,20)
+                        
+                        HStack{
+                            ZStack{
+                                Rectangle()
+                                    .frame(width: 280, height: 196)
+                                    .foregroundColor(Color(UIColor(hex: "#98A8F8")))
+                                    .cornerRadius(25)
+                                
+                                VStack(alignment: .center){
+                                    let bmi : Double = 24.93000 //ini perlu diganti kalo udh ada backend
+                                    Text("BMI")
+                                        .font(.custom("Poppins-SemiBold", size: 30))
+                                        .foregroundColor(.white)
+                                    Text(String(format: "%.1f" ,bmi))
+                                        .font(.custom("Poppins-Light", size: 24))
+                                        .foregroundColor(.white)
+                                    if(bmi<18.5){
+                                        Text("UnderWeight")
+                                            .font(.custom("Poppins-SemiBold", size: 24))
+                                            .foregroundColor(Color(UIColor(hex: "#ED5656")))
+                                    }else if(bmi<24.9){
+                                        Text("Normal")
+                                            .font(.custom("Poppins-SemiBold", size: 24))
+                                            .foregroundColor(Color(UIColor(hex: "#C1FF8F")))
+                                    }else if(bmi<29.9){
+                                        Text("OverWeight")
+                                            .font(.custom("Poppins-SemiBold", size: 24))
+                                            .foregroundColor(Color(UIColor(hex: "#FFDF84")))
+                                    }else if(bmi<34.9){
+                                        Text("Obesity Class I")
+                                            .font(.custom("Poppins-SemiBold", size: 24))
+                                            .foregroundColor(Color(UIColor(hex: "#FA6657")))
+                                    }else if(bmi<39.9){
+                                        Text("Obesity Class II")
+                                            .font(.custom("Poppins-SemiBold", size: 24))
+                                            .foregroundColor(Color(UIColor(hex: "#FF5353")))
+                                    }else if(bmi>=40){
+                                        Text("Obesity Class III")
+                                            .font(.custom("Poppins-SemiBold", size: 24))
+                                            .foregroundColor(Color(UIColor(hex: "#ED5656")))
+                                    }
+                                }
+                            }
+                            
+                            ZStack{
+                                let cal: Double = 1000 // ini butuh diganti kalo sdh backend
+                                Rectangle()
+                                    .fill(ImagePaint(image: Image("CalorieShowBGiPad")))
+                                    .frame(width: 505, height: 196)
+                                    .cornerRadius(25)
+                                
+                                
+                                VStack(alignment: .center){
+                                    Text("Calorie Information")
+                                        .font(.custom("Poppins-Bold", size: 30))
+                                        .foregroundColor(.white)
+                                    
+                                    Text("\(String(format: "%.0f" ,cal))/Day")
+                                        .font(.custom("Poppins-Light", size: 24))
+                                        .foregroundColor(.white)
                                 }
                             }
                         }
                         
-                        Button(action: {
-                            isShowingDetail3.toggle()
-                        }){
-                            ZStack{
-                                Rectangle()
-                                    .fill(ImagePaint(image: Image("GraphBG")))
-                                    .frame(width: 370, height: 125)
-                                    .cornerRadius(25)
-                                
-                                Text("GRAPH")
-                                    .foregroundColor(.white)
-                                    .font(.custom("Poppins-Bold", size: 24))
-                            }
-                        }
-                        .sheet(isPresented: $isShowingDetail3) {
-                            VStack {
-                                HStack {
-                                    Image("chart")
+                        VStack{
+                            Button(action: {
+                                isShowingDetail1.toggle()
+                            }){
+                                ZStack{
+                                    Rectangle()
+                                        .fill(ImagePaint(image: Image("MealRecomBGiPad")))
+                                        .frame(width: 800, height: 200)
+                                        .cornerRadius(25)
+                                    
+                                    
+                                    
+                                    VStack(alignment: .center) {
+                                        Text("Meal")
+                                            .foregroundColor(.white)
+                                            .font(.custom("Poppins-Bold", size: 30))
+                                        
+                                        Text("Recommendation")
+                                            .foregroundColor(.white)
+                                            .font(.custom("Poppins-Bold", size: 30))
+                                    }
                                 }
                             }
-                            .frame(width: 75, height: 75)
-                            .padding(.all)
+                            .sheet(isPresented: $isShowingDetail1) {
+                                Text("MEAL RECOM VIEW")
+                            }
+                            .padding(.trailing,15)
+                            .padding(.leading,15)
+                            
+                            Button(action: {
+                                // Food Information Button
+                            }){
+                                NavigationLink(destination: FoodInformationView()) {
+                                    ZStack{
+                                        Rectangle()
+                                            .fill(ImagePaint(image: Image("foodBGiPad")))
+                                            .frame(width: 800, height: 200)
+                                            .cornerRadius(25)
+                                        
+                                        Text("Food Information")
+                                            .foregroundColor(.white)
+                                            .font(.custom("Poppins-Bold", size: 30))
+                                    }
+                                }
+                            }
+                            
+                            Button(action: {
+                                isShowingDetail3.toggle()
+                            }){
+                                ZStack{
+                                    Rectangle()
+                                        .fill(ImagePaint(image: Image("GraphBGiPad")))
+                                        .frame(width: 800, height: 200)
+                                        .cornerRadius(25)
+                                    
+                                    Text("GRAPH")
+                                        .foregroundColor(.white)
+                                        .font(.custom("Poppins-Bold", size: 30))
+                                }
+                            }
+                            .sheet(isPresented: $isShowingDetail3) {
+                                VStack {
+                                    HStack {
+                                        Image("chart")
+                                    }
+                                }
+                                .frame(width: 75, height: 75)
+                                .padding(.all)
+                            }
+                            .padding(.trailing,15)
+                            .padding(.leading,15)
                         }
-                        .padding(.trailing,15)
-                        .padding(.leading,15)
+                        Spacer()
                     }
-                    Spacer()
+                    .padding(.horizontal, 15)
+                    .padding(.top, 100)
+                    .padding(.bottom, 200)
                 }
-                .padding(15)
             }
         }
+        
+        
     }
 }
 
