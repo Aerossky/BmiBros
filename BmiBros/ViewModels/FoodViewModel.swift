@@ -11,10 +11,12 @@ class FoodViewModel: ObservableObject {
     @Published var foods: [Food] = []
     
     @Published var filteredFoods: [Food] = []
-       
+    
     private var isProteinFilterOn = false
     private var isCarbohydrateFilterOn = false
     private var isFatFilterOn = false
+    
+    private var searchKeyword = ""
     
     init() {
         fetchFoods()
@@ -94,28 +96,58 @@ class FoodViewModel: ObservableObject {
         applyFilter()
     }
     
+    
+    
     private func applyFilter() {
         // Reset filteredFoods
         filteredFoods = []
         
         // Apply filters based on selected options
-        for food in foods {
-            var check = false
-            
-            if isProteinFilterOn && food.prot > 0 {
-                check = true
+        
+        if(!isFatFilterOn && !isProteinFilterOn && !isCarbohydrateFilterOn){
+            for food in foods{
+                if (food.name.localizedCaseInsensitiveContains(searchKeyword)){
+                    filteredFoods.append(food)
+                }
             }
-            if isCarbohydrateFilterOn && food.carbs > 0 {
-                check = true
+        }else if((isFatFilterOn || isProteinFilterOn || isCarbohydrateFilterOn) && searchKeyword == ""){
+            for food in foods {
+                var check = false
+                
+                if isProteinFilterOn && food.prot > 0 {
+                    check = true
+                }
+                if isCarbohydrateFilterOn && food.carbs > 0 {
+                    check = true
+                }
+                if isFatFilterOn && food.fat > 0 {
+                    check = true
+                }
+                
+                if check{
+                    filteredFoods.append(food)
+                }
             }
-            if isFatFilterOn && food.fat > 0 {
-                check = true
-            }
-            
-            if check {
-                filteredFoods.append(food)
+        }else{
+            for food in foods {
+                var check = false
+                
+                if isProteinFilterOn && food.prot > 0 {
+                    check = true
+                }
+                if isCarbohydrateFilterOn && food.carbs > 0 {
+                    check = true
+                }
+                if isFatFilterOn && food.fat > 0 {
+                    check = true
+                }
+                
+                if check && food.name.localizedCaseInsensitiveContains(searchKeyword) {
+                    filteredFoods.append(food)
+                }
             }
         }
+        
     }
     
     // Functions to update filter options
@@ -131,6 +163,11 @@ class FoodViewModel: ObservableObject {
     
     func setFatFilterOn(_ isOn: Bool) {
         isFatFilterOn = isOn
+        applyFilter()
+    }
+    
+    func search(with keyword: String) {
+        searchKeyword = keyword
         applyFilter()
     }
 }
