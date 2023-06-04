@@ -277,9 +277,9 @@ struct InputView: View {
         @State private var Weight = ""
         @State private var Age = ""
         @State private var selectedGender = "male"
-        @State private var selectedAge = "30"
-        @State private var selectedHeight = "183"
-        @State private var selectedWeight = "75"
+        @State private var selectedAge = "20"
+        @State private var selectedHeight = "170"
+        @State private var selectedWeight = "70"
         
         //picker gender
         
