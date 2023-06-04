@@ -50,7 +50,7 @@ struct ContentView: View {
                 } else {
                     // Tampilan untuk iPad
                     if viewModel.loggedInUser != nil{
-                        NavigationView {
+                        NavigationStack {
                             TabView {
                                 HomeView()
                                     .tabItem {
