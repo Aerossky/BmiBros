@@ -14,26 +14,20 @@ struct FoodRecommendationView: View {
     @EnvironmentObject var inputViewModel: InputViewModel
     @EnvironmentObject var appEnvironment: AppEnvironment
     
-    let data = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7"]
-    
 //    untuk menentukan berapa item per row
     let gridLayout = [GridItem(.flexible()), GridItem(.flexible())]
     
     var body: some View {
-        ScrollView {
-            LazyVGrid(columns: gridLayout, spacing: 16) {
-                ForEach(data, id: \.self) { item in
-                    ZStack {
-                        Rectangle()
-                        Text(item)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                            .background(Color.gray)
-                            .cornerRadius(8)
-                        .padding()
+        NavigationView {
+            ScrollView {
+                LazyVGrid(columns: gridLayout, spacing: 16) {
+                    ForEach(foodViewModel.foods, id: \.self) { item in
+                        
                     }
                 }
+                .padding()
             }
-            .padding()
+            .navigationTitle("Food Recommendation")
         }
     }
 }

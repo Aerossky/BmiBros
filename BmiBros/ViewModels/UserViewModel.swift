@@ -13,7 +13,7 @@ class UserViewModel: ObservableObject {
     
     @Published var users: [User]
     @Published var userInfos: [UserInfo]
-    @Published var history: [UserInfo] = []
+    @Published var loginUserInfo: [UserInfo] = []
     @Published var loggedInUser: User?
     //validate variable
     @Published var isEmailValid: Bool = true
@@ -126,7 +126,24 @@ class UserViewModel: ObservableObject {
     }
     
 //    user info
-
+    func getLastUserInfo(_ userID: String) -> Double {
+        loginUserInfo = []
+        
+        for info in userInfos {
+            if info.userId == userID {
+                loginUserInfo.append(info)
+            }
+        }
+        
+        if loginUserInfo.isEmpty {
+            return 0.0
+        }else{
+//            loginUserInfo.last.
+        }
+        
+        return 0.0
+    }
+    
     func addUserInfo(_ id:UUID, _ userID: String, _ age: Int, _ height: Double, _ weight: Double, _ bmi: Double, _ calories: Double, _ date: Date){
         let userInfo = UserInfo(id: id, userId: userID, age: age, height: height, weight: weight, bmi: bmi, calories: calories, date: date)
         userInfos.append(userInfo)
