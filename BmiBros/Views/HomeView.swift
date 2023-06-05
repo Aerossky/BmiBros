@@ -168,17 +168,19 @@ struct HomeView: View {
                             }
                             
                             Button(action: {
-                                isShowingDetail3.toggle()
+                                
                             }){
-                                ZStack{
-                                    Rectangle()
-                                        .fill(ImagePaint(image: Image("GraphBG")))
-                                        .frame(width: 370, height: 125)
-                                        .cornerRadius(25)
-                                    
-                                    Text("GRAPH")
-                                        .foregroundColor(.white)
-                                        .font(.custom("Poppins-Bold", size: 24))
+                                NavigationLink(destination: GraphView()) {
+                                    ZStack{
+                                        Rectangle()
+                                            .fill(ImagePaint(image: Image("GraphBG")))
+                                            .frame(width: 370, height: 125)
+                                            .cornerRadius(25)
+                                        
+                                        Text("GRAPH")
+                                            .foregroundColor(.white)
+                                            .font(.custom("Poppins-Bold", size: 24))
+                                    }
                                 }
                             }
                             .sheet(isPresented: $isShowingDetail3) {
