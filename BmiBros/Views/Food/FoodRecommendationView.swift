@@ -21,40 +21,58 @@ struct FoodRecommendationView: View {
     let gridLayout = [GridItem(.flexible()), GridItem(.flexible())]
     
     var body: some View {
-        NavigationView {
-            ScrollView {
-                let getID = viewModel.loggedInUser?.id.uuidString
-                let userInfo = viewModel.getLastUserInfoCalories(getID ?? "")
-                let calsMakan = Int(userInfo)/3
-                LazyVGrid(columns: gridLayout, spacing: 16) {
-                    ForEach(foodViewModel.foods, id: \.self) { item in
-                        if item.cal <= calsMakan {
-                            Button(action: {
-                                selectedFood = item
-                            }) {
-                                ZStack {
-                                    Rectangle()
-                                        .foregroundColor(.white)
-                                        .cornerRadius(25)
-                                        .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
-                                    
-                                    VStack {
-                                        Image(item.image)
-                                            .resizable()
-                                            .frame(width: 50, height: 50)
-                                        Text(item.name)
+        let getID = viewModel.loggedInUser?.id.uuidString
+        let userInfo = viewModel.getLastUserInfoCalories(getID ?? "")
+        let calsMakan = Int(userInfo)/3
+        if userInfo != 0{
+            NavigationView {
+                ScrollView {
+                    LazyVGrid(columns: gridLayout, spacing: 16) {
+                        ForEach(foodViewModel.foods, id: \.self) { item in
+                            if item.cal <= calsMakan {
+                                Button(action: {
+                                    selectedFood = item
+                                }) {
+                                    ZStack {
+                                        Rectangle()
+                                            .foregroundColor(.white)
+                                            .cornerRadius(25)
+                                            .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
+                                        
+                                        VStack {
+                                            Image(item.image)
+                                                .resizable()
+                                                .frame(width: 50, height: 50)
+                                            Text(item.name)
+                                                .font(.custom("Poppins-Regular", size: 16))
+                                                .foregroundColor(.black)
+                                        }
+                                        .padding()
                                     }
-                                    .padding()
                                 }
                             }
+                        }.sheet(item: $selectedFood) { food in
+                            FoodDetailView(food: food)
                         }
-                    }.sheet(item: $selectedFood) { food in
-                        FoodDetailView(food: food)
                     }
+                    .padding()
                 }
-                .padding()
+                .navigationTitle("Food Recommendation")
             }
-            .navigationTitle("Food Recommendation")
+        }else{
+            VStack{
+                Image("noFoodData").resizable().frame(width: 150, height: 160)
+                    .padding(.vertical,20)
+                Text("No data available.")
+                    .fontWeight(.bold)
+                    .padding(.bottom,1)
+                Text("Please input calorie data first for food recommendations.")
+                    .font(.custom("Poppins-Regular", size: 16))
+                    .multilineTextAlignment(.center)
+                    .frame(width: 300)
+                
+            }
+           
         }
     }
 }
@@ -70,3 +88,4 @@ struct FoodRecommendationView_Previews: PreviewProvider {
         
     }
 }
+
