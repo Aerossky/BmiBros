@@ -16,6 +16,9 @@ struct FoodDetailView: View {
             VStack {
                 HStack {
                     Image(food.image)
+                        .resizable()
+                        .frame(width: 250, height: 250)
+                    .clipShape(Circle())
                 }
                 Text(food.name)
                     .font(.custom("Poppins-semiBold", size: 20))
@@ -40,6 +43,7 @@ struct FoodDetailView: View {
                     Image(food.image)
                         .resizable()
                         .frame(width: 400, height: 400)
+                        .clipShape(Circle())
                 }
                 Text(food.name)
                     .font(.custom("Poppins-semiBold", size: 30))

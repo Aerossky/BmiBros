@@ -101,7 +101,7 @@ class UserViewModel: ObservableObject {
             loggedInUser = users[index]
         }
      
-        debugPrint(loggedInUser)
+//        debugPrint(loggedInUser)
     }
 
     func updatePassword(id: UUID, newPassword: String) {
@@ -111,7 +111,7 @@ class UserViewModel: ObservableObject {
             loggedInUser = users[index]
         }
      
-        debugPrint(loggedInUser)
+//        debugPrint(loggedInUser)
     }
     
     
@@ -127,7 +127,7 @@ class UserViewModel: ObservableObject {
     func loginUser(email: String, password: String) -> Bool {
         if let user = users.first(where: { $0.email == email && $0.password == password }) {
             loggedInUser = user
-            debugPrint(loggedInUser)
+//            debugPrint(loggedInUser)
             return true
         } else {
             debugPrint("User not found")
@@ -145,13 +145,6 @@ class UserViewModel: ObservableObject {
         }
         return nil
     }
-    
-//    func updateUserData(id: Int, newWeight:Double){
-//        if let index = userInfos.firstIndex(where: { $0.id == id }) {
-//            userInfos[index].weight = newWeight
-//        }
-//        debugPrint(userInfos)
-//    }
     
     func logoutUser() {
         loggedInUser = nil
@@ -204,11 +197,7 @@ class UserViewModel: ObservableObject {
         userInfos.append(userInfo)
         debugPrint(userInfos)
     }
-    
-    //function getUserId
-    //function getUserData(filter by id)
-    //function updateUserData
-    //function logout
+
 }
 
 extension UserViewModel {

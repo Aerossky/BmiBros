@@ -47,6 +47,7 @@ struct FoodRecommendationView: View {
                                                 Image(item.image)
                                                     .resizable()
                                                     .frame(width: 50, height: 50)
+                                                .clipShape(Circle())
                                                 Text(item.name)
                                                     .font(.custom("Poppins-Regular", size: 16))
                                                     .foregroundColor(.black)
@@ -103,6 +104,7 @@ struct FoodRecommendationView: View {
                                                 VStack {
                                                     Image(item.image)
                                                         .resizable()
+                                                        .clipShape(Circle())
                                                         .frame(width: 250, height: 250)
                                                     Text(item.name)
                                                         .font(.custom("Poppins-Regular", size: 32))
