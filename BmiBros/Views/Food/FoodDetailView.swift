@@ -16,9 +16,11 @@ struct FoodDetailView: View {
                 Image(food.image)
             }
             Text(food.name)
-                .font(.title)
+                .font(.custom("Poppins-semiBold", size: 20))
             Text(food.description)
-                .frame(width: 300)
+                .frame(width: 330)
+                .multilineTextAlignment(.center)
+                .lineLimit(nil)
             Spacer()
             VStack {
                 HStack {
@@ -41,7 +43,7 @@ struct InfoCircleView: View {
         ZStack {
             Circle()
                 .frame(width: 75)
-                .foregroundColor(.purple)
+                .foregroundColor(Color(UIColor(hex: "#98A8F8")))
             
             VStack {
                 Text(title)
@@ -56,7 +58,8 @@ struct InfoCircleView: View {
 
 struct FoodDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        let food = Food(id: UUID(), image: "food Image", name: "Salad Babi", description: "Salad isi babi ala Joseph yang enaknya wauwwwww makjos slebew (aku diajarin Rey)", cal: 478, prot: 30, carbs: 25, fat: 12)
+        let food = Food(id: UUID(), image: "food Image", name: "Nama Makanan", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam blandit velit eget porttitor finibus.", cal: 478, prot: 30, carbs: 25, fat: 12)
         FoodDetailView(food: food)
+        
     }
 }

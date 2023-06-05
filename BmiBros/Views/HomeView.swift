@@ -46,7 +46,6 @@ struct HomeView: View {
                         let getID = viewModel.loggedInUser?.id.uuidString ?? UUID().uuidString
                         HStack {
                             VStack(alignment: .leading){
-                                //                            Text("Hello, \(viewModel.loggedInUser.username)")
                                 Text("Hello, \(viewModel.loggedInUser?.username ?? "Admin")")
                                     .font(.custom("Poppins-Bold", size: 36))
                                     .foregroundColor(Color(UIColor(hex: "#609FFF")))
@@ -78,7 +77,10 @@ struct HomeView: View {
                                     Text(String(format: "%.1f" ,bmi))
                                         .font(.custom("Poppins-Light", size: 15))
                                         .foregroundColor(.white)
-                                    if(bmi<18.5){
+                                    if(bmi == 0){
+                                        Text("")
+                                    }
+                                    else if(bmi<18.5){
                                         Text("UnderWeight")
                                             .font(.custom("Poppins-SemiBold", size: 16))
                                             .foregroundColor(Color(UIColor(hex: "#ED5656")))
@@ -239,14 +241,13 @@ struct HomeView: View {
                                     Text(String(format: "%.1f" ,bmi))
                                         .font(.custom("Poppins-Light", size: 24))
                                         .foregroundColor(.white)
-                                    if(bmi<18.5){
+                                    if(bmi == 0){
+                                        Text("")
+                                    }
+                                    else if(bmi<18.5){
                                         Text("UnderWeight")
-                                            .font(.custom("Poppins-SemiBold", size: 24))
+                                            .font(.custom("Poppins-SemiBold", size: 16))
                                             .foregroundColor(Color(UIColor(hex: "#ED5656")))
-                                    }else if(bmi<24.9){
-                                        Text("Normal")
-                                            .font(.custom("Poppins-SemiBold", size: 24))
-                                            .foregroundColor(Color(UIColor(hex: "#C1FF8F")))
                                     }else if(bmi<29.9){
                                         Text("OverWeight")
                                             .font(.custom("Poppins-SemiBold", size: 24))

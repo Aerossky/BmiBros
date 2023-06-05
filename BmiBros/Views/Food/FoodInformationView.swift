@@ -102,13 +102,15 @@ struct FoodInformationView: View {
                                             }
                                         }
                                         .padding()
+                                        .frame(maxWidth: .infinity)
+                                        .background(Color(UIColor(hex: "#F7F7F7")))
+                                        .cornerRadius(20)
+                                        .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
                                     }
                                     .buttonStyle(PlainButtonStyle())
                                     .listRowSeparator(.hidden)
                                     .listRowInsets(EdgeInsets(top: 8, leading: 20, bottom: 8, trailing: 20))
-                                    .background(Color(UIColor(hex: "#F7F7F7")))
-                                    .cornerRadius(20)
-                                    .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
+
                                 }
                             }else{
                                 ForEach(viewModel.filteredFoods) { food in
