@@ -80,7 +80,7 @@ struct FoodRecommendationView: View {
             }
         }else{
             // tampilan ipad
-//            if userInfo != 0{
+            if userInfo != 0{
                 NavigationStack {
                     ScrollView {
                         LazyVGrid(columns: gridLayout, spacing: 50) {
@@ -117,21 +117,21 @@ struct FoodRecommendationView: View {
                     }
                     .navigationTitle("Food Recommendation")
                 }
-//            }else{
-//                VStack{
-//                    Image("noFoodData").resizable().frame(width: 150, height: 160)
-//                        .padding(.vertical,20)
-//                    Text("No data available.")
-//                        .fontWeight(.bold)
-//                        .padding(.bottom,1)
-//                    Text("Please input calorie data first for food recommendations.")
-//                        .font(.custom("Poppins-Regular", size: 16))
-//                        .multilineTextAlignment(.center)
-//                        .frame(width: 300)
-//
-//                }
-//
-//            }
+            }else{
+                VStack{
+                    Image("noFoodData").resizable().frame(width: 150, height: 160)
+                        .padding(.vertical,20)
+                    Text("No data available.")
+                        .fontWeight(.bold)
+                        .padding(.bottom,1)
+                    Text("Please input calorie data first for food recommendations.")
+                        .font(.custom("Poppins-Regular", size: 16))
+                        .multilineTextAlignment(.center)
+                        .frame(width: 300)
+
+                }
+
+            }
         }
     }
 }

@@ -12,36 +12,84 @@ struct InputView: View {
     
     let options = ["BMI Calculator", "Calories Calculator"]
     
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass //variabel untuk tau ukuran device yang dipake
+    
     var body: some View {
-        NavigationStack {
-            VStack {
-                HStack(){
-                    Spacer()
-                    Button(action: {
-                        // UserInfo
-                    }){
-                        NavigationLink(destination: HistoryUserInfoView()) {
-                            ZStack{
-                                Text("History")
-                                    .foregroundColor(.black)
-                                    .font(.headline)
-                                    .padding(.all)
+        if horizontalSizeClass == .compact{
+            //iphone
+            NavigationStack {
+                VStack {
+                    HStack(){
+                        Spacer()
+                        Button(action: {
+                            // UserInfo
+                        }){
+                            NavigationLink(destination: HistoryUserInfoView()) {
+                                ZStack{
+                                    Text("History")
+                                        .foregroundColor(.black)
+                                        .font(.headline)
+                                        .padding(.all)
+                                }
                             }
                         }
                     }
-                }
-                Picker("Pilih Konten", selection: $selectedOption) {
-                    ForEach(options.indices, id: \.self) { index in
-                        Text(options[index]).tag(options[index])
+                    Picker("Pilih Konten", selection: $selectedOption) {
+                        ForEach(options.indices, id: \.self) { index in
+                            Text(options[index]).tag(options[index])
+                        }
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                    .padding(.horizontal, 50)
+                    //            Spacer()
+                    if selectedOption == 0 {
+                        BMIView()
+                    } else {
+                        CaloriesView()
                     }
                 }
-                .pickerStyle(SegmentedPickerStyle())
-                .padding(.horizontal, 50)
-                //            Spacer()
-                if selectedOption == 0 {
-                    BMIView()
-                } else {
-                    CaloriesView()
+            }
+        }else {
+            //ipad
+            NavigationStack {
+                VStack {
+                    HStack(){
+                        Spacer()
+                        
+                        HStack {
+                            Text("Calculator")
+                                .foregroundColor(.black)
+                                .padding(.all, 30)
+                                .font(.custom("Poppins-Regular", size: 28))
+                            Spacer()
+                            
+                            Button(action: {
+                                // UserInfo
+                            }){
+                                NavigationLink(destination: HistoryUserInfoView()) {
+                                    Text("History")
+                                        .foregroundColor(.black)
+                                        .padding(.all, 30)
+                                        .font(.custom("Poppins-Regular", size: 28))
+                                }
+                            }
+                        }
+                    }
+                    Picker("Pilih Konten", selection: $selectedOption) {
+                        ForEach(options.indices, id: \.self) { index in
+                            Text(options[index])
+                                .tag(options[index])
+                        }
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                    .padding(.horizontal, 200)
+                    .scaleEffect(1.2)
+                    
+                    if selectedOption == 0 {
+                        BMIView()
+                    } else {
+                        CaloriesView()
+                    }
                 }
             }
         }
@@ -62,6 +110,7 @@ struct InputView: View {
         @State private var selectedHeight = "20"
         @State private var selectedWeight = "20"
         
+        @Environment(\.horizontalSizeClass) var horizontalSizeClass //variabel untuk tau ukuran device yang dipake
         
         @State private var bmi:Double = 1
         
@@ -120,191 +169,382 @@ struct InputView: View {
             return value >= minAge && value <= maxAge
         }
         var body: some View {
-            NavigationView {
-                VStack {
-                    HStack {
-                        VStack {
-                            Text("BMI Score")
-                                .font(.custom("Poppins-Bold", size: 32))
-                                .foregroundColor(Color(UIColor(hex: "#76AAFA")))
-                            //BMI RESULT
-                            Text("\(String(format: "%.1f", bmi))")
-                                .font(.custom("Poppins-Bold", size: 96))
-                                .foregroundColor(Color(UIColor(hex: "#76AAFA")))
-                            //BMI CATEGORY
-                            //getBMICategory.{0 = category, 1 = color}
-                            Text(bmiCategory.0)
-                                .font(.custom("Poppins-Bold", size: 32))
-                                .foregroundColor(bmiColor.1)
-                            HStack {
-                                Text("Gender")
-                                    .font(.custom("Poppins-Bold", size: 20))
+            if horizontalSizeClass == .compact {
+                // iphone
+                NavigationView {
+                    VStack {
+                        HStack {
+                            VStack {
+                                Text("BMI Score")
+                                    .font(.custom("Poppins-Bold", size: 32))
                                     .foregroundColor(Color(UIColor(hex: "#76AAFA")))
-                                Picker("Select an Option", selection: $gender) {
-                                    ForEach(genderOptions.indices, id: \.self) { index in
-                                        Text(genderOptions[index])
-                                            .tag(index)
+                                //BMI RESULT
+                                Text("\(String(format: "%.1f", bmi))")
+                                    .font(.custom("Poppins-Bold", size: 96))
+                                    .foregroundColor(Color(UIColor(hex: "#76AAFA")))
+                                //BMI CATEGORY
+                                //getBMICategory.{0 = category, 1 = color}
+                                Text(bmiCategory.0)
+                                    .font(.custom("Poppins-Bold", size: 32))
+                                    .foregroundColor(bmiColor.1)
+                                HStack {
+                                    Text("Gender")
+                                        .font(.custom("Poppins-Bold", size: 20))
+                                        .foregroundColor(Color(UIColor(hex: "#76AAFA")))
+                                    Picker("Select an Option", selection: $gender) {
+                                        ForEach(genderOptions.indices, id: \.self) { index in
+                                            Text(genderOptions[index])
+                                                .tag(index)
+                                        }
                                     }
-                                }
-                                .onChange(of: gender) { newValue in
-                                    selectedGender = genderOptions[newValue].lowercased()
-                                }
-                                .padding(.trailing, 20)
-                                .pickerStyle(SegmentedPickerStyle())
-                                .padding(.leading, 20)
-                            }
-                            
-                            .padding(.leading, 20)
-                            
-                            HStack {
-                                Text("Age")
-                                    .font(.custom("Poppins-Bold", size: 20))
-                                    .foregroundColor(Color(UIColor(hex: "#76AAFA")))
-                                VStack{
-                                    TextField("Enter a number", text: $selectedAge)
-                                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                                        .keyboardType(.numberPad)
-                                        .padding(.leading, 54)
-                                        .padding(.trailing, 20)
-                                }
-                                
-                            }
-                            .padding(.leading, 20)
-                            
-                            HStack {
-                                Text("Height")
-                                    .font(.custom("Poppins-Bold", size: 20))
-                                    .foregroundColor(Color(UIColor(hex: "#76AAFA")))
-                                
-                                
-                                TextField("Enter a number", text: $selectedHeight)
-                                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                                    .keyboardType(.numberPad)
-                                    .padding(.leading, 25)
+                                    .onChange(of: gender) { newValue in
+                                        selectedGender = genderOptions[newValue].lowercased()
+                                    }
                                     .padding(.trailing, 20)
+                                    .pickerStyle(SegmentedPickerStyle())
+                                    .padding(.leading, 20)
+                                }
                                 
-                            }
-                            .padding(.leading, 20)
-                            
-                            HStack {
-                                Text("Weight")
-                                    .font(.custom("Poppins-Bold", size: 20))
-                                    .foregroundColor(Color(UIColor(hex: "#76AAFA")))
-                                VStack{
-                                    TextField("Enter a number", text: $selectedWeight)
+                                .padding(.leading, 20)
+                                
+                                HStack {
+                                    Text("Age")
+                                        .font(.custom("Poppins-Bold", size: 20))
+                                        .foregroundColor(Color(UIColor(hex: "#76AAFA")))
+                                    VStack{
+                                        TextField("Enter a number", text: $selectedAge)
+                                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                                            .keyboardType(.numberPad)
+                                            .padding(.leading, 54)
+                                            .padding(.trailing, 20)
+                                    }
+                                    
+                                }
+                                .padding(.leading, 20)
+                                
+                                HStack {
+                                    Text("Height")
+                                        .font(.custom("Poppins-Bold", size: 20))
+                                        .foregroundColor(Color(UIColor(hex: "#76AAFA")))
+                                    
+                                    
+                                    TextField("Enter a number", text: $selectedHeight)
                                         .textFieldStyle(RoundedBorderTextFieldStyle())
                                         .keyboardType(.numberPad)
-                                        .padding(.leading, 20)
+                                        .padding(.leading, 25)
                                         .padding(.trailing, 20)
+                                    
                                 }
+                                .padding(.leading, 20)
                                 
+                                HStack {
+                                    Text("Weight")
+                                        .font(.custom("Poppins-Bold", size: 20))
+                                        .foregroundColor(Color(UIColor(hex: "#76AAFA")))
+                                    VStack{
+                                        TextField("Enter a number", text: $selectedWeight)
+                                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                                            .keyboardType(.numberPad)
+                                            .padding(.leading, 20)
+                                            .padding(.trailing, 20)
+                                    }
+                                    
+                                }
+                                .padding(.leading, 20)
+                                
+                                Spacer()
+                                
+                                HStack{
+                                    // button hitung saja
+                                    Button(action: {
+                                        if !isInputHeightValid {
+                                            activeAlert = .Height
+                                        }
+                                        else if(!isInputWeightValid){
+                                            activeAlert = .Weight
+                                        }
+                                        else if(!isInputAgeValid){
+                                            activeAlert = .Age
+                                        }
+                                        else if isInputHeightValid && isInputWeightValid && isInputAgeValid {
+                                            //hitung bmi
+                                            bmi = inputViewModel.calculateBMI(weight: Double(selectedWeight) ?? 0, height: Double(selectedHeight) ?? 0, age: Int(selectedAge) ?? 0, gender: selectedGender)
+                                            bmiCategory = inputViewModel.getBMICategory(bmi: bmi, age: Int(selectedAge) ?? 0)
+                                            bmiColor = inputViewModel.getBMICategory(bmi: bmi, age: Int(selectedAge) ?? 1)
+                                            activeAlert = .SuccessInput
+                                        }
+                                    }) {
+                                        Text("Check")
+                                            .font(.headline)
+                                            .foregroundColor(.white)
+                                            .padding()
+                                            .frame(maxWidth: .infinity)
+                                            .background((isInputHeightValid  && isInputWeightValid && isInputAgeValid) ? Color(UIColor(hex: "#6D85FD")): Color.gray)
+                                            .cornerRadius(8)
+                                    }
+                                    .padding()
+                                    .alert(item: $activeAlert) { alertType in
+                                        switch alertType {
+                                        case .Weight:
+                                            return Alert(title: Text("Invalid Input"), message: Text("Weight Must Between \(minWeight) and \(maxWeight) ."), dismissButton: .default(Text("OK")))
+                                        case .Height:
+                                            return Alert(title: Text("Invalid Input"), message: Text("Height Must Between \(minHeight) and \(maxHeight) ."), dismissButton: .default(Text("OK")))
+                                        case .Age:
+                                            return Alert(title: Text("Invalid Input"), message: Text("Age Must Between \(minAge) and \(maxAge) ."), dismissButton: .default(Text("OK")))
+                                            
+                                        case .SuccessInput:
+                                            return Alert(title: Text("Success"), message: Text("Bmi Calculate "), dismissButton: .default(Text("OK")))
+                                        }
+                                    }
+                                    
+                                    // button save ke history
+                                    Button(action: {
+                                        if !isInputHeightValid {
+                                            activeAlert = .Height
+                                        }
+                                        else if(!isInputWeightValid){
+                                            activeAlert = .Weight
+                                        }
+                                        else if(!isInputAgeValid){
+                                            activeAlert = .Age
+                                        }
+                                        else if isInputHeightValid && isInputWeightValid && isInputAgeValid {
+                                            //hitung bmi
+                                            bmi = inputViewModel.calculateBMI(weight: Double(selectedWeight) ?? 0, height: Double(selectedHeight) ?? 0, age: Int(selectedAge) ?? 0, gender: selectedGender)
+                                            bmiCategory = inputViewModel.getBMICategory(bmi: bmi, age: Int(selectedAge) ?? 0)
+                                            bmiColor = inputViewModel.getBMICategory(bmi: bmi, age: Int(selectedAge) ?? 1)
+                                            
+                                            let id = UUID()
+                                            let getUserID = viewModel.loggedInUser?.id.uuidString ?? ""
+                                            let age = Int(selectedAge)
+                                            let height = Double(selectedHeight)
+                                            let weight = Double(selectedWeight)
+                                            let bmi = bmi
+                                            let calories = 0
+                                            let date = Date()
+                                            
+                                            viewModel.addUserInfo(id, getUserID, age!, height!, weight!, bmi, Double(calories), date)
+                                            activeAlert = .SuccessInput
+                                        }
+                                    }) {
+                                        Text("Check & Save")
+                                            .font(.headline)
+                                            .foregroundColor(.white)
+                                            .padding()
+                                            .frame(maxWidth: .infinity)
+                                            .background((isInputHeightValid  && isInputWeightValid && isInputAgeValid) ? Color(UIColor(hex: "#6D85FD")): Color.gray)
+                                            .cornerRadius(8)
+                                    }
+                                    .padding()
+                                    .alert(item: $activeAlert) { alertType in
+                                        switch alertType {
+                                        case .Weight:
+                                            return Alert(title: Text("Invalid Input"), message: Text("Weight Must Between \(minWeight) and \(maxWeight) ."), dismissButton: .default(Text("OK")))
+                                        case .Height:
+                                            return Alert(title: Text("Invalid Input"), message: Text("Height Must Between \(minHeight) and \(maxHeight) ."), dismissButton: .default(Text("OK")))
+                                        case .Age:
+                                            return Alert(title: Text("Invalid Input"), message: Text("Age Must Between \(minAge) and \(maxAge) ."), dismissButton: .default(Text("OK")))
+                                            
+                                        case .SuccessInput:
+                                            return Alert(title: Text("Success"), message: Text("Bmi Calculate "), dismissButton: .default(Text("OK")))
+                                        }
+                                    }
+                                }
                             }
-                            .padding(.leading, 20)
                             
-                            Spacer()
-                            
-                            HStack{
-                                // button hitung saja
-                                Button(action: {
-                                    if !isInputHeightValid {
-                                        activeAlert = .Height
+                        }
+                        .padding(.top, 50)
+                    }
+                    .multilineTextAlignment(.center)
+                }
+            } else {
+                // ipad
+                NavigationStack {
+                    VStack {
+                        HStack {
+                            VStack {
+                                Text("BMI Score")
+                                    .font(.custom("Poppins-Bold", size: 54))
+                                    .foregroundColor(Color(UIColor(hex: "#76AAFA")))
+                                //BMI RESULT
+                                Text("\(String(format: "%.1f", bmi))")
+                                    .font(.custom("Poppins-Bold", size: 96))
+                                    .foregroundColor(Color(UIColor(hex: "#76AAFA")))
+                                //BMI CATEGORY
+                                //getBMICategory.{0 = category, 1 = color}
+                                Text(bmiCategory.0)
+                                    .font(.custom("Poppins-Bold", size: 48))
+                                    .foregroundColor(bmiColor.1)
+                                HStack {
+                                    Text("Gender")
+                                        .font(.custom("Poppins-Bold", size: 20))
+                                        .foregroundColor(Color(UIColor(hex: "#76AAFA")))
+                                    Picker("Select an Option", selection: $gender) {
+                                        ForEach(genderOptions.indices, id: \.self) { index in
+                                            Text(genderOptions[index])
+                                                .tag(index)
+                                        }
                                     }
-                                    else if(!isInputWeightValid){
-                                        activeAlert = .Weight
+                                    .onChange(of: gender) { newValue in
+                                        selectedGender = genderOptions[newValue].lowercased()
                                     }
-                                    else if(!isInputAgeValid){
-                                        activeAlert = .Age
-                                    }
-                                    else if isInputHeightValid && isInputWeightValid && isInputAgeValid {
-                                        //hitung bmi
-                                        bmi = inputViewModel.calculateBMI(weight: Double(selectedWeight) ?? 0, height: Double(selectedHeight) ?? 0, age: Int(selectedAge) ?? 0, gender: selectedGender)
-                                        bmiCategory = inputViewModel.getBMICategory(bmi: bmi, age: Int(selectedAge) ?? 0)
-                                        bmiColor = inputViewModel.getBMICategory(bmi: bmi, age: Int(selectedAge) ?? 1)
-                                        activeAlert = .SuccessInput
-                                    }
-                                }) {
-                                    Text("Check")
-                                        .font(.headline)
-                                        .foregroundColor(.white)
-                                        .padding()
-                                        .frame(maxWidth: .infinity)
-                                        .background((isInputHeightValid  && isInputWeightValid && isInputAgeValid) ? Color(UIColor(hex: "#6D85FD")): Color.gray)
-                                        .cornerRadius(8)
-                                }
-                                .padding()
-                                .alert(item: $activeAlert) { alertType in
-                                    switch alertType {
-                                    case .Weight:
-                                        return Alert(title: Text("Invalid Input"), message: Text("Weight Must Between \(minWeight) and \(maxWeight) ."), dismissButton: .default(Text("OK")))
-                                    case .Height:
-                                        return Alert(title: Text("Invalid Input"), message: Text("Height Must Between \(minHeight) and \(maxHeight) ."), dismissButton: .default(Text("OK")))
-                                    case .Age:
-                                        return Alert(title: Text("Invalid Input"), message: Text("Age Must Between \(minAge) and \(maxAge) ."), dismissButton: .default(Text("OK")))
-                                        
-                                    case .SuccessInput:
-                                        return Alert(title: Text("Success"), message: Text("Bmi Calculate "), dismissButton: .default(Text("OK")))
-                                    }
+                                    .padding(.trailing, 20)
+                                    .pickerStyle(SegmentedPickerStyle())
+                                    .padding(.leading, 20)
                                 }
                                 
-                                // button save ke history
-                                Button(action: {
-                                    if !isInputHeightValid {
-                                        activeAlert = .Height
+                                .padding(.leading, 20)
+                                
+                                HStack {
+                                    Text("Age")
+                                        .font(.custom("Poppins-Bold", size: 20))
+                                        .foregroundColor(Color(UIColor(hex: "#76AAFA")))
+                                    VStack{
+                                        TextField("Enter a number", text: $selectedAge)
+                                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                                            .keyboardType(.numberPad)
+                                            .padding(.leading, 54)
+                                            .padding(.trailing, 20)
                                     }
-                                    else if(!isInputWeightValid){
-                                        activeAlert = .Weight
-                                    }
-                                    else if(!isInputAgeValid){
-                                        activeAlert = .Age
-                                    }
-                                    else if isInputHeightValid && isInputWeightValid && isInputAgeValid {
-                                        //hitung bmi
-                                        bmi = inputViewModel.calculateBMI(weight: Double(selectedWeight) ?? 0, height: Double(selectedHeight) ?? 0, age: Int(selectedAge) ?? 0, gender: selectedGender)
-                                        bmiCategory = inputViewModel.getBMICategory(bmi: bmi, age: Int(selectedAge) ?? 0)
-                                        bmiColor = inputViewModel.getBMICategory(bmi: bmi, age: Int(selectedAge) ?? 1)
-                                        
-                                        let id = UUID()
-                                        let getUserID = viewModel.loggedInUser?.id.uuidString ?? ""
-                                        let age = Int(selectedAge)
-                                        let height = Double(selectedHeight)
-                                        let weight = Double(selectedWeight)
-                                        let bmi = bmi
-                                        let calories = 0
-                                        let date = Date()
-                                        
-                                        viewModel.addUserInfo(id, getUserID, age!, height!, weight!, bmi, Double(calories), date)
-                                        activeAlert = .SuccessInput
-                                    }
-                                }) {
-                                    Text("Check & Save")
-                                        .font(.headline)
-                                        .foregroundColor(.white)
-                                        .padding()
-                                        .frame(maxWidth: .infinity)
-                                        .background((isInputHeightValid  && isInputWeightValid && isInputAgeValid) ? Color(UIColor(hex: "#6D85FD")): Color.gray)
-                                        .cornerRadius(8)
+                                    
                                 }
-                                .padding()
-                                .alert(item: $activeAlert) { alertType in
-                                    switch alertType {
-                                    case .Weight:
-                                        return Alert(title: Text("Invalid Input"), message: Text("Weight Must Between \(minWeight) and \(maxWeight) ."), dismissButton: .default(Text("OK")))
-                                    case .Height:
-                                        return Alert(title: Text("Invalid Input"), message: Text("Height Must Between \(minHeight) and \(maxHeight) ."), dismissButton: .default(Text("OK")))
-                                    case .Age:
-                                        return Alert(title: Text("Invalid Input"), message: Text("Age Must Between \(minAge) and \(maxAge) ."), dismissButton: .default(Text("OK")))
-                                        
-                                    case .SuccessInput:
-                                        return Alert(title: Text("Success"), message: Text("Bmi Calculate "), dismissButton: .default(Text("OK")))
+                                .padding(.leading, 20)
+                                
+                                HStack {
+                                    Text("Height")
+                                        .font(.custom("Poppins-Bold", size: 20))
+                                        .foregroundColor(Color(UIColor(hex: "#76AAFA")))
+                                    
+                                    
+                                    TextField("Enter a number", text: $selectedHeight)
+                                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                                        .keyboardType(.numberPad)
+                                        .padding(.leading, 25)
+                                        .padding(.trailing, 20)
+                                    
+                                }
+                                .padding(.leading, 20)
+                                
+                                HStack {
+                                    Text("Weight")
+                                        .font(.custom("Poppins-Bold", size: 20))
+                                        .foregroundColor(Color(UIColor(hex: "#76AAFA")))
+                                    VStack{
+                                        TextField("Enter a number", text: $selectedWeight)
+                                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                                            .keyboardType(.numberPad)
+                                            .padding(.leading, 20)
+                                            .padding(.trailing, 20)
+                                    }
+                                    
+                                }
+                                .padding(.leading, 20)
+                                
+                                Spacer()
+                                
+                                HStack{
+                                    // button hitung saja
+                                    Button(action: {
+                                        if !isInputHeightValid {
+                                            activeAlert = .Height
+                                        }
+                                        else if(!isInputWeightValid){
+                                            activeAlert = .Weight
+                                        }
+                                        else if(!isInputAgeValid){
+                                            activeAlert = .Age
+                                        }
+                                        else if isInputHeightValid && isInputWeightValid && isInputAgeValid {
+                                            //hitung bmi
+                                            bmi = inputViewModel.calculateBMI(weight: Double(selectedWeight) ?? 0, height: Double(selectedHeight) ?? 0, age: Int(selectedAge) ?? 0, gender: selectedGender)
+                                            bmiCategory = inputViewModel.getBMICategory(bmi: bmi, age: Int(selectedAge) ?? 0)
+                                            bmiColor = inputViewModel.getBMICategory(bmi: bmi, age: Int(selectedAge) ?? 1)
+                                            activeAlert = .SuccessInput
+                                        }
+                                    }) {
+                                        Text("Check")
+                                            .font(.system(size: 24))
+                                            .foregroundColor(.white)
+                                            .padding()
+                                            .frame(maxWidth: .infinity)
+                                            .background((isInputHeightValid  && isInputWeightValid && isInputAgeValid) ? Color(UIColor(hex: "#6D85FD")): Color.gray)
+                                            .cornerRadius(20)
+                                    }
+                                    .padding()
+                                    .alert(item: $activeAlert) { alertType in
+                                        switch alertType {
+                                        case .Weight:
+                                            return Alert(title: Text("Invalid Input"), message: Text("Weight Must Between \(minWeight) and \(maxWeight) ."), dismissButton: .default(Text("OK")))
+                                        case .Height:
+                                            return Alert(title: Text("Invalid Input"), message: Text("Height Must Between \(minHeight) and \(maxHeight) ."), dismissButton: .default(Text("OK")))
+                                        case .Age:
+                                            return Alert(title: Text("Invalid Input"), message: Text("Age Must Between \(minAge) and \(maxAge) ."), dismissButton: .default(Text("OK")))
+                                            
+                                        case .SuccessInput:
+                                            return Alert(title: Text("Success"), message: Text("Bmi Calculate "), dismissButton: .default(Text("OK")))
+                                        }
+                                    }
+                                    
+                                    // button save ke history
+                                    Button(action: {
+                                        if !isInputHeightValid {
+                                            activeAlert = .Height
+                                        }
+                                        else if(!isInputWeightValid){
+                                            activeAlert = .Weight
+                                        }
+                                        else if(!isInputAgeValid){
+                                            activeAlert = .Age
+                                        }
+                                        else if isInputHeightValid && isInputWeightValid && isInputAgeValid {
+                                            //hitung bmi
+                                            bmi = inputViewModel.calculateBMI(weight: Double(selectedWeight) ?? 0, height: Double(selectedHeight) ?? 0, age: Int(selectedAge) ?? 0, gender: selectedGender)
+                                            bmiCategory = inputViewModel.getBMICategory(bmi: bmi, age: Int(selectedAge) ?? 0)
+                                            bmiColor = inputViewModel.getBMICategory(bmi: bmi, age: Int(selectedAge) ?? 1)
+                                            
+                                            let id = UUID()
+                                            let getUserID = viewModel.loggedInUser?.id.uuidString ?? ""
+                                            let age = Int(selectedAge)
+                                            let height = Double(selectedHeight)
+                                            let weight = Double(selectedWeight)
+                                            let bmi = bmi
+                                            let calories = 0
+                                            let date = Date()
+                                            
+                                            viewModel.addUserInfo(id, getUserID, age!, height!, weight!, bmi, Double(calories), date)
+                                            activeAlert = .SuccessInput
+                                        }
+                                    }) {
+                                        Text("Check & Save")
+                                            .font(.system(size: 24))
+                                            .foregroundColor(.white)
+                                            .padding()
+                                            .frame(maxWidth: .infinity)
+                                            .background((isInputHeightValid  && isInputWeightValid && isInputAgeValid) ? Color(UIColor(hex: "#6D85FD")): Color.gray)
+                                            .cornerRadius(20)
+                                    }
+                                    .padding()
+                                    .alert(item: $activeAlert) { alertType in
+                                        switch alertType {
+                                        case .Weight:
+                                            return Alert(title: Text("Invalid Input"), message: Text("Weight Must Between \(minWeight) and \(maxWeight) ."), dismissButton: .default(Text("OK")))
+                                        case .Height:
+                                            return Alert(title: Text("Invalid Input"), message: Text("Height Must Between \(minHeight) and \(maxHeight) ."), dismissButton: .default(Text("OK")))
+                                        case .Age:
+                                            return Alert(title: Text("Invalid Input"), message: Text("Age Must Between \(minAge) and \(maxAge) ."), dismissButton: .default(Text("OK")))
+                                            
+                                        case .SuccessInput:
+                                            return Alert(title: Text("Success"), message: Text("Bmi Calculate "), dismissButton: .default(Text("OK")))
+                                        }
                                     }
                                 }
                             }
                         }
-                        
+                        .padding(.top, 50)
                     }
-                    .padding(.top, 50)
+                    .multilineTextAlignment(.center)
                 }
-                .multilineTextAlignment(.center)
+                .padding(.all, 100)
             }
         }
     }
@@ -324,8 +564,9 @@ struct InputView: View {
         @State private var selectedHeight = "170"
         @State private var selectedWeight = "70"
         
-        //picker gender
+        @Environment(\.horizontalSizeClass) var horizontalSizeClass //variabel untuk tau ukuran device yang dipake
         
+        //picker gender
         let genderOptions = ["Male", "Female"]
         @State private var gender = 0
         
@@ -379,186 +620,373 @@ struct InputView: View {
             return value >= minAge && value <= maxAge
         }
         var body: some View {
-            NavigationView {
-                VStack {
-                    HStack {
-                        VStack {
-                            Text("Your Daily Calories")
-                                .font(.custom("Poppins-Bold", size: 32))
-                                .foregroundColor(Color(UIColor(hex: "#76AAFA")))
-                            
-                            Text(String(format: "%.0f", calorie))
-                                .font(.custom("Poppins-Bold", size: 96))
-                                .foregroundColor(.green)
-                            
-                            Text("Calories/day")
-                                .font(.custom("Poppins-Bold", size: 32))
-                                .foregroundColor(Color(UIColor(hex: "#76AAFA")))
-                            HStack {
-                                Text("Gender")
-                                    .font(.custom("Poppins-Bold", size: 20))
+            if horizontalSizeClass == .compact {
+                // iphone
+                NavigationView {
+                    VStack {
+                        HStack {
+                            VStack {
+                                Text("Your Daily Calories")
+                                    .font(.custom("Poppins-Bold", size: 32))
                                     .foregroundColor(Color(UIColor(hex: "#76AAFA")))
-                                Picker("Select an Option", selection: $gender) {
-                                    ForEach(Array(0..<genderOptions.count), id: \.self) { index in
-                                        Text(genderOptions[index])
-                                            .tag(index)
+                                
+                                Text(String(format: "%.0f", calorie))
+                                    .font(.custom("Poppins-Bold", size: 96))
+                                    .foregroundColor(.green)
+                                
+                                Text("Calories/day")
+                                    .font(.custom("Poppins-Bold", size: 32))
+                                    .foregroundColor(Color(UIColor(hex: "#76AAFA")))
+                                HStack {
+                                    Text("Gender")
+                                        .font(.custom("Poppins-Bold", size: 20))
+                                        .foregroundColor(Color(UIColor(hex: "#76AAFA")))
+                                    Picker("Select an Option", selection: $gender) {
+                                        ForEach(Array(0..<genderOptions.count), id: \.self) { index in
+                                            Text(genderOptions[index])
+                                                .tag(index)
+                                        }
                                     }
-                                }
-                                .onChange(of: gender) { newValue in
-                                    selectedGender = genderOptions[newValue].lowercased()
-                                }
-                                .padding(.trailing, 20)
-                                .pickerStyle(SegmentedPickerStyle())
-                                .padding(.leading, 20)
-                            }
-                            
-                            .padding(.leading, 20)
-                            
-                            HStack {
-                                Text("Age")
-                                    .font(.custom("Poppins-Bold", size: 20))
-                                    .foregroundColor(Color(UIColor(hex: "#76AAFA")))
-                                VStack{
-                                    TextField("Enter a number", text: $selectedAge)
-                                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                                        .keyboardType(.numberPad)
-                                        .padding(.leading, 54)
-                                        .padding(.trailing, 20)
-                                }
-                                
-                            }
-                            .padding(.leading, 20)
-                            
-                            HStack {
-                                Text("Height")
-                                    .font(.custom("Poppins-Bold", size: 20))
-                                    .foregroundColor(Color(UIColor(hex: "#76AAFA")))
-                                
-                                
-                                TextField("Enter a number", text: $selectedHeight)
-                                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                                    .keyboardType(.numberPad)
-                                    .padding(.leading, 25)
+                                    .onChange(of: gender) { newValue in
+                                        selectedGender = genderOptions[newValue].lowercased()
+                                    }
                                     .padding(.trailing, 20)
+                                    .pickerStyle(SegmentedPickerStyle())
+                                    .padding(.leading, 20)
+                                }
                                 
-                            }
-                            .padding(.leading, 20)
-                            
-                            HStack {
-                                Text("Weight")
-                                    .font(.custom("Poppins-Bold", size: 20))
-                                    .foregroundColor(Color(UIColor(hex: "#76AAFA")))
-                                VStack{
-                                    TextField("Enter a number", text: $selectedWeight)
+                                .padding(.leading, 20)
+                                
+                                HStack {
+                                    Text("Age")
+                                        .font(.custom("Poppins-Bold", size: 20))
+                                        .foregroundColor(Color(UIColor(hex: "#76AAFA")))
+                                    VStack{
+                                        TextField("Enter a number", text: $selectedAge)
+                                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                                            .keyboardType(.numberPad)
+                                            .padding(.leading, 54)
+                                            .padding(.trailing, 20)
+                                    }
+                                    
+                                }
+                                .padding(.leading, 20)
+                                
+                                HStack {
+                                    Text("Height")
+                                        .font(.custom("Poppins-Bold", size: 20))
+                                        .foregroundColor(Color(UIColor(hex: "#76AAFA")))
+                                    
+                                    
+                                    TextField("Enter a number", text: $selectedHeight)
                                         .textFieldStyle(RoundedBorderTextFieldStyle())
                                         .keyboardType(.numberPad)
-                                        .padding(.leading, 20)
+                                        .padding(.leading, 25)
                                         .padding(.trailing, 20)
+                                    
                                 }
+                                .padding(.leading, 20)
                                 
-                            }
-                            .padding(.leading, 20)
-                            
-                            
-                            Spacer()
-                            HStack{
-                                // button Hitung saja
-                                Button(action: {
-                                    if !isInputHeightValid {
-                                        activeAlert = .Height
+                                HStack {
+                                    Text("Weight")
+                                        .font(.custom("Poppins-Bold", size: 20))
+                                        .foregroundColor(Color(UIColor(hex: "#76AAFA")))
+                                    VStack{
+                                        TextField("Enter a number", text: $selectedWeight)
+                                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                                            .keyboardType(.numberPad)
+                                            .padding(.leading, 20)
+                                            .padding(.trailing, 20)
                                     }
-                                    else if(!isInputWeightValid){
-                                        activeAlert = .Weight
-                                    }
-                                    else if(!isInputAgeValid){
-                                        activeAlert = .Age
-                                    }
-                                    else if isInputHeightValid && isInputWeightValid && isInputAgeValid {
-                                        calorie = inputViewModel.calculateCalorie(weight: Double(selectedWeight) ?? 0, height: Double(selectedHeight) ?? 0, age: Double(selectedAge) ?? 0, gender: selectedGender)
-                                        activeAlert = .SuccessInput
-                                    }
-                                }) {
-                                    Text("Check")
-                                        .font(.headline)
-                                        .foregroundColor(.white)
-                                        .padding()
-                                        .frame(maxWidth: .infinity)
-                                        .background((isInputHeightValid  && isInputWeightValid && isInputAgeValid) ? Color(UIColor(hex: "#6D85FD")): Color.gray)
-                                        .cornerRadius(8)
+                                    
                                 }
-                                .padding()
-                                .alert(item: $activeAlert) { alertType in
-                                    switch alertType {
-                                    case .Weight:
-                                        return Alert(title: Text("Invalid Input"), message: Text("Weight Must Between \(minWeight) and \(maxWeight) ."), dismissButton: .default(Text("OK")))
-                                    case .Height:
-                                        return Alert(title: Text("Invalid Input"), message: Text("Height Must Between \(minHeight) and \(maxHeight) ."), dismissButton: .default(Text("OK")))
-                                    case .Age:
-                                        return Alert(title: Text("Invalid Input"), message: Text("Age Must Between \(minAge) and \(maxAge) ."), dismissButton: .default(Text("OK")))
-                                        
-                                    case .SuccessInput:
-                                        return Alert(title: Text("Success"), message: Text("Calories Calculate"), dismissButton: .default(Text("OK")))
-                                    }
-                                }
+                                .padding(.leading, 20)
                                 
-                                // button save ke history
-                                Button(action: {
-                                    if !isInputHeightValid {
-                                        activeAlert = .Height
+                                
+                                Spacer()
+                                HStack{
+                                    // button Hitung saja
+                                    Button(action: {
+                                        if !isInputHeightValid {
+                                            activeAlert = .Height
+                                        }
+                                        else if(!isInputWeightValid){
+                                            activeAlert = .Weight
+                                        }
+                                        else if(!isInputAgeValid){
+                                            activeAlert = .Age
+                                        }
+                                        else if isInputHeightValid && isInputWeightValid && isInputAgeValid {
+                                            calorie = inputViewModel.calculateCalorie(weight: Double(selectedWeight) ?? 0, height: Double(selectedHeight) ?? 0, age: Double(selectedAge) ?? 0, gender: selectedGender)
+                                            activeAlert = .SuccessInput
+                                        }
+                                    }) {
+                                        Text("Check")
+                                            .font(.headline)
+                                            .foregroundColor(.white)
+                                            .padding()
+                                            .frame(maxWidth: .infinity)
+                                            .background((isInputHeightValid  && isInputWeightValid && isInputAgeValid) ? Color(UIColor(hex: "#6D85FD")): Color.gray)
+                                            .cornerRadius(8)
                                     }
-                                    else if(!isInputWeightValid){
-                                        activeAlert = .Weight
+                                    .padding()
+                                    .alert(item: $activeAlert) { alertType in
+                                        switch alertType {
+                                        case .Weight:
+                                            return Alert(title: Text("Invalid Input"), message: Text("Weight Must Between \(minWeight) and \(maxWeight) ."), dismissButton: .default(Text("OK")))
+                                        case .Height:
+                                            return Alert(title: Text("Invalid Input"), message: Text("Height Must Between \(minHeight) and \(maxHeight) ."), dismissButton: .default(Text("OK")))
+                                        case .Age:
+                                            return Alert(title: Text("Invalid Input"), message: Text("Age Must Between \(minAge) and \(maxAge) ."), dismissButton: .default(Text("OK")))
+                                            
+                                        case .SuccessInput:
+                                            return Alert(title: Text("Success"), message: Text("Calories Calculate"), dismissButton: .default(Text("OK")))
+                                        }
                                     }
-                                    else if(!isInputAgeValid){
-                                        activeAlert = .Age
+                                    
+                                    // button save ke history
+                                    Button(action: {
+                                        if !isInputHeightValid {
+                                            activeAlert = .Height
+                                        }
+                                        else if(!isInputWeightValid){
+                                            activeAlert = .Weight
+                                        }
+                                        else if(!isInputAgeValid){
+                                            activeAlert = .Age
+                                        }
+                                        else if isInputHeightValid && isInputWeightValid && isInputAgeValid {
+                                            calorie = inputViewModel.calculateCalorie(weight: Double(selectedWeight) ?? 0, height: Double(selectedHeight) ?? 0, age: Double(selectedAge) ?? 0, gender: selectedGender)
+                                            activeAlert = .SuccessInput
+                                            
+                                            let id = UUID()
+                                            let getUserID = viewModel.loggedInUser?.id.uuidString ?? ""
+                                            let age = Int(selectedAge)
+                                            let height = Double(selectedHeight)
+                                            let weight = Double(selectedWeight)
+                                            let bmi = 0
+                                            let calories = calorie
+                                            let date = Date()
+                                            
+                                            viewModel.addUserInfo(id, getUserID, age!, height!, weight!, Double(bmi), Double(calories), date)
+                                            
+                                        }
+                                    }) {
+                                        Text("Check & Save")
+                                            .font(.headline)
+                                            .foregroundColor(.white)
+                                            .padding()
+                                            .frame(maxWidth: .infinity)
+                                            .background((isInputHeightValid  && isInputWeightValid && isInputAgeValid) ? Color(UIColor(hex: "#6D85FD")) : Color.gray)
+                                        //                                .background(isInputWeightValid ? Color.blue : Color.gray)
+                                            .cornerRadius(8)
                                     }
-                                    else if isInputHeightValid && isInputWeightValid && isInputAgeValid {
-                                        calorie = inputViewModel.calculateCalorie(weight: Double(selectedWeight) ?? 0, height: Double(selectedHeight) ?? 0, age: Double(selectedAge) ?? 0, gender: selectedGender)
-                                        activeAlert = .SuccessInput
-                                        
-                                        let id = UUID()
-                                        let getUserID = viewModel.loggedInUser?.id.uuidString ?? ""
-                                        let age = Int(selectedAge)
-                                        let height = Double(selectedHeight)
-                                        let weight = Double(selectedWeight)
-                                        let bmi = 0
-                                        let calories = calorie
-                                        let date = Date()
-                                        
-                                        viewModel.addUserInfo(id, getUserID, age!, height!, weight!, Double(bmi), Double(calories), date)
-                                        
-                                    }
-                                }) {
-                                    Text("Check & Save")
-                                        .font(.headline)
-                                        .foregroundColor(.white)
-                                        .padding()
-                                        .frame(maxWidth: .infinity)
-                                        .background((isInputHeightValid  && isInputWeightValid && isInputAgeValid) ? Color(UIColor(hex: "#6D85FD")) : Color.gray)
-                                    //                                .background(isInputWeightValid ? Color.blue : Color.gray)
-                                        .cornerRadius(8)
-                                }
-                                .padding()
-                                .alert(item: $activeAlert) { alertType in
-                                    switch alertType {
-                                    case .Weight:
-                                        return Alert(title: Text("Invalid Input"), message: Text("Weight Must Between \(minWeight) and \(maxWeight) ."), dismissButton: .default(Text("OK")))
-                                    case .Height:
-                                        return Alert(title: Text("Invalid Input"), message: Text("Height Must Between \(minHeight) and \(maxHeight) ."), dismissButton: .default(Text("OK")))
-                                    case .Age:
-                                        return Alert(title: Text("Invalid Input"), message: Text("Age Must Between \(minAge) and \(maxAge) ."), dismissButton: .default(Text("OK")))
-                                        
-                                    case .SuccessInput:
-                                        return Alert(title: Text("Success"), message: Text("Calories Calculate"), dismissButton: .default(Text("OK")))
+                                    .padding()
+                                    .alert(item: $activeAlert) { alertType in
+                                        switch alertType {
+                                        case .Weight:
+                                            return Alert(title: Text("Invalid Input"), message: Text("Weight Must Between \(minWeight) and \(maxWeight) ."), dismissButton: .default(Text("OK")))
+                                        case .Height:
+                                            return Alert(title: Text("Invalid Input"), message: Text("Height Must Between \(minHeight) and \(maxHeight) ."), dismissButton: .default(Text("OK")))
+                                        case .Age:
+                                            return Alert(title: Text("Invalid Input"), message: Text("Age Must Between \(minAge) and \(maxAge) ."), dismissButton: .default(Text("OK")))
+                                            
+                                        case .SuccessInput:
+                                            return Alert(title: Text("Success"), message: Text("Calories Calculate"), dismissButton: .default(Text("OK")))
+                                        }
                                     }
                                 }
                             }
+                            
                         }
-                        
+                        .padding(.top, 50)
                     }
-                    .padding(.top, 50)
+                    .multilineTextAlignment(.center)
                 }
-                .multilineTextAlignment(.center)
+            } else {
+                // ipad
+                NavigationStack {
+                    VStack {
+                        HStack {
+                            VStack {
+                                Text("Your Daily Calories")
+                                    .font(.custom("Poppins-Bold", size: 54))
+                                    .foregroundColor(Color(UIColor(hex: "#76AAFA")))
+                                
+                                Text(String(format: "%.0f", calorie))
+                                    .font(.custom("Poppins-Bold", size: 96))
+                                    .foregroundColor(.green)
+                                
+                                Text("Calories/day")
+                                    .font(.custom("Poppins-Bold", size: 48))
+                                    .foregroundColor(Color(UIColor(hex: "#76AAFA")))
+                                HStack {
+                                    Text("Gender")
+                                        .font(.custom("Poppins-Bold", size: 20))
+                                        .foregroundColor(Color(UIColor(hex: "#76AAFA")))
+                                    Picker("Select an Option", selection: $gender) {
+                                        ForEach(Array(0..<genderOptions.count), id: \.self) { index in
+                                            Text(genderOptions[index])
+                                                .tag(index)
+                                        }
+                                    }
+                                    .onChange(of: gender) { newValue in
+                                        selectedGender = genderOptions[newValue].lowercased()
+                                    }
+                                    .padding(.trailing, 20)
+                                    .pickerStyle(SegmentedPickerStyle())
+                                    .padding(.leading, 20)
+                                }
+                                
+                                .padding(.leading, 20)
+                                
+                                HStack {
+                                    Text("Age")
+                                        .font(.custom("Poppins-Bold", size: 20))
+                                        .foregroundColor(Color(UIColor(hex: "#76AAFA")))
+                                    VStack{
+                                        TextField("Enter a number", text: $selectedAge)
+                                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                                            .keyboardType(.numberPad)
+                                            .padding(.leading, 54)
+                                            .padding(.trailing, 20)
+                                    }
+                                    
+                                }
+                                .padding(.leading, 20)
+                                
+                                HStack {
+                                    Text("Height")
+                                        .font(.custom("Poppins-Bold", size: 20))
+                                        .foregroundColor(Color(UIColor(hex: "#76AAFA")))
+                                    
+                                    
+                                    TextField("Enter a number", text: $selectedHeight)
+                                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                                        .keyboardType(.numberPad)
+                                        .padding(.leading, 25)
+                                        .padding(.trailing, 20)
+                                    
+                                }
+                                .padding(.leading, 20)
+                                
+                                HStack {
+                                    Text("Weight")
+                                        .font(.custom("Poppins-Bold", size: 20))
+                                        .foregroundColor(Color(UIColor(hex: "#76AAFA")))
+                                    VStack{
+                                        TextField("Enter a number", text: $selectedWeight)
+                                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                                            .keyboardType(.numberPad)
+                                            .padding(.leading, 20)
+                                            .padding(.trailing, 20)
+                                    }
+                                    
+                                }
+                                .padding(.leading, 20)
+                                
+                                
+                                Spacer()
+                                HStack{
+                                    // button Hitung saja
+                                    Button(action: {
+                                        if !isInputHeightValid {
+                                            activeAlert = .Height
+                                        }
+                                        else if(!isInputWeightValid){
+                                            activeAlert = .Weight
+                                        }
+                                        else if(!isInputAgeValid){
+                                            activeAlert = .Age
+                                        }
+                                        else if isInputHeightValid && isInputWeightValid && isInputAgeValid {
+                                            calorie = inputViewModel.calculateCalorie(weight: Double(selectedWeight) ?? 0, height: Double(selectedHeight) ?? 0, age: Double(selectedAge) ?? 0, gender: selectedGender)
+                                            activeAlert = .SuccessInput
+                                        }
+                                    }) {
+                                        Text("Check")
+                                            .font(.system(size: 24))
+                                            .foregroundColor(.white)
+                                            .padding()
+                                            .frame(maxWidth: .infinity)
+                                            .background((isInputHeightValid  && isInputWeightValid && isInputAgeValid) ? Color(UIColor(hex: "#6D85FD")): Color.gray)
+                                            .cornerRadius(20)
+                                    }
+                                    .padding()
+                                    .alert(item: $activeAlert) { alertType in
+                                        switch alertType {
+                                        case .Weight:
+                                            return Alert(title: Text("Invalid Input"), message: Text("Weight Must Between \(minWeight) and \(maxWeight) ."), dismissButton: .default(Text("OK")))
+                                        case .Height:
+                                            return Alert(title: Text("Invalid Input"), message: Text("Height Must Between \(minHeight) and \(maxHeight) ."), dismissButton: .default(Text("OK")))
+                                        case .Age:
+                                            return Alert(title: Text("Invalid Input"), message: Text("Age Must Between \(minAge) and \(maxAge) ."), dismissButton: .default(Text("OK")))
+                                            
+                                        case .SuccessInput:
+                                            return Alert(title: Text("Success"), message: Text("Calories Calculate"), dismissButton: .default(Text("OK")))
+                                        }
+                                    }
+                                    
+                                    // button save ke history
+                                    Button(action: {
+                                        if !isInputHeightValid {
+                                            activeAlert = .Height
+                                        }
+                                        else if(!isInputWeightValid){
+                                            activeAlert = .Weight
+                                        }
+                                        else if(!isInputAgeValid){
+                                            activeAlert = .Age
+                                        }
+                                        else if isInputHeightValid && isInputWeightValid && isInputAgeValid {
+                                            calorie = inputViewModel.calculateCalorie(weight: Double(selectedWeight) ?? 0, height: Double(selectedHeight) ?? 0, age: Double(selectedAge) ?? 0, gender: selectedGender)
+                                            activeAlert = .SuccessInput
+                                            
+                                            let id = UUID()
+                                            let getUserID = viewModel.loggedInUser?.id.uuidString ?? ""
+                                            let age = Int(selectedAge)
+                                            let height = Double(selectedHeight)
+                                            let weight = Double(selectedWeight)
+                                            let bmi = 0
+                                            let calories = calorie
+                                            let date = Date()
+                                            
+                                            viewModel.addUserInfo(id, getUserID, age!, height!, weight!, Double(bmi), Double(calories), date)
+                                            
+                                        }
+                                    }) {
+                                        Text("Check & Save")
+                                            .font(.system(size: 24))
+                                            .foregroundColor(.white)
+                                            .padding()
+                                            .frame(maxWidth: .infinity)
+                                            .background((isInputHeightValid  && isInputWeightValid && isInputAgeValid) ? Color(UIColor(hex: "#6D85FD")) : Color.gray)
+                                        //                                .background(isInputWeightValid ? Color.blue : Color.gray)
+                                            .cornerRadius(20)
+                                    }
+                                    .padding()
+                                    .alert(item: $activeAlert) { alertType in
+                                        switch alertType {
+                                        case .Weight:
+                                            return Alert(title: Text("Invalid Input"), message: Text("Weight Must Between \(minWeight) and \(maxWeight) ."), dismissButton: .default(Text("OK")))
+                                        case .Height:
+                                            return Alert(title: Text("Invalid Input"), message: Text("Height Must Between \(minHeight) and \(maxHeight) ."), dismissButton: .default(Text("OK")))
+                                        case .Age:
+                                            return Alert(title: Text("Invalid Input"), message: Text("Age Must Between \(minAge) and \(maxAge) ."), dismissButton: .default(Text("OK")))
+                                            
+                                        case .SuccessInput:
+                                            return Alert(title: Text("Success"), message: Text("Calories Calculate"), dismissButton: .default(Text("OK")))
+                                        }
+                                    }
+                                }
+                            }
+                            
+                        }
+                        .padding(.top, 50)
+                    }
+                    .multilineTextAlignment(.center)
+                }
+                .padding(.all, 100)
             }
         }
     }

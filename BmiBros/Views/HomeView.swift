@@ -109,7 +109,7 @@ struct HomeView: View {
                             }
                             
                             ZStack{
-                                let cal: Double = viewModel.getLastUserInfoCalories(getID) // ini butuh diganti kalo sdh backend
+                                let cal = viewModel.getLastUserInfoCalories(getID) // ini butuh diganti kalo sdh backend
                                 Rectangle()
                                     .fill(ImagePaint(image: Image("CalorieShowBG")))
                                     .frame(width: 220, height: 125)
@@ -207,6 +207,7 @@ struct HomeView: View {
             NavigationStack {
                 ScrollView {
                     VStack {
+                        let getID = viewModel.loggedInUser?.id.uuidString ?? UUID().uuidString
                         HStack {
                             VStack(alignment: .leading){
                                 Text("Hello, \(viewModel.loggedInUser?.username ?? "Admin")")
@@ -234,7 +235,7 @@ struct HomeView: View {
                                     .cornerRadius(25)
                                 
                                 VStack(alignment: .center){
-                                    let bmi : Double = 24.93000 //ini perlu diganti kalo udh ada backend
+                                    let bmi = viewModel.getLastUserInfoBMI(getID)//ini perlu diganti kalo udh ada backend
                                     Text("BMI")
                                         .font(.custom("Poppins-SemiBold", size: 30))
                                         .foregroundColor(.white)
@@ -269,7 +270,7 @@ struct HomeView: View {
                             }
                             
                             ZStack{
-                                let cal: Double = 1000 // ini butuh diganti kalo sdh backend
+                                let cal = viewModel.getLastUserInfoCalories(getID) // ini butuh diganti kalo sdh backend
                                 Rectangle()
                                     .fill(ImagePaint(image: Image("CalorieShowBGiPad")))
                                     .frame(width: 505, height: 196)
@@ -290,29 +291,28 @@ struct HomeView: View {
                         
                         VStack{
                             Button(action: {
-                                isShowingDetail1.toggle()
+                                //food recom button
                             }){
-                                ZStack{
-                                    Rectangle()
-                                        .fill(ImagePaint(image: Image("MealRecomBGiPad")))
-                                        .frame(width: 800, height: 200)
-                                        .cornerRadius(25)
-                                    
-                                    
-                                    
-                                    VStack(alignment: .center) {
-                                        Text("Meal")
-                                            .foregroundColor(.white)
-                                            .font(.custom("Poppins-Bold", size: 30))
+                                NavigationLink(destination: FoodRecommendationView()) {
+                                    ZStack{
+                                        Rectangle()
+                                            .fill(ImagePaint(image: Image("MealRecomBGiPad")))
+                                            .frame(width: 800, height: 200)
+                                            .cornerRadius(25)
                                         
-                                        Text("Recommendation")
-                                            .foregroundColor(.white)
-                                            .font(.custom("Poppins-Bold", size: 30))
+                                        
+                                        
+                                        VStack(alignment: .center) {
+                                            Text("Meal")
+                                                .foregroundColor(.white)
+                                                .font(.custom("Poppins-Bold", size: 30))
+                                            
+                                            Text("Recommendation")
+                                                .foregroundColor(.white)
+                                                .font(.custom("Poppins-Bold", size: 30))
+                                        }
                                     }
                                 }
-                            }
-                            .sheet(isPresented: $isShowingDetail1) {
-                                Text("MEAL RECOM VIEW")
                             }
                             .padding(.trailing,15)
                             .padding(.leading,15)
