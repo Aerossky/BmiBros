@@ -16,16 +16,6 @@ struct ProfileView: View {
     
     
     @State private var username = ""
-    enum Country: String, CaseIterable {
-        case Indonesia
-        case Japan
-        case USA
-        case Other
-        
-        func getLocalizedCountry() -> String {
-            return rawValue
-        }
-    }
     
     @State private var profilePictureSelection: PhotosPickerItem?
     @State private var profilePictureObject: UIImage?
@@ -37,13 +27,7 @@ struct ProfileView: View {
     @State private var isPasswordLengthValid: Bool = false
     @State private var showLogoutAlert = false
     @State private var showChangeUsernameAlert = false
-    
-    @State private var ageHidden: Bool = false
-    @State private var age: Double = 18
-    
-    @State private var country: Country = .Indonesia
-    @State private var customizedCountry: String = ""
-    @State private var dateOfBirth: Date = Calendar.current.date(byAdding: .year, value: -20, to: Date()) ?? Date()
+    @State private var showChangePasswordAlert = false
     
     var body: some View {
         
@@ -85,7 +69,6 @@ struct ProfileView: View {
                 
                 Section {
                     Text("Hello, \(userViewModel.loggedInUser?.username ?? "Admin")")
-                    Text("\(userViewModel.loggedInUser?.id.uuidString ?? "id123")")
                     TextField("New Username", text: $username)
                         .keyboardType(.asciiCapable)
                         .autocorrectionDisabled(true)
@@ -103,6 +86,7 @@ struct ProfileView: View {
                     Text("Change Username")
                         .padding(.trailing)
                 }
+                .disabled(username.isEmpty)
                 .alert(isPresented: $showChangeUsernameAlert) {
                     Alert(
                         title: Text("Success"),
@@ -135,9 +119,13 @@ struct ProfileView: View {
                             Label("minimal of 5 characters", systemImage: isPasswordLengthValid ? "checkmark" : "xmark")
                                 .foregroundColor(isPasswordLengthValid ? .green : .red)
                         }
-                        Gauge(value: passwordSecurityCheckProgress) {
+                        HStack {
                             Label("Password security", systemImage: passwordSecurityCheckProgress >= 0.5 ? "checkmark" : "xmark")
                                 .foregroundColor(passwordSecurityCheckProgress >= 0.5 ? .green : .red)
+                            
+                            Gauge(value: passwordSecurityCheckProgress) {
+                                // Gauge content
+                            }
                         }
                     }
                     SecureField("Confirm Password", text: $passwordConfirmation)
@@ -159,47 +147,46 @@ struct ProfileView: View {
                     }
                 }
                 
-                Section("Age") {
-                    Toggle("Hide your age", isOn: $ageHidden)
-                    HStack {
-                        Slider(value: $age, in: 2...120, step: 1)
-                        Text("\(Int(age)) years")
-                    }
-                }
-                
-                Section("Test Section") {
-                    Picker("Country of origin", selection: $country) {
-                        ForEach(Country.allCases, id: \.self.rawValue) { countryID in
-                            Text(countryID.getLocalizedCountry())
-                                .tag(countryID)
-                        }
-                    }
-                    if country == .Other {
-                        TextField("Which country are you from?", text: $customizedCountry)
-                    }
-                    DatePicker("Date of birth", selection: $dateOfBirth, displayedComponents: .date)
-                }
-                
                 Button(action: {
-                    userViewModel.logoutUser()
-                    showLogoutAlert = true
+                    if let id = userViewModel.loggedInUser?.id {
+                        userViewModel.updatePassword(id: id, newPassword: password)
+                        showChangePasswordAlert = true
+                    }
                 }) {
-                    Text("Sign Out")
+                    Text("Change Password")
                         .padding(.trailing)
                 }
-                .alert(isPresented: $showLogoutAlert) {
+                .disabled(!isPasswordLengthValid || passwordSecurityCheckProgress < 0.5)
+                .alert(isPresented: $showChangePasswordAlert) {
                     Alert(
                         title: Text("Success"),
-                        message: Text("You have logged out."),
+                        message: Text("You have changed your password."),
                         dismissButton: .default(Text("OK"))
                     )
                 }
-                .background(NavigationLink(destination: IntroductionView()
-                    .navigationBarBackButtonHidden(true),
-                    label: {
+                
+                Section {
+                    Button(action: {
+                        userViewModel.logoutUser()
+                        showLogoutAlert = true
+                    }) {
+                        Text("Sign Out")
+                            .padding(.trailing)
+                    }
+                    .alert(isPresented: $showLogoutAlert) {
+                        Alert(
+                            title: Text("Success"),
+                            message: Text("You have logged out."),
+                            dismissButton: .default(Text("OK"))
+                        )
+                    }
+                    .background(NavigationLink(destination: IntroductionView()
+                        .navigationBarBackButtonHidden(true),
+                                               label: {
                         EmptyView()
                     })
-                )
+                    )
+                }
                 
             }
 //            .navigationTitle("Profile Settings")

@@ -13,7 +13,7 @@ struct User: Identifiable {
     let id: UUID
     var username: String
     let email: String
-    let password: String
+    var password: String
     let gender: String
 }
 //}

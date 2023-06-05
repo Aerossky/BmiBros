@@ -35,9 +35,13 @@ class UserViewModel: ObservableObject {
             // Tambahkan pengguna lainnya sesuai kebutuhan
         ]
         userInfos = [
-            UserInfo(id: UUID(), userId: "1", age: 30, height: 170, weight: 90, bmi: 0, calories: 0, date: Date()),
-            UserInfo(id: UUID(), userId: "2", age: 25, height: 160, weight: 55, bmi: 0, calories: 0, date: Date()),
-            UserInfo(id: UUID(), userId: "3", age: 25, height: 160, weight: 55, bmi: 50, calories: 2500, date: Date())
+            UserInfo(id: UUID(), userId: "1", age: 30, height: 170, weight: 90, bmi: 0, calories: 0, date: Date.from(year: 2023, month: 6, day: 4)),
+            UserInfo(id: UUID(), userId: "2", age: 25, height: 160, weight: 55, bmi: 0, calories: 0, date: Date.from(year: 2023, month: 6, day: 5)),
+            UserInfo(id: UUID(), userId: "3", age: 25, height: 160, weight: 55, bmi: 50, calories: 2500, date: Date.from(year: 2023, month: 6, day: 6)),
+            UserInfo(id: UUID(), userId: "4", age: 25, height: 160, weight: 55, bmi: 40, calories: 2550, date: Date.from(year: 2023, month: 6, day: 7)),
+            UserInfo(id: UUID(), userId: "5", age: 25, height: 160, weight: 55, bmi: 45, calories: 2600, date: Date.from(year: 2023, month: 6, day: 8)),
+            UserInfo(id: UUID(), userId: "6", age: 25, height: 160, weight: 55, bmi: 50, calories: 2400, date: Date.from(year: 2023, month: 6, day: 9)),
+            UserInfo(id: UUID(), userId: "7", age: 25, height: 160, weight: 55, bmi: 55, calories: 2450, date: Date.from(year: 2023, month: 6, day: 10))
         ]
     }
     //date convert
@@ -86,6 +90,15 @@ class UserViewModel: ObservableObject {
         debugPrint(loggedInUser)
     }
 
+    func updatePassword(id: UUID, newPassword: String) {
+        if let index = users.firstIndex(where: { $0.id == id }) {
+            users[index].password = newPassword
+            //rewrite loggedInUser
+            loggedInUser = users[index]
+        }
+     
+        debugPrint(loggedInUser)
+    }
     
     
     //    func loginUser(email: String, password: String) -> Bool {

@@ -13,6 +13,7 @@
 		0412D6412A21BE2500909BD7 /* AppEnviroment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0412D6402A21BE2500909BD7 /* AppEnviroment.swift */; };
 		043279A52A1CD37400669EA5 /* InputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043279A42A1CD37400669EA5 /* InputViewModel.swift */; };
 		043279A72A1CD3A600669EA5 /* Input.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043279A62A1CD3A600669EA5 /* Input.swift */; };
+		043CA2EE2A2DFF0A00F22D62 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043CA2ED2A2DFF0A00F22D62 /* GraphView.swift */; };
 		044537372A2330A3001CBB56 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044537362A2330A3001CBB56 /* SessionManager.swift */; };
 		044537392A234BA5001CBB56 /* MainAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044537382A234BA5001CBB56 /* MainAppView.swift */; };
 		0445373B2A234DCB001CBB56 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0445373A2A234DCB001CBB56 /* OnboardingView.swift */; };
@@ -95,6 +96,7 @@
 		0412D6402A21BE2500909BD7 /* AppEnviroment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnviroment.swift; sourceTree = "<group>"; };
 		043279A42A1CD37400669EA5 /* InputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewModel.swift; sourceTree = "<group>"; };
 		043279A62A1CD3A600669EA5 /* Input.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Input.swift; sourceTree = "<group>"; };
+		043CA2ED2A2DFF0A00F22D62 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		044537362A2330A3001CBB56 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		044537382A234BA5001CBB56 /* MainAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAppView.swift; sourceTree = "<group>"; };
 		0445373A2A234DCB001CBB56 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 		04DBD8662A18C2F70037792E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				043CA2ED2A2DFF0A00F22D62 /* GraphView.swift */,
 				044537382A234BA5001CBB56 /* MainAppView.swift */,
 				0445373A2A234DCB001CBB56 /* OnboardingView.swift */,
 				0445373C2A234F9A001CBB56 /* OnboardingInfoView.swift */,
@@ -496,6 +499,7 @@
 				04DBD86A2A18C6BA0037792E /* HomeView.swift in Sources */,
 				044537392A234BA5001CBB56 /* MainAppView.swift in Sources */,
 				04703BB92A1A19C1008723A7 /* SignInView.swift in Sources */,
+				043CA2EE2A2DFF0A00F22D62 /* GraphView.swift in Sources */,
 				04703BBD2A1A2894008723A7 /* SignUpView.swift in Sources */,
 				044537372A2330A3001CBB56 /* SessionManager.swift in Sources */,
 				04DBD89F2A18F54F0037792E /* UIColor.swift in Sources */,
