@@ -86,6 +86,15 @@ class UserViewModel: ObservableObject {
         debugPrint(loggedInUser)
     }
 
+    func updatePassword(id: UUID, newPassword: String) {
+        if let index = users.firstIndex(where: { $0.id == id }) {
+            users[index].password = newPassword
+            //rewrite loggedInUser
+            loggedInUser = users[index]
+        }
+     
+        debugPrint(loggedInUser)
+    }
     
     
     //    func loginUser(email: String, password: String) -> Bool {
