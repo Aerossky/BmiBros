@@ -83,39 +83,44 @@ struct FoodRecommendationView: View {
             if userInfo != 0{
                 NavigationStack {
                     ScrollView {
-                        LazyVGrid(columns: gridLayout, spacing: 50) {
-                            ForEach(foodViewModel.foods, id: \.self) { item in
-                                if item.cal <= 20000 {
-                                    Button(action: {
-                                        selectedFood = item
-                                    }) {
-                                        ZStack {
-                                            Rectangle()
-                                                .foregroundColor(.white)
-                                                .cornerRadius(25)
-                                                .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
-                                                .padding(.horizontal)
-                                            
-                                            VStack {
-                                                Image(item.image)
-                                                    .resizable()
-                                                    .frame(width: 250, height: 250)
-                                                Text(item.name)
-                                                    .font(.custom("Poppins-Regular", size: 32))
-                                                    .foregroundColor(.black)
+                        VStack {
+                            Text("Food Recommendation")
+                                .font(.system(size: 52))
+                            
+                            LazyVGrid(columns: gridLayout, spacing: 50) {
+                                ForEach(foodViewModel.foods, id: \.self) { item in
+                                    if item.cal <= 20000 {
+                                        Button(action: {
+                                            selectedFood = item
+                                        }) {
+                                            ZStack {
+                                                Rectangle()
+                                                    .foregroundColor(.white)
+                                                    .cornerRadius(25)
+                                                    .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
+                                                    .padding(.horizontal)
+                                                
+                                                VStack {
+                                                    Image(item.image)
+                                                        .resizable()
+                                                        .frame(width: 250, height: 250)
+                                                    Text(item.name)
+                                                        .font(.custom("Poppins-Regular", size: 32))
+                                                        .foregroundColor(.black)
+                                                }
+                                                .padding()
                                             }
-                                            .padding()
                                         }
                                     }
                                 }
+                                .sheet(item: $selectedFood) { food in
+                                    FoodDetailView(food: food)
+                                }
                             }
-                            .sheet(item: $selectedFood) { food in
-                                FoodDetailView(food: food)
-                            }
+                            .padding()
                         }
-                        .padding()
                     }
-                    .navigationTitle("Food Recommendation")
+//                    .navigationTitle("Food Recommendation")
                 }
             }else{
                 VStack{
@@ -128,9 +133,7 @@ struct FoodRecommendationView: View {
                         .font(.custom("Poppins-Regular", size: 16))
                         .multilineTextAlignment(.center)
                         .frame(width: 300)
-
                 }
-
             }
         }
     }
