@@ -22,6 +22,7 @@ class UserViewModel: ObservableObject {
     @Published var hasError = false
     @Published var error: SignUpError?
     
+    
     init() {
         // Tambahkan kode di bawah ini untuk membuat default data users
         users = [
@@ -50,6 +51,18 @@ class UserViewModel: ObservableObject {
         dateFormatter.dateFormat = "dd MMMM yyyy"
         return dateFormatter.string(from: date)
     }
+    //limit name length
+  
+    func limitWordCount(_ text: String?) -> String {
+         guard let text = text else {
+             return "Admin"
+         }
+         
+         let words = text.split(separator: " ").map(String.init)
+         let truncatedWords = words.prefix(6)
+         return truncatedWords.joined(separator: " ")
+     }
+
     //validate
     func validateEmail(_ email: String) {
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
