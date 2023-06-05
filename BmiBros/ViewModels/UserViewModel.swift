@@ -26,12 +26,12 @@ class UserViewModel: ObservableObject {
     init() {
         // Tambahkan kode di bawah ini untuk membuat default data users
         users = [
-            User(id: UUID(),username: "JohnDoe", email: "Admin", password: "1", gender: "Male"),
-            User(id: UUID(),username: "JaneSmith", email: "Admin1", password: "2", gender: "Female"),
-            User(id: UUID(),username: "JaneSmith", email: "Admin2", password: "3", gender: "Female"),
-            User(id: UUID(),username: "JaneSmith", email: "Admin3", password: "4", gender: "Female"),
-            User(id: UUID(),username: "JaneSmith", email: "Admin4", password: "5", gender: "Female"),
-            User(id: UUID(),username: "JaneSmith", email: "Admin5", password: "6", gender: "Female"),
+            User(id: UUID(),username: "Budi", email: "admin@gmail.com", password: "Admin12345", gender: "Male"),
+//            User(id: UUID(),username: "JaneSmith", email: "Admin1", password: "2", gender: "Female"),
+//            User(id: UUID(),username: "JaneSmith", email: "Admin2", password: "3", gender: "Female"),
+//            User(id: UUID(),username: "JaneSmith", email: "Admin3", password: "4", gender: "Female"),
+//            User(id: UUID(),username: "JaneSmith", email: "Admin4", password: "5", gender: "Female"),
+//            User(id: UUID(),username: "JaneSmith", email: "Admin5", password: "6", gender: "Female"),
             
             // Tambahkan pengguna lainnya sesuai kebutuhan
         ]
@@ -114,16 +114,7 @@ class UserViewModel: ObservableObject {
 //        debugPrint(loggedInUser)
     }
     
-    
-    //    func loginUser(email: String, password: String) -> Bool {
-    //        if let index = users.firstIndex(where: { $0.email == email && $0.password == password }) {
-    //            appEnvironment.idLogin = index
-    //            debugPrint(index)
-    //            return true
-    //        }
-    //        debugPrint(index)
-    //        return false
-    //    }
+
     func loginUser(email: String, password: String) -> Bool {
         if let user = users.first(where: { $0.email == email && $0.password == password }) {
             loggedInUser = user
