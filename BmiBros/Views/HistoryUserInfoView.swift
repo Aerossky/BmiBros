@@ -75,28 +75,38 @@ struct HistoryUserInfoView: View {
         
         var body: some View{
             List {
-                ForEach(viewModel.userInfos) { userInfo in
-                    if userInfo.userId == viewModel.loggedInUser?.id.uuidString {
-                        if userInfo.calories != 0 || userInfo.calories > 0 {
-                            HStack {
-                                Text("Date")
-                                Text("\(viewModel.formatDate(userInfo.date))")
+                if viewModel.userInfos.filter({ $0.userId == viewModel.loggedInUser?.id.uuidString && ($0.calories != 0 || $0.calories > 0) }).isEmpty {
+                            VStack {
+                                Image("noData")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(height: 200)
+                                Text("No Data")
                                     .font(.headline)
-                                    .font(.headline)
-                                Spacer()
-                                Text("Cals")
-                                Text("\(Int(userInfo.calories))")
+                                    .padding()
+                                    .alignmentGuide(HorizontalAlignment.center) { $0[HorizontalAlignment.center] }
+                                     
                             }
-                            .padding()
-                            .listRowSeparator(.hidden)
-                            .listRowInsets(EdgeInsets(top: 8, leading: 20, bottom: 8, trailing: 20))
-                            .background(Color(UIColor(hex: "#F7F7F7")))
-                            .cornerRadius(20)
-                            .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
+                        } else {
+                            ForEach(viewModel.userInfos) { userInfo in
+                                if userInfo.userId == viewModel.loggedInUser?.id.uuidString && (userInfo.calories != 0 || userInfo.calories > 0) {
+                                    HStack {
+                                        Text("Date")
+                                        Text("\(viewModel.formatDate(userInfo.date))")
+                                            .font(.headline)
+                                        Spacer()
+                                        Text("Cals")
+                                        Text("\(Int(userInfo.calories))")
+                                    }
+                                    .padding()
+                                    .background(Color(UIColor(hex: "#F7F7F7")))
+                                    .cornerRadius(20)
+                                    .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
+                                }
+                            }
                         }
-                    }
-                }
             }
+
             .listStyle(PlainListStyle())
             .accentColor(.clear)
         }
