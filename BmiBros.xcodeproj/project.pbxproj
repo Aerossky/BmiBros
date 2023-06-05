@@ -14,6 +14,13 @@
 		043279A52A1CD37400669EA5 /* InputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043279A42A1CD37400669EA5 /* InputViewModel.swift */; };
 		043279A72A1CD3A600669EA5 /* Input.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043279A62A1CD3A600669EA5 /* Input.swift */; };
 		043CA2EE2A2DFF0A00F22D62 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043CA2ED2A2DFF0A00F22D62 /* GraphView.swift */; };
+		043CA2F02A2E503600F22D62 /* InputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043279A42A1CD37400669EA5 /* InputViewModel.swift */; };
+		043CA2F12A2E503C00F22D62 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04100DF12A1BCEC900160C69 /* User.swift */; };
+		043CA2F22A2E504100F22D62 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048B320A2A23CDA5005582BE /* UserInfo.swift */; };
+		043CA2F32A2E504400F22D62 /* Input.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043279A62A1CD3A600669EA5 /* Input.swift */; };
+		043CA2F42A2E504700F22D62 /* AppEnviroment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0412D6402A21BE2500909BD7 /* AppEnviroment.swift */; };
+		043CA2F52A2E537D00F22D62 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DBD89E2A18F54F0037792E /* UIColor.swift */; };
+		043CA2F62A2E58A600F22D62 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FE7A92A1BDE6C00A295F5 /* UserViewModel.swift */; };
 		044537372A2330A3001CBB56 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044537362A2330A3001CBB56 /* SessionManager.swift */; };
 		044537392A234BA5001CBB56 /* MainAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044537382A234BA5001CBB56 /* MainAppView.swift */; };
 		0445373B2A234DCB001CBB56 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0445373A2A234DCB001CBB56 /* OnboardingView.swift */; };
@@ -467,8 +474,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				043CA2F32A2E504400F22D62 /* Input.swift in Sources */,
 				044B6A8E2A22481000C1BF7A /* ContentView.swift in Sources */,
 				044B6A8C2A22481000C1BF7A /* BmiBros_Watch_AppApp.swift in Sources */,
+				043CA2F52A2E537D00F22D62 /* UIColor.swift in Sources */,
+				043CA2F12A2E503C00F22D62 /* User.swift in Sources */,
+				043CA2F22A2E504100F22D62 /* UserInfo.swift in Sources */,
+				043CA2F42A2E504700F22D62 /* AppEnviroment.swift in Sources */,
+				043CA2F62A2E58A600F22D62 /* UserViewModel.swift in Sources */,
+				043CA2F02A2E503600F22D62 /* InputViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

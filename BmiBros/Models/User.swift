@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 //extension UserViewModel {
-struct User: Identifiable {
+struct User: Identifiable, Equatable {
     let id: UUID
     var username: String
     let email: String

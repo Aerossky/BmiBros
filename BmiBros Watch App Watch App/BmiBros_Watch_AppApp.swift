@@ -9,9 +9,15 @@ import SwiftUI
 
 @main
 struct BmiBros_Watch_App_Watch_AppApp: App {
+    
+    @StateObject private var viewModel = UserViewModel()
+    @StateObject private var appEnvironment = AppEnvironment()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(viewModel)
+                .environmentObject(appEnvironment)
         }
     }
 }
