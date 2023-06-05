@@ -69,7 +69,6 @@ struct ProfileView: View {
                 
                 Section {
                     Text("Hello, \(userViewModel.loggedInUser?.username ?? "Admin")")
-                    Text("\(userViewModel.loggedInUser?.id.uuidString ?? "id123")")
                     TextField("New Username", text: $username)
                         .keyboardType(.asciiCapable)
                         .autocorrectionDisabled(true)
@@ -87,6 +86,7 @@ struct ProfileView: View {
                     Text("Change Username")
                         .padding(.trailing)
                 }
+                .disabled(username.isEmpty)
                 .alert(isPresented: $showChangeUsernameAlert) {
                     Alert(
                         title: Text("Success"),
@@ -119,9 +119,13 @@ struct ProfileView: View {
                             Label("minimal of 5 characters", systemImage: isPasswordLengthValid ? "checkmark" : "xmark")
                                 .foregroundColor(isPasswordLengthValid ? .green : .red)
                         }
-                        Gauge(value: passwordSecurityCheckProgress) {
+                        HStack {
                             Label("Password security", systemImage: passwordSecurityCheckProgress >= 0.5 ? "checkmark" : "xmark")
                                 .foregroundColor(passwordSecurityCheckProgress >= 0.5 ? .green : .red)
+                            
+                            Gauge(value: passwordSecurityCheckProgress) {
+                                // Gauge content
+                            }
                         }
                     }
                     SecureField("Confirm Password", text: $passwordConfirmation)
@@ -152,6 +156,7 @@ struct ProfileView: View {
                     Text("Change Password")
                         .padding(.trailing)
                 }
+                .disabled(!isPasswordLengthValid || passwordSecurityCheckProgress < 0.5)
                 .alert(isPresented: $showChangePasswordAlert) {
                     Alert(
                         title: Text("Success"),
