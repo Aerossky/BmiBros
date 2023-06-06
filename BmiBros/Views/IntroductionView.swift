@@ -24,7 +24,7 @@ struct IntroductionView: View {
                     .font(.custom("Poppins-bold", size: 36))
                     .padding(.horizontal, 10)
                     .padding(.vertical, 20)
-                Text("BMI Bros, teman sehat Anda! Hitung BMI dan lacak kalori dengan mudah. Bergabunglah dan mulailah perjalanan hidup sehat anda.")
+                Text("BMI Bros, your healthy companion! Calculate your BMI and track calories easily. Join us and start your healthy lifestyle journey.")
                     .font(.custom("Poppins-Light", size: 14))
                     .multilineTextAlignment(.center)
                     .padding([.horizontal, .bottom], 20)

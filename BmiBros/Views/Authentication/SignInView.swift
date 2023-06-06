@@ -55,18 +55,18 @@ struct SignInView: View {
                         .frame(maxWidth: .infinity)
                         .padding(.horizontal)
                     //                EMAIL VALIDATOR
-//                                        .onChange(of: email) { newValue in
-//                                            viewModel.validateEmail(newValue)
-//                                        }
-//                    
-//                                    if !viewModel.isEmailValid {
-//                                        Text("Invalid email format")
-//                                            .foregroundColor(.red)
-//                                            .font(.custom("Poppins-Light", size: 12))
-//                                            .multilineTextAlignment(.leading)
-//                                            .frame(width: 360, alignment: .leading)
-//                                    }
-//                    
+                        .onChange(of: email) { newValue in
+                            viewModel.validateEmail(newValue)
+                        }
+                    
+                    if !viewModel.isEmailValid {
+                        Text("Invalid email format")
+                            .foregroundColor(.red)
+                            .font(.custom("Poppins-Light", size: 12))
+                            .multilineTextAlignment(.leading)
+                            .frame(width: 360, alignment: .leading)
+                    }
+                                        
                     HStack {
                         if isPasswordVisible {
                             TextField("Password", text: $password)
@@ -98,28 +98,6 @@ struct SignInView: View {
                     )
                     .frame(maxWidth: .infinity)
                     .padding(.horizontal)
-                    //password validator
-//                                    .onChange(of: password) { newValue in
-//                                        viewModel.validatePassword(newValue)
-//                                    }
-//
-//                                    if !viewModel.isPasswordValid {
-//
-//                                        if !password.contains(where: { $0.isUppercase }) {
-//                                            Text("Password must contain at least one uppercase letter")
-//                                                .foregroundColor(.red)
-//                                                .font(.custom("Poppins-Light", size: 12))
-//                                                .multilineTextAlignment(.leading)
-//                                                .frame(width: 360, alignment: .leading)
-//                                        }  else if(password.count < 8){
-//                                            Text("Password must be at least 8 characters")
-//                                                .foregroundColor(.red)
-//                                                .font(.custom("Poppins-Light", size: 12))
-//                                                .multilineTextAlignment(.leading)
-//                                                .frame(width: 360, alignment: .leading)
-//                                        }
-//
-//                                    }
                     
                     Button(action: {
                         isLoggedIn = viewModel.loginUser(email: email, password: password)
@@ -235,17 +213,17 @@ struct SignInView: View {
                         .frame(maxWidth: .infinity)
                         .padding(.horizontal)
                     //                EMAIL VALIDATOR
-//                        .onChange(of: email) { newValue in
-//                            viewModel.validateEmail(newValue)
-//                        }
-//
-//                    if !viewModel.isEmailValid {
-//                        Text("Invalid email format")
-//                            .foregroundColor(.red)
-//                            .font(.custom("Poppins-Light", size: 12))
-//                            .multilineTextAlignment(.leading)
-//                            .frame(width: 360, alignment: .leading)
-//                    }
+                        .onChange(of: email) { newValue in
+                            viewModel.validateEmail(newValue)
+                        }
+                    
+                    if !viewModel.isEmailValid {
+                        Text("Invalid email format")
+                            .foregroundColor(.red)
+                            .font(.custom("Poppins-Light", size: 12))
+                            .multilineTextAlignment(.leading)
+                            .frame(width: 360, alignment: .leading)
+                    }
                     
                     HStack {
                         if isPasswordVisible {
@@ -278,28 +256,6 @@ struct SignInView: View {
                     )
                     .frame(maxWidth: .infinity)
                     .padding(.horizontal)
-                    //password validator
-                                    .onChange(of: password) { newValue in
-                                        viewModel.validatePassword(newValue)
-                                    }
-                    
-                                    if !viewModel.isPasswordValid {
-                    
-                                        if !password.contains(where: { $0.isUppercase }) {
-                                            Text("Password must contain at least one uppercase letter")
-                                                .foregroundColor(.red)
-                                                .font(.custom("Poppins-Light", size: 12))
-                                                .multilineTextAlignment(.leading)
-                                                .frame(width: 360, alignment: .leading)
-                                        }  else if(password.count < 8){
-                                            Text("Password must be at least 8 characters")
-                                                .foregroundColor(.red)
-                                                .font(.custom("Poppins-Light", size: 12))
-                                                .multilineTextAlignment(.leading)
-                                                .frame(width: 360, alignment: .leading)
-                                        }
-                    
-                                    }
                     
                     Button(action: {
                         isLoggedIn = viewModel.loginUser(email: email, password: password)
@@ -340,9 +296,9 @@ struct SignInView: View {
                     })
                     )
                     //                BUTTON DISABLE
-                    //                .disabled(email.isEmpty || password.isEmpty || !viewModel.isPasswordValid) // Mengatur tombol menjadi nonaktif jika username, email, atau password kosong
-                    //                .opacity(email.isEmpty || password.isEmpty || !viewModel.isPasswordValid ? 0.5 : 1) // Mengatur opasitas tombol
-                    
+                    .disabled(email.isEmpty || password.isEmpty || !viewModel.isPasswordValid) // Mengatur tombol menjadi nonaktif jika username, email, atau password kosong
+                    .opacity(email.isEmpty || password.isEmpty || !viewModel.isPasswordValid ? 0.5 : 1) // Mengatur opasitas tombol
+                
                     VStack {
                         if isSignInSuccessful {
                             NavigationLink(destination: ContentView().navigationBarBackButtonHidden(true)) { // ini jg ak ganti biar bar backnya hilang

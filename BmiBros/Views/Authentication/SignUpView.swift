@@ -35,13 +35,11 @@ struct SignUpView: View {
                 VStack {
                     Image("signup")
                         .frame(width: 262, height: 263)
-                        .animation(.spring())
-                    
+ 
                     Text("Sign Up")
                         .font(.custom("Poppins-Bold", size: 24))
                         .frame(width: 360, alignment: .leading)
-                        .animation(.spring())
-                    
+
                     TextField("Username", text: $username)
                         .keyboardType(.asciiCapable)
                         .autocorrectionDisabled(true)
@@ -208,13 +206,11 @@ struct SignUpView: View {
                 VStack {
                     Image("signupiPad")
                         .frame(width: 500, height: 500)
-                        .animation(.spring())
-                    
+
                     Text("Sign Up")
                         .font(.custom("Poppins-Bold", size: 36))
                         .frame(width: 360, alignment: .center)
-                        .animation(.spring())
-                    
+         
                     TextField("Username", text: $username)
                         .keyboardType(.asciiCapable)
                         .autocorrectionDisabled(true)
