@@ -8,10 +8,13 @@
 import SwiftUI
 import Charts
 
+
 struct ContentView: View {
     
     @EnvironmentObject var viewModel: UserViewModel
     @EnvironmentObject var appEnvironment: AppEnvironment
+    @ObservedObject private var connectivity: WatchConnectivityManager = WatchConnectivityManager.shared
+    @State private var userID: String = ""
     
     @State private var loggedInUser: User?
     
@@ -24,26 +27,26 @@ struct ContentView: View {
                         Text("BMI")
                     }
                     .padding(.top, 15)
-//                    if loggedInUser != nil {
+                    if connectivity.loggedUserID != "" {
                         // User is logged in
                         Text("Your BMI Score")
                             .foregroundColor(.gray)
                             .font(.footnote)
                             .padding(.bottom, 5)
                             .padding(.top, 10)
-                        let getID = loggedInUser?.id.uuidString ?? UUID().uuidString
-                        let bmi = viewModel.getLastUserInfoBMI(getID)
+//                    let getID = connectivity.loggedUserID
+                        let bmi = connectivity.bmi
                         Text(String(format: "%.1f", bmi))
                             .foregroundColor(.green)
                             .font(.system(size: 30))
                             .padding(.bottom, 10)
-//                    } else {
-//                        // User is not logged in
-//                        Text("Please log in to view your BMI.")
-//                            .foregroundColor(.gray)
-//                            .font(.footnote)
-//                            .padding(.vertical, 15)
-//                    }
+                    } else {
+                        // User is not logged in
+                        Text("Please log in to view your BMI.")
+                            .foregroundColor(.gray)
+                            .font(.footnote)
+                            .padding(.vertical, 15)
+                    }
                 }
             }
             
@@ -55,7 +58,7 @@ struct ContentView: View {
                     }
                     .padding(.top, 15)
                     
-                    if let loggedInUser = viewModel.loggedInUser {
+                    if connectivity.loggedUserID != ""{
                         // User is logged in
                         Text("Your Cals Information")
                             .foregroundColor(.gray)
@@ -63,8 +66,8 @@ struct ContentView: View {
                             .padding(.bottom, 5)
                             .padding(.top, 10)
                         
-                        let getID = loggedInUser.id.uuidString
-                        let cal: Double = viewModel.getLastUserInfoCalories(getID)
+//                        let getID = loggedInUser.id.uuidString
+                        let cal: Double = connectivity.calories
                         
                         HStack {
                             Text(String(format: "%.0f", cal))

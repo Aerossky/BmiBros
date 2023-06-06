@@ -12,6 +12,7 @@ struct ContentView: View {
     @EnvironmentObject var session: SessionManager
     @EnvironmentObject var viewModel: UserViewModel
     @EnvironmentObject var appEnvironment: AppEnvironment
+    @EnvironmentObject var conn :iOSConnectivityManager
     
     var body: some View {
         

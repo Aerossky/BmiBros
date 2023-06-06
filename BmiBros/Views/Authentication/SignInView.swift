@@ -15,6 +15,7 @@ struct SignInView: View {
     @EnvironmentObject var session: SessionManager
     @EnvironmentObject var viewModel: UserViewModel
     @EnvironmentObject var appEnvironment: AppEnvironment
+    let conn = iOSConnectivityManager()
     
     //    @State private var username = ""
     //    @State private var password = ""
@@ -102,6 +103,7 @@ struct SignInView: View {
                     Button(action: {
                         isLoggedIn = viewModel.loginUser(email: email, password: password)
                         if isLoggedIn {
+                            conn.sendID(userID: viewModel.loggedInUser?.id.uuidString ?? "") 
                             showLoginSuccessAlert = true
                         } else {
                             showLoginFailAlert = true
@@ -258,6 +260,7 @@ struct SignInView: View {
                     Button(action: {
                         isLoggedIn = viewModel.loginUser(email: email, password: password)
                         if isLoggedIn {
+                            conn.sendID(userID: viewModel.loggedInUser?.id.uuidString ?? "") 
                             showLoginSuccessAlert = true
                         } else {
                             showLoginFailAlert = true

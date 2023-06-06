@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04043FE52A2F70AB0053998B /* WatchConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04043FE32A2F70AB0053998B /* WatchConnectivityManager.swift */; };
+		04043FEA2A2F7E840053998B /* iOSConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04043FE92A2F7E840053998B /* iOSConnectivityManager.swift */; };
 		04100DEA2A1B538600160C69 /* FoodInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04100DE92A1B538600160C69 /* FoodInformationView.swift */; };
 		04100DED2A1B543000160C69 /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04100DEC2A1B543000160C69 /* Food.swift */; };
 		04100DF22A1BCEC900160C69 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04100DF12A1BCEC900160C69 /* User.swift */; };
@@ -96,6 +98,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		04043FE32A2F70AB0053998B /* WatchConnectivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnectivityManager.swift; sourceTree = "<group>"; };
+		04043FE92A2F7E840053998B /* iOSConnectivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSConnectivityManager.swift; sourceTree = "<group>"; };
 		04100DE92A1B538600160C69 /* FoodInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodInformationView.swift; sourceTree = "<group>"; };
 		04100DEC2A1B543000160C69 /* Food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
 		04100DF02A1B957D00160C69 /* BmiBros.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BmiBros.entitlements; sourceTree = "<group>"; };
@@ -173,6 +177,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04043FE22A2F70350053998B /* WatchConnectivity */ = {
+			isa = PBXGroup;
+			children = (
+				04043FE32A2F70AB0053998B /* WatchConnectivityManager.swift */,
+			);
+			path = WatchConnectivity;
+			sourceTree = "<group>";
+		};
+		04043FE82A2F7DFA0053998B /* WatchConnectivity */ = {
+			isa = PBXGroup;
+			children = (
+				04043FE92A2F7E840053998B /* iOSConnectivityManager.swift */,
+			);
+			path = WatchConnectivity;
+			sourceTree = "<group>";
+		};
 		04100DEB2A1B540700160C69 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -206,6 +226,7 @@
 		044B6A8A2A22481000C1BF7A /* BmiBros Watch App Watch App */ = {
 			isa = PBXGroup;
 			children = (
+				04043FE22A2F70350053998B /* WatchConnectivity */,
 				044B6A8B2A22481000C1BF7A /* BmiBros_Watch_AppApp.swift */,
 				044537352A22542F001CBB56 /* Views */,
 				044B6A8F2A22481200C1BF7A /* Assets.xcassets */,
@@ -328,6 +349,7 @@
 		04FBE7972A11C61200059DBF /* BmiBros */ = {
 			isa = PBXGroup;
 			children = (
+				04043FE82A2F7DFA0053998B /* WatchConnectivity */,
 				04100DF02A1B957D00160C69 /* BmiBros.entitlements */,
 				04FBE7982A11C61200059DBF /* BmiBrosApp.swift */,
 				04100DEB2A1B540700160C69 /* Models */,
@@ -478,6 +500,7 @@
 				044B6A8E2A22481000C1BF7A /* ContentView.swift in Sources */,
 				044B6A8C2A22481000C1BF7A /* BmiBros_Watch_AppApp.swift in Sources */,
 				043CA2F52A2E537D00F22D62 /* UIColor.swift in Sources */,
+				04043FE52A2F70AB0053998B /* WatchConnectivityManager.swift in Sources */,
 				043CA2F12A2E503C00F22D62 /* User.swift in Sources */,
 				043CA2F22A2E504100F22D62 /* UserInfo.swift in Sources */,
 				043CA2F42A2E504700F22D62 /* AppEnviroment.swift in Sources */,
@@ -498,6 +521,7 @@
 				044D50252A18C05800DE0AD4 /* ContentView.swift in Sources */,
 				04E203792A1BA13800F61375 /* FoodViewModel.swift in Sources */,
 				04DBD89C2A18F27A0037792E /* FoodDetailView.swift in Sources */,
+				04043FEA2A2F7E840053998B /* iOSConnectivityManager.swift in Sources */,
 				0445373D2A234F9A001CBB56 /* OnboardingInfoView.swift in Sources */,
 				048FE7AA2A1BDE6C00A295F5 /* UserViewModel.swift in Sources */,
 				043279A72A1CD3A600669EA5 /* Input.swift in Sources */,

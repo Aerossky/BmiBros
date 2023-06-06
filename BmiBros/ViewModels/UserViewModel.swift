@@ -21,6 +21,7 @@ class UserViewModel: ObservableObject {
     
     @Published var hasError = false
     @Published var error: SignUpError?
+//    let conn : iOSConnectivityManager = iOSConnectivityManager.shared
     
     
     init() {
@@ -111,7 +112,10 @@ class UserViewModel: ObservableObject {
     func loginUser(email: String, password: String) -> Bool {
         if let user = users.first(where: { $0.email == email && $0.password == password }) {
             loggedInUser = user
+//            let connectivity = iOSConnectivityManager()
+//            conn.sendID(userID: loggedInUser?.id.uuidString ?? "")
 //            debugPrint(loggedInUser)
+//            conn.id = loggedInUser?.id.uuidString ?? ""
             return true
         } else {
             debugPrint("User not found")

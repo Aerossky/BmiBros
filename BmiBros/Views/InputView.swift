@@ -6,9 +6,10 @@
 //
 
 import SwiftUI
-
+let conn = iOSConnectivityManager()
 struct InputView: View {
     @State private var selectedOption = 0
+    
     
     let options = ["BMI Calculator", "Calories Calculator"]
     
@@ -325,6 +326,7 @@ struct InputView: View {
                                             
                                             viewModel.addUserInfo(id, getUserID, age!, height!, weight!, bmi, Double(calories), date)
                                             activeAlert = .SuccessInput
+                                            conn.sendBMI(bmi: bmi) 
                                         }
                                     }) {
                                         Text("Check & Save")
@@ -513,6 +515,7 @@ struct InputView: View {
                                             
                                             viewModel.addUserInfo(id, getUserID, age!, height!, weight!, bmi, Double(calories), date)
                                             activeAlert = .SuccessInput
+                                            conn.sendBMI(bmi: bmi)
                                         }
                                     }) {
                                         Text("Check & Save")
@@ -769,7 +772,7 @@ struct InputView: View {
                                             let date = Date()
                                             
                                             viewModel.addUserInfo(id, getUserID, age!, height!, weight!, Double(bmi), Double(calories), date)
-                                            
+                                            conn.sendCal(cal: calories)
                                         }
                                     }) {
                                         Text("Check & Save")
@@ -952,7 +955,7 @@ struct InputView: View {
                                             let date = Date()
                                             
                                             viewModel.addUserInfo(id, getUserID, age!, height!, weight!, Double(bmi), Double(calories), date)
-                                            
+                                            conn.sendCal(cal: calories)
                                         }
                                     }) {
                                         Text("Check & Save")
