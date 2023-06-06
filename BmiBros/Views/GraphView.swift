@@ -14,61 +14,66 @@ struct GraphView: View {
     @EnvironmentObject var appEnvironment: AppEnvironment
     
     var body: some View {
-        VStack {
-            Text("BMI Graph")
-            Text("Average BMI: \(String(format: "%.1f", userViewModel.userInfos.reduce(0, { $0 + $1.bmi })))")
-                .fontWeight(.semibold)
-                .font(.footnote)
-                .foregroundColor(.secondary)
-                .padding(.bottom, 12)
-            
-            Chart {
-                ForEach(userViewModel.userInfos) { userInfo in
-                    BarMark(
-                        x: .value("Day", userInfo.date, unit: .day),
-                        y: .value("BMI", userInfo.bmi)
-                    )
-                    .foregroundStyle(Color.blue.gradient)
-                }
-            }
-            .frame(height: 180)
-            .padding(.bottom, 50)
-            .chartXAxis {
-                AxisMarks(values: userViewModel.userInfos.map { $0.date }) { date in
-                    AxisValueLabel(format: .dateTime.weekday())
-                }
-            }
-            
-            Text("Calories Graph")
-            Text("Average Calories: \(String(format: "%.0f", userViewModel.userInfos.reduce(0, { $0 + $1.calories }))) / day")
-                .fontWeight(.semibold)
-                .font(.footnote)
-                .foregroundColor(.secondary)
-                .padding(.bottom, 12)
-            Chart {
-                RuleMark(y: .value("Goal", 50))
-                    .foregroundStyle(Color.pink)
-                    .lineStyle(StrokeStyle(lineWidth: 1, dash: [5]))
-                    .annotation(alignment: .leading) {
-                        Text("Goal")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
+        if userViewModel.userInfos.isEmpty {
+            Text("No data yet, please input data to continue.")
+                .foregroundColor(.gray)
+        } else {
+            VStack {
+                Text("BMI Graph")
+                Text("Average BMI: \(String(format: "%.1f", userViewModel.userInfos.reduce(0, { $0 + $1.bmi })))")
+                    .fontWeight(.semibold)
+                    .font(.footnote)
+                    .foregroundColor(.secondary)
+                    .padding(.bottom, 12)
+                
+                Chart {
+                    ForEach(userViewModel.userInfos) { userInfo in
+                        BarMark(
+                            x: .value("Day", userInfo.date, unit: .day),
+                            y: .value("BMI", userInfo.bmi)
+                        )
+                        .foregroundStyle(Color.blue.gradient)
                     }
-                ForEach(userViewModel.userInfos) { userInfo in
-                    LineMark(
-                        x: .value("Day", userInfo.date, unit: .day),
-                        y: .value("BMI", userInfo.bmi)
-                    )
+                }
+                .frame(height: 180)
+                .padding(.bottom, 50)
+                .chartXAxis {
+                    AxisMarks(values: userViewModel.userInfos.map { $0.date }) { date in
+                        AxisValueLabel(format: .dateTime.weekday())
+                    }
+                }
+                
+                Text("Calories Graph")
+                Text("Average Calories: \(String(format: "%.0f", userViewModel.userInfos.reduce(0, { $0 + $1.calories }))) / day")
+                    .fontWeight(.semibold)
+                    .font(.footnote)
+                    .foregroundColor(.secondary)
+                    .padding(.bottom, 12)
+                Chart {
+                    RuleMark(y: .value("Goal", 50))
+                        .foregroundStyle(Color.pink)
+                        .lineStyle(StrokeStyle(lineWidth: 1, dash: [5]))
+                        .annotation(alignment: .leading) {
+                            Text("Goal")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+                    ForEach(userViewModel.userInfos) { userInfo in
+                        LineMark(
+                            x: .value("Day", userInfo.date, unit: .day),
+                            y: .value("BMI", userInfo.bmi)
+                        )
+                    }
+                }
+                .frame(height: 180)
+                .chartXAxis {
+                    AxisMarks(values: userViewModel.userInfos.map { $0.date }) { date in
+                        AxisValueLabel(format: .dateTime.day())
+                    }
                 }
             }
-            .frame(height: 180)
-            .chartXAxis {
-                AxisMarks(values: userViewModel.userInfos.map { $0.date }) { date in
-                    AxisValueLabel(format: .dateTime.day())
-                }
-            }
+            .padding()
         }
-        .padding()
     }
 }
 
