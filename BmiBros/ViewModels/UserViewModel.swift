@@ -26,7 +26,7 @@ class UserViewModel: ObservableObject {
     init() {
         // Tambahkan kode di bawah ini untuk membuat default data users
         users = [
-            User(id: UUID(),username: "Budi", email: "admin@gmail.com", password: "Admin12345", gender: "Male"),
+            User(id: UUID(),username: "Budi", email: "admin", password: "1", gender: "Male"),
 //            User(id: UUID(),username: "JaneSmith", email: "Admin1", password: "2", gender: "Female"),
 //            User(id: UUID(),username: "JaneSmith", email: "Admin2", password: "3", gender: "Female"),
 //            User(id: UUID(),username: "JaneSmith", email: "Admin3", password: "4", gender: "Female"),
