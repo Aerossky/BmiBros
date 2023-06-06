@@ -88,7 +88,6 @@ struct ContentView: View {
         .navigationTitle("BMI Bros")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
-            // Assign the logged-in user from the view model to the local state variable
             loggedInUser = viewModel.loggedInUser
         }
     }

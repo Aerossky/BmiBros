@@ -20,7 +20,7 @@ struct GraphView: View {
         } else {
             VStack {
                 Text("BMI Graph")
-                Text("Average BMI: \(String(format: "%.1f", userViewModel.userInfos.reduce(0, { $0 + $1.bmi })))")
+                Text("Average BMI: \(String(format: "%.1f", userViewModel.userInfos.isEmpty ? 0 : userViewModel.userInfos.reduce(0, { $0 + $1.bmi }) / Double(userViewModel.userInfos.count)))")
                     .fontWeight(.semibold)
                     .font(.footnote)
                     .foregroundColor(.secondary)
@@ -44,20 +44,21 @@ struct GraphView: View {
                 }
                 
                 Text("Calories Graph")
-                Text("Average Calories: \(String(format: "%.0f", userViewModel.userInfos.reduce(0, { $0 + $1.calories }))) / day")
+                Text("Average Calories: \(String(format: "%.0f", userViewModel.userInfos.isEmpty ? 0 : userViewModel.userInfos.reduce(0, { $0 + $1.calories }) / Double(userViewModel.userInfos.count)))")
+
                     .fontWeight(.semibold)
                     .font(.footnote)
                     .foregroundColor(.secondary)
                     .padding(.bottom, 12)
                 Chart {
-                    RuleMark(y: .value("Goal", 50))
-                        .foregroundStyle(Color.pink)
-                        .lineStyle(StrokeStyle(lineWidth: 1, dash: [5]))
-                        .annotation(alignment: .leading) {
-                            Text("Goal")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                        }
+//                    RuleMark(y: .value("Goal", 50))
+//                        .foregroundStyle(Color.pink)
+//                        .lineStyle(StrokeStyle(lineWidth: 1, dash: [5]))
+//                        .annotation(alignment: .leading) {
+//                            Text("Goal")
+//                                .font(.caption)
+//                                .foregroundColor(.secondary)
+//                        }
                     ForEach(userViewModel.userInfos) { userInfo in
                         LineMark(
                             x: .value("Day", userInfo.date, unit: .day),
