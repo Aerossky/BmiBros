@@ -130,13 +130,11 @@ struct SignInView: View {
                             dismissButton: .default(Text("OK"))
                         )
                     }
-                    .background(NavigationLink(destination: ContentView()
-                        .navigationBarBackButtonHidden(true),
-                                               isActive: $isLoggedIn,
-                                               label: {
-                        EmptyView()
-                    })
-                    )
+                    .navigationDestination(isPresented: $isLoggedIn){
+                        ContentView()
+                            .navigationBarBackButtonHidden(true)
+                        
+                    }
                     //                BUTTON DISABLE
                     .disabled(email.isEmpty || password.isEmpty || !viewModel.isPasswordValid) // Mengatur tombol menjadi nonaktif jika username, email, atau password kosong
                     .opacity(email.isEmpty || password.isEmpty || !viewModel.isPasswordValid ? 0.5 : 1) // Mengatur opasitas tombol
@@ -151,7 +149,7 @@ struct SignInView: View {
                                 request.requestedScopes = [.fullName, .email]
                             } onCompletion: { result in
                                 switch result {
-                                case .success(let authResults):
+                                case .success(_):
                                     print("Authorization successful")
                                     isSignInSuccessful = true  // Set the flag to true
                                 case .failure(let error):
@@ -288,13 +286,11 @@ struct SignInView: View {
                             dismissButton: .default(Text("OK"))
                         )
                     }
-                    .background(NavigationLink(destination: ContentView()
-                        .navigationBarBackButtonHidden(true),
-                                               isActive: $isLoggedIn,
-                                               label: {
-                        EmptyView()
-                    })
-                    )
+                    .navigationDestination(isPresented: $isLoggedIn){
+                        ContentView()
+                            .navigationBarBackButtonHidden(true)
+                        
+                    }
                     //                BUTTON DISABLE
                     .disabled(email.isEmpty || password.isEmpty || !viewModel.isPasswordValid) // Mengatur tombol menjadi nonaktif jika username, email, atau password kosong
                     .opacity(email.isEmpty || password.isEmpty || !viewModel.isPasswordValid ? 0.5 : 1) // Mengatur opasitas tombol
@@ -309,7 +305,7 @@ struct SignInView: View {
                                 request.requestedScopes = [.fullName, .email]
                             } onCompletion: { result in
                                 switch result {
-                                case .success(let authResults):
+                                case .success(_):
                                     print("Authorization successful")
                                     isSignInSuccessful = true  // Set the flag to true
                                 case .failure(let error):
